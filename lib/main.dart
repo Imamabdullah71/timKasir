@@ -57,7 +57,7 @@ class LandingPage extends StatelessWidget {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
+                backgroundColor: Colors.blue, // Menggunakan backgroundColor untuk mengatur warna latar belakang
               ),
             ),
           ],
