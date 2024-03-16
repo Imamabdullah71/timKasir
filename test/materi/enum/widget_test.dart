@@ -1,5 +1,3 @@
-// Materi Enum
-
 enum motor {
   // penggunaan class boleh menggunakan huruf besar, dengan sayarat pengimplementasiannya harus sesuai
   nmax, // |
