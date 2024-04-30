@@ -1,80 +1,40 @@
-// Widget Builder
-
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
-import './widgets/kotak_warna.dart';
-
 void main() {
-  runApp(MyApp());
+  runApp(Nova());
 }
 
-class MyApp extends StatelessWidget {
-  // final List<KotakWarna> allItems = List.generate(
-  //   10,
-  //   (index) => KotakWarna(
-  //     text: "Kotak - ${index + 1}",
-  //     warna: Color.fromARGB(
-  //       255,
-  //       200 + Random().nextInt(256),
-  //       200 + Random().nextInt(256),
-  //       200 + Random().nextInt(256),
-  //     ),
-  //   ),
-  // );
-
-  // List<Map<String, dynamic>> data = List.generate(
-  //   10,
-  //   (index) => {
-  //     "text": "Kotak - ${index + 1}",
-  //     "color": Color.fromARGB(
-  //       255,
-  //       200 + Random().nextInt(256),
-  //       200 + Random().nextInt(256),
-  //       200 + Random().nextInt(256),
-  //     ),
-  //   },
-  // );
+class Nova extends StatelessWidget {
+  const Nova({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      home: Nimbus(),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("timKasir"),
-        ),
-        body: GridView.builder(
-          itemCount: 30,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 5,
-            crossAxisSpacing: 5,
-          ),
-          itemBuilder: (context, index) => Container(
-            color: Color.fromARGB(
-              255,
-              60 + Random().nextInt(151),
-              60 + Random().nextInt(151),
-              60 + Random().nextInt(151),
-            ),
-          ),
-        ),
+    );
+  }
+}
 
-        // ListView.builder(
-        //   itemCount: 10,
-        //   itemBuilder: (context, index) => KotakWarna(
-        //     text: "Kotak ke - ${index + 1}",
-        //     warna: Color.fromARGB(
-        //       250,
-        //       150 + Random().nextInt(200),
-        //       150 + Random().nextInt(200),
-        //       150 + Random().nextInt(200),
-        //     ),
-        //   ),
-        // ),
+class Nimbus extends StatefulWidget {
+  const Nimbus({super.key});
+
+  @override
+  State<Nimbus> createState() => _NimbusState();
+}
+
+class _NimbusState extends State<Nimbus> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("data",
+        style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.lightBlue,
       ),
+      body: ,
     );
   }
 }

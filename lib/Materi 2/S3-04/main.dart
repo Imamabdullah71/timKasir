@@ -6,7 +6,7 @@ import './widgets/kotak_warna.dart';
 // hanya merubah parameter saja menggunakan Extract widget
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("timKasir"),
+          title: const Text("timKasir"),
         ),
-        body: SingleChildScrollView(
+        body: const SingleChildScrollView(
           child: Column(
             children: [
               KotakWarna(

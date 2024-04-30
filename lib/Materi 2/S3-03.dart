@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           // gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           //   maxCrossAxisExtent: 200, <-[200px]
           // ),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 5,
             crossAxisSpacing: 5, // <- Spacing antar kotak vertical
             mainAxisSpacing: 5, // <- Spacing antar kotak horizontal
