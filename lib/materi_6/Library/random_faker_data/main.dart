@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './pages/kontruksi.dart';
+import 'pages/kontruksi.dart';
 
 void main() {
   runApp(ApkFlutter());
