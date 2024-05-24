@@ -1,70 +1,30 @@
-// Materi Enum
+// This is a basic Flutter widget test.
+//
+// To perform an interaction with a widget in your test, use the WidgetTester
+// utility in the flutter_test package. For example, you can send tap and scroll
+// gestures. You can also use WidgetTester to find child widgets in the widget
+// tree, read text, and verify that the values of widget properties are correct.
 
-enum motor {
-  // penggunaan class boleh menggunakan huruf besar, dengan sayarat pengimplementasiannya harus sesuai
-  nmax, // |
-  jupiter, // |
-  supra, // | -> value harus diawali dengan huruf kecil
-  mio, // |
-  vespa, // |
-}
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:timkasirapp/main.dart';
 
 void main() {
-  // ENUM
-  var motorKita = motor.nmax;
-  if (motorKita == motor.nmax) {
-    print("Motor NMAX");
-  } else if (motorKita == motor.jupiter) {
-    print("Motor Jupiter");
-  } else if (motorKita == motor.supra) {
-    print("Motor Supra");
-  } else if (motorKita == motor.mio) {
-    print("Motor Mio");
-  } else if (motorKita == motor.vespa) {
-    print("Motor Vespa");
-  } else {
-    print("Tidak diketahui");
-  }
-  // Enum -> bool(boolean) -> data cuma 2 -> kondisi treu / false
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget( MyApp());
 
-  // bool isMale = true;
+    // Verify that our counter starts at 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
 
-  // if (isMale == true) {
-  //   print("Dia Laki-Laki");
-  // } else {
-  //   print("Dia Perempuan");
-  // }
+    // Tap the '+' icon and trigger a frame.
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
 
-  // Enum ->int -> bisa banyak data
-  // 0 : Laki-Laki
-  // 1 : Perempuan
-  // Selain 0 & 1 : Tidak diketahui
-
-  // int jk = 0;
-  // if (jk == 0) {
-  //   print("Dia Laki-Laki");
-  // } else if (jk == 1) {
-  //   print("Dia Perempuan");
-  // } else {
-  //   print("Tidak diketahui");
-  // }
-
-  // Enum ->int -> bisa banyak data
-  // 0 : NMAX
-  // 1 : Jupiter
-  // 2 : Supra
-  // 3 : MIO
-
-  // int motor = 0;
-  // if (motor == 0) {
-  //   print("Motor NMAX");
-  // } else if (motor == 1) {
-  //   print("Motor Jupiter");
-  // } else if (motor == 2) {
-  //   print("Motor Supra");
-  // } else if (motor == 3) {
-  //   print("Motor Mio");
-  // } else {
-  //   print("Tidak diketahui");
-  // }
+    // Verify that our counter has incremented.
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
+  });
 }

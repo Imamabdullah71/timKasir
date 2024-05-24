@@ -1,247 +1,133 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:dropdown_search/dropdown_search.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:timkasirapp/controllers/authController.dart';
+import 'package:timkasirapp/controllers/bottomBar_controller.dart'; // Import BottomBarController
+import 'package:timkasirapp/pages/auth/daftar.dart';
+import 'package:timkasirapp/pages/auth/login.dart';
+import 'package:timkasirapp/pages/auth/reset_password.dart';
+import 'package:timkasirapp/pages/management_barang/page_menu/barang.dart';
+import 'package:timkasirapp/pages/management_barang/page_menu/kategori_barang.dart';
+import 'package:timkasirapp/pages/management_barang/page_menu/tambah_barang.dart';
+import 'package:timkasirapp/pages/laporan.dart';
+import 'package:timkasirapp/pages/leading_pages/mainLeading.dart';
+import 'package:timkasirapp/pages/profile.dart';
+import 'package:timkasirapp/pages/scan_test.dart';
+import 'package:timkasirapp/pages/transaksi.dart';
+import 'package:timkasirapp/pages/transaksi/bayar.dart';
+import 'pages/management_barang/manage_barang.dart';
+import 'bottom_bar.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: WilayahIndonesiaDropdown(),
-  ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await GetStorage.init();
+
+  runApp(MyApp());
 }
 
-class WilayahIndonesiaDropdown extends StatefulWidget {
-  @override
-  _WilayahIndonesiaDropdownState createState() =>
-      _WilayahIndonesiaDropdownState();
-}
-
-class _WilayahIndonesiaDropdownState extends State<WilayahIndonesiaDropdown> {
-  String? selectedProvinsi;
-  String? selectedKabupaten;
-  String? selectedKecamatan;
-  String? selectedKelurahan;
-
-  List<dynamic> provinsiList = [];
-  List<dynamic> kabupatenList = [];
-  List<dynamic> kecamatanList = [];
-  List<dynamic> kelurahanList = [];
-
-  @override
-  void initState() {
-    super.initState();
-    fetchProvinsi(); // Fetch data Provinsi on init
-  }
-
-  Future<void> fetchProvinsi() async {
-    final response = await http.get(Uri.parse(
-        'https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json'));
-    if (response.statusCode == 200) {
-      setState(() {
-        provinsiList = jsonDecode(response.body);
-      });
-    }
-  }
-
-  Future<void> fetchKabupaten(String provinsiId) async {
-    final response = await http.get(Uri.parse(
-        'https://www.emsifa.com/api-wilayah-indonesia/api/regencies/$provinsiId.json'));
-    if (response.statusCode == 200) {
-      setState(() {
-        kabupatenList = jsonDecode(response.body);
-      });
-    }
-  }
-
-  Future<void> fetchKecamatan(String kabupatenId) async {
-    final response = await http.get(Uri.parse(
-        'https://www.emsifa.com/api-wilayah-indonesia/api/districts/$kabupatenId.json'));
-    if (response.statusCode == 200) {
-      setState(() {
-        kecamatanList = jsonDecode(response.body);
-      });
-    }
-  }
-
-  Future<void> fetchKelurahan(String kecamatanId) async {
-    final response = await http.get(Uri.parse(
-        'https://www.emsifa.com/api-wilayah-indonesia/api/villages/$kecamatanId.json'));
-    if (response.statusCode == 200) {
-      setState(() {
-        kelurahanList = jsonDecode(response.body);
-      });
-    }
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Dropdown Search API',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    return GetMaterialApp(
+      initialBinding: BindingsBuilder(() {
+        Get.lazyPut<AuthController>(() => AuthController());
+        Get.lazyPut<BottomBarController>(() => BottomBarController()); // Inisialisasi BottomBarController
+      }),
+      getPages: [
+        GetPage(
+          name: "/halaman_intro",
+          page: () => PageOneL()
         ),
-        centerTitle: true,
-        backgroundColor: Colors.cyan,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DropdownSearch<dynamic>(
-                items: provinsiList,
-                dropdownBuilder: (context, item) =>
-                    Text(item != null ? item['name'] : ''),
-                onChanged: (value) {
-                  setState(() {
-                    selectedProvinsi = value['id'];
-                    selectedKabupaten = null;
-                    selectedKecamatan = null;
-                    selectedKelurahan = null;
-                    kabupatenList = [];
-                    kecamatanList = [];
-                    kelurahanList = [];
-                  });
-                  fetchKabupaten(selectedProvinsi!);
-                },
-                dropdownDecoratorProps: DropDownDecoratorProps(
-                  dropdownSearchDecoration: InputDecoration(
-                    labelText: 'Pilih Provinsi',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                popupProps: PopupProps.menu(
-                  showSearchBox: true,
-                  searchFieldProps: TextFieldProps(
-                    decoration: InputDecoration(
-                      hintText: 'Cari Provinsi...',
-                    ),
-                  ),
-                  itemBuilder: (context, item, isSelected) {
-                    // Membuat tampilan item pada popup hanya menampilkan nama
-                    return ListTile(
-                      title: Text(item['name']),
-                      selected: isSelected,
-                    );
-                  },
-                ),
-              ),
-              SizedBox(height: 20),
-              if (kabupatenList.isNotEmpty)
-                DropdownSearch<dynamic>(
-                  items: kabupatenList,
-                  dropdownBuilder: (context, item) =>
-                      Text(item != null ? item['name'] : ''),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedKabupaten = value['id'];
-                      selectedKecamatan = null;
-                      selectedKelurahan = null;
-                      kecamatanList = [];
-                      kelurahanList = [];
-                    });
-                    fetchKecamatan(selectedKabupaten!);
-                  },
-                  dropdownDecoratorProps: DropDownDecoratorProps(
-                    dropdownSearchDecoration: InputDecoration(
-                      labelText: 'Pilih Kabupaten',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  popupProps: PopupProps.menu(
-                    showSearchBox: true,
-                    searchFieldProps: TextFieldProps(
-                      decoration: InputDecoration(
-                        hintText: 'Cari Kabupaten...',
-                      ),
-                    ),
-                    itemBuilder: (context, item, isSelected) {
-                      // Membuat tampilan item pada popup hanya menampilkan nama
-                      return ListTile(
-                        title: Text(item['name']),
-                        selected: isSelected,
-                      );
-                    },
-                  ),
-                ),
-              SizedBox(height: 20),
-              if (kecamatanList.isNotEmpty)
-                DropdownSearch<dynamic>(
-                  items: kecamatanList,
-                  dropdownBuilder: (context, item) =>
-                      Text(item != null ? item['name'] : ''),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedKecamatan = value['id'];
-                      selectedKelurahan = null;
-                      kelurahanList = [];
-                    });
-                    fetchKelurahan(selectedKecamatan!);
-                  },
-                  dropdownDecoratorProps: DropDownDecoratorProps(
-                    dropdownSearchDecoration: InputDecoration(
-                      labelText: 'Pilih Kecamatan',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  popupProps: PopupProps.menu(
-                    showSearchBox: true,
-                    searchFieldProps: TextFieldProps(
-                      decoration: InputDecoration(
-                        hintText: 'Cari Kecamatan...',
-                      ),
-                    ),
-                    itemBuilder: (context, item, isSelected) {
-                      // Membuat tampilan item pada popup hanya menampilkan nama
-                      return ListTile(
-                        title: Text(item['name']),
-                        selected: isSelected,
-                      );
-                    },
-                  ),
-                ),
-              SizedBox(height: 20),
-              if (kelurahanList.isNotEmpty)
-                DropdownSearch<dynamic>(
-                  items: kelurahanList,
-                  dropdownBuilder: (context, item) {
-                    // Mengembalikan widget Text dengan nama item
-                    return Text(item != null ? item['name'] : '');
-                  },
-                  onChanged: (value) {
-                    // Mengubah state saat item dipilih
-                    setState(() {
-                      selectedKelurahan = value['id'];
-                    });
-                  },
-                  dropdownDecoratorProps: DropDownDecoratorProps(
-                    dropdownSearchDecoration: InputDecoration(
-                      labelText: 'Pilih Kelurahan',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  popupProps: PopupProps.menu(
-                    showSearchBox: true,
-                    searchFieldProps: TextFieldProps(
-                      decoration: InputDecoration(
-                        hintText: 'Cari Kelurahan...',
-                      ),
-                    ),
-                    itemBuilder: (context, item, isSelected) {
-                      // Membuat tampilan item pada popup hanya menampilkan nama
-                      return ListTile(
-                        title: Text(item['name']),
-                        selected: isSelected,
-                      );
-                    },
-                  ),
-                ),
-            ],
-          ),
+        GetPage(
+          name: "/halaman_utama",
+          page: () => BottomBar()
         ),
-      ),
+        GetPage(
+          name: "/halaman_login",
+          page: () => LoginPage()
+        ),
+        GetPage(
+          name: "/halaman_daftar",
+          page: () => DaftarPage()
+        ),
+        GetPage(name: "/halaman_reset_password", page: () => ResetPasswordPage()),
+        GetPage(
+          name: "/manage_barang",
+          page: () => ManageBarang()
+        ),
+        GetPage(
+          name: "/halaman_barang",
+          page: () => PageBarang()
+        ),
+        GetPage(
+          name: "/halaman_kategori_barang",
+          page: () => KategoriBarang()
+        ),
+        GetPage(
+          name: "/tambah_barang",
+          page: () => tambahBarang()
+        ),
+        GetPage(
+          name: "/transaksi",
+          page: () => Transaksi()
+        ),
+        GetPage(
+          name: "/halaman_bayar",
+          page: () => Pembayaran()
+        ),
+        GetPage(
+          name: "/halaman_laporan",
+          page: () => Laporan()
+        ),
+        GetPage(
+          name: "/halaman_pengaturan",
+          page: () => Pengaturan()
+        ),
+        
+        GetPage(
+          name: "/halaman_scan",
+          page: () => TestingBarcode()
+        ),
+      ],
+      debugShowCheckedModeBanner: false,
+      home: AuthHandler(),
+    );
+  }
+}
+
+class AuthHandler extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          print('Connection is active');
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasData) {
+          User? user = snapshot.data;
+          if (user != null && !user.emailVerified) {
+            // Jika pengguna belum verifikasi email, arahkan ke halaman login dengan pesan
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Get.snackbar(
+                "Email belum diverifikasi",
+                "Silakan verifikasi email Anda terlebih dahulu.",
+              );
+            });
+            return LoginPage(); // Halaman login atau halaman verifikasi email
+          } else {
+            return BottomBar();
+          }
+        } else {
+          return PageOneL();
+        }
+      },
     );
   }
 }
