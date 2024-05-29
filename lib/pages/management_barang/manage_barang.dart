@@ -82,6 +82,12 @@ class ManageBarang extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed("/infaq_page");
+        },
+        child: Icon(BootstrapIcons.plus_lg),
+      ),
     );
   }
 }

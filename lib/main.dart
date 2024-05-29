@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:timkasirapp/controllers/produk_controller.dart/add_product_controller.dart';
 import 'package:timkasirapp/controllers/authController.dart';
-import 'package:timkasirapp/controllers/bottomBar_controller.dart'; // Import BottomBarController
+import 'package:timkasirapp/controllers/bottomBar_controller.dart';
+import 'package:timkasirapp/controllers/home_controller.dart';
+import 'package:timkasirapp/infaq.dart';
 import 'package:timkasirapp/pages/auth/daftar.dart';
 import 'package:timkasirapp/pages/auth/login.dart';
 import 'package:timkasirapp/pages/auth/reset_password.dart';
+import 'package:timkasirapp/pages/crud/edit_produk.dart';
 import 'package:timkasirapp/pages/management_barang/page_menu/barang.dart';
 import 'package:timkasirapp/pages/management_barang/page_menu/kategori_barang.dart';
 import 'package:timkasirapp/pages/management_barang/page_menu/tambah_barang.dart';
@@ -17,8 +21,10 @@ import 'package:timkasirapp/pages/profile.dart';
 import 'package:timkasirapp/pages/scan_test.dart';
 import 'package:timkasirapp/pages/transaksi.dart';
 import 'package:timkasirapp/pages/transaksi/bayar.dart';
+import 'package:timkasirapp/pages/crud/tambah_product.dart';
 import 'pages/management_barang/manage_barang.dart';
 import 'bottom_bar.dart';
+import 'package:timkasirapp/bindings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,68 +34,50 @@ void main() async {
   runApp(MyApp());
 }
 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: BindingsBuilder(() {
         Get.lazyPut<AuthController>(() => AuthController());
-        Get.lazyPut<BottomBarController>(() => BottomBarController()); // Inisialisasi BottomBarController
+        Get.lazyPut<BottomBarController>(() => BottomBarController());
+        Get.lazyPut<AddProductController>(() => AddProductController());
+        Get.lazyPut<HomeController>(() => HomeController());
       }),
       getPages: [
+        GetPage(name: "/bottom_bar", page: () => BottomBar(),
+          binding: TambahDataBinding(),
+        ),
+        GetPage(name: "/halaman_intro", page: () => PageOneL()),
+        GetPage(name: "/halaman_utama", page: () => BottomBar()),
+        GetPage(name: "/halaman_login", page: () => LoginPage()),
+        GetPage(name: "/halaman_daftar", page: () => DaftarPage()),
         GetPage(
-          name: "/halaman_intro",
-          page: () => PageOneL()
+            name: "/halaman_reset_password", page: () => ResetPasswordPage()),
+        GetPage(name: "/manage_barang", page: () => ManageBarang()),
+        GetPage(name: "/halaman_barang", page: () => PageBarang()),
+        GetPage(name: "/halaman_kategori_barang", page: () => KategoriBarang()),
+        GetPage(name: "/tambah_barang", page: () => tambahBarang()),
+        GetPage(name: "/transaksi", page: () => Transaksi()),
+        GetPage(name: "/halaman_bayar", page: () => Pembayaran()),
+        GetPage(name: "/halaman_laporan", page: () => Laporan()),
+        GetPage(name: "/halaman_pengaturan", page: () => Pengaturan()),
+        GetPage(name: "/halaman_scan", page: () => TestingBarcode()),
+        GetPage(
+          name: "/tambah_data_produk",
+          page: () => TambahDataPage(),
+          binding: TambahDataBinding(),
         ),
         GetPage(
-          name: "/halaman_utama",
-          page: () => BottomBar()
+          name: "/edit_data_produk",
+          page: () => EditDataPage(),
+          binding: TambahDataBinding(),
         ),
         GetPage(
-          name: "/halaman_login",
-          page: () => LoginPage()
-        ),
-        GetPage(
-          name: "/halaman_daftar",
-          page: () => DaftarPage()
-        ),
-        GetPage(name: "/halaman_reset_password", page: () => ResetPasswordPage()),
-        GetPage(
-          name: "/manage_barang",
-          page: () => ManageBarang()
-        ),
-        GetPage(
-          name: "/halaman_barang",
-          page: () => PageBarang()
-        ),
-        GetPage(
-          name: "/halaman_kategori_barang",
-          page: () => KategoriBarang()
-        ),
-        GetPage(
-          name: "/tambah_barang",
-          page: () => tambahBarang()
-        ),
-        GetPage(
-          name: "/transaksi",
-          page: () => Transaksi()
-        ),
-        GetPage(
-          name: "/halaman_bayar",
-          page: () => Pembayaran()
-        ),
-        GetPage(
-          name: "/halaman_laporan",
-          page: () => Laporan()
-        ),
-        GetPage(
-          name: "/halaman_pengaturan",
-          page: () => Pengaturan()
-        ),
-        
-        GetPage(
-          name: "/halaman_scan",
-          page: () => TestingBarcode()
+          name: "/infaq_page",
+          page: () => InfaqScreen(),
+          binding: TambahDataBinding(),
         ),
       ],
       debugShowCheckedModeBanner: false,

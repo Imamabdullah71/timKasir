@@ -3,14 +3,13 @@ import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:timkasirapp/controllers/bottomBar_controller.dart';
 import 'package:timkasirapp/mainHomePage.dart';
-import 'package:timkasirapp/pages/management_barang/page_menu/barang.dart';
 import 'package:timkasirapp/pages/laporan.dart';
 import 'package:timkasirapp/pages/management_barang/manage_barang.dart';
 import 'package:timkasirapp/pages/profile.dart';
 import 'package:timkasirapp/pages/transaksi.dart';
 import './widgets/widgetDrawer.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 class BottomBar extends StatelessWidget {
   final BottomBarController controller = Get.put(BottomBarController());
