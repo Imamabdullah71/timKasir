@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timkasirapp/controllers/produk_controller.dart/add_product_controller.dart';
-import 'package:timkasirapp/controllers/home_controller.dart';
+import 'package:timkasirapp/Controllers/produk_controller/add_product_controller.dart';
+import 'package:timkasirapp/Controllers/home_controller.dart';
 import 'package:timkasirapp/widgets/widgetDrawer.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 
@@ -62,7 +62,7 @@ class MainHomePage extends StatelessWidget {
                       child: Center(
                         child: IconButton(
                           onPressed: () {
-                            Get.toNamed("/halaman_scan");
+                            
                           },
                           icon: Icon(
                             BootstrapIcons.upc_scan,

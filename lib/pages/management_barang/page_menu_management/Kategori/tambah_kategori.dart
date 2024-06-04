@@ -1,68 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timkasirapp/Controllers/produk_controller/add_product_controller.dart';
+import 'package:timkasirapp/Controllers/Kategori_Controller/page_kategori_controller.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 
-class TambahDataPage extends GetView<AddProductController> {
+class TambahKategoriPage extends GetView<PageKategoriController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Tambah Data Produk",
+          "Tambah Kategori",
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Color.fromARGB(255, 237, 42, 255),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             TextField(
-              controller: controller.nameC,
+              controller: controller.namaKategoriC,
               autocorrect: false,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                hintText: 'Nama Produk...',
+                hintText: 'Nama Kategori...',
                 prefixIcon: Icon(
                   BootstrapIcons.box_seam,
-                  color: Colors.grey.shade600,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  borderSide: BorderSide(
-                    color: Colors.purple,
-                  ), // Warna border saat fokus
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade500,
-                  ), // Change border color here
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 5,
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: controller.priceC,
-              keyboardType: TextInputType.number,
-              autocorrect: false,
-              textInputAction: TextInputAction.done,
-              decoration: InputDecoration(
-                hintText: 'Harga...',
-                prefixIcon: Icon(
-                  BootstrapIcons.cash,
                   color: Colors.grey.shade600,
                 ),
                 border: OutlineInputBorder(
@@ -90,7 +56,7 @@ class TambahDataPage extends GetView<AddProductController> {
             SizedBox(height: 40),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.greenAccent,
+                backgroundColor: Color.fromARGB(255, 237, 42, 255),
                 minimumSize: Size(
                   70, // Lebar
                   48, // Tinggi
@@ -98,13 +64,12 @@ class TambahDataPage extends GetView<AddProductController> {
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               ),
               onPressed: () {
-                controller.addProduct(
-                    controller.nameC.text, controller.priceC.text);
+                controller.tambahKategori(controller.namaKategoriC.text);
               },
               child: Text(
-                'Tambah Produk',
+                'Tambahkan',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ),

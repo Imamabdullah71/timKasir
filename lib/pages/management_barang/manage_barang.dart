@@ -42,7 +42,7 @@ class ManageBarang extends StatelessWidget {
             leading: Icon(BootstrapIcons.grid),
             title: Text("Kategori barang"),
             onTap: () {
-              Get.toNamed("/halaman_kategori_barang");
+              Get.toNamed("/kategori_page");
             },
           ),
           ListTile(
@@ -62,23 +62,31 @@ class ManageBarang extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(BootstrapIcons.journal_text),
-            title: Text("Hutang dam Piutang"),
-            onTap: () {},
+            title: Text("Barang Test"),
+            onTap: () {
+              Get.toNamed("/uplaod_page_barang");
+            },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.newspaper),
-            title: Text("Diskon, Pajak, dan Biaya"),
-            onTap: () {},
+            leading: Icon(BootstrapIcons.folder),
+            title: Text("Folder"),
+            onTap: () {
+              Get.toNamed("/uplaod_page");
+            },
           ),
           ListTile(
             leading: Icon(BootstrapIcons.pen),
-            title: Text("Stok Opname"),
-            onTap: () {},
+            title: Text("Count Page"),
+            onTap: () {
+              Get.toNamed("/count_page");
+            },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.star),
-            title: Text("Marketing"),
-            onTap: () {},
+            leading: Icon(BootstrapIcons.funnel),
+            title: Text("Filter Page"),
+            onTap: () {
+              Get.toNamed("/filter_page");
+            },
           ),
         ],
       ),
@@ -91,3 +99,11 @@ class ManageBarang extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+

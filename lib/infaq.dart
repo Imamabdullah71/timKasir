@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timkasirapp/models/infaq.dart';
-import 'controllers/infaq_controller.dart';
+import 'Controllers/infaq_controller.dart';
 
 class InfaqScreen extends StatelessWidget {
   final InfaqController infaqController = Get.put(InfaqController());

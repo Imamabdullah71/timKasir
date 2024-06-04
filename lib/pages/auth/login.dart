@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:timkasirapp/controllers/authController.dart';
-import 'package:timkasirapp/controllers/bottomBar_controller.dart';
+import 'package:timkasirapp/Controllers/authController.dart';
+import 'package:timkasirapp/Controllers/bottomBar_controller.dart';
 
 class LoginPage extends StatelessWidget {
   final AuthController authC = Get.find();

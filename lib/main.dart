@@ -3,26 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:timkasirapp/controllers/produk_controller.dart/add_product_controller.dart';
-import 'package:timkasirapp/controllers/authController.dart';
-import 'package:timkasirapp/controllers/bottomBar_controller.dart';
-import 'package:timkasirapp/controllers/home_controller.dart';
+import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/detail_barang.dart';
+import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/edit_barang.dart';
+import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/tambah_barang.dart';
+import 'package:timkasirapp/Count_Down_Test/count_page.dart';
+import 'package:timkasirapp/Controllers/produk_controller/add_product_controller.dart';
+import 'package:timkasirapp/Controllers/authController.dart';
+import 'package:timkasirapp/Controllers/bottomBar_controller.dart';
+import 'package:timkasirapp/Controllers/home_controller.dart';
+import 'package:timkasirapp/Pages/management_barang/page_menu_management/Kategori/kategori.dart';
+import 'package:timkasirapp/Pages/management_barang/page_menu_management/Kategori/tambah_kategori.dart';
 import 'package:timkasirapp/infaq.dart';
-import 'package:timkasirapp/pages/auth/daftar.dart';
-import 'package:timkasirapp/pages/auth/login.dart';
-import 'package:timkasirapp/pages/auth/reset_password.dart';
-import 'package:timkasirapp/pages/crud/edit_produk.dart';
-import 'package:timkasirapp/pages/management_barang/page_menu/barang.dart';
-import 'package:timkasirapp/pages/management_barang/page_menu/kategori_barang.dart';
-import 'package:timkasirapp/pages/management_barang/page_menu/tambah_barang.dart';
-import 'package:timkasirapp/pages/laporan.dart';
-import 'package:timkasirapp/pages/leading_pages/mainLeading.dart';
-import 'package:timkasirapp/pages/profile.dart';
-import 'package:timkasirapp/pages/scan_test.dart';
-import 'package:timkasirapp/pages/transaksi.dart';
-import 'package:timkasirapp/pages/transaksi/bayar.dart';
-import 'package:timkasirapp/pages/crud/tambah_product.dart';
-import 'pages/management_barang/manage_barang.dart';
+import 'package:timkasirapp/Pages/auth/daftar.dart';
+import 'package:timkasirapp/Pages/auth/login.dart';
+import 'package:timkasirapp/Pages/auth/reset_password.dart';
+import 'package:timkasirapp/Pages/crud/edit_produk.dart';
+import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/barang.dart';
+import 'package:timkasirapp/Pages/laporan.dart';
+import 'package:timkasirapp/Pages/leading_pages/mainLeading.dart';
+import 'package:timkasirapp/Pages/profile.dart';
+import 'package:timkasirapp/Pages/transaksi.dart';
+import 'package:timkasirapp/Pages/transaksi/bayar.dart';
+import 'package:timkasirapp/Pages/crud/tambah_product.dart';
+import 'package:timkasirapp/upload_file/upload_page.dart';
+import 'Pages/management_barang/manage_barang.dart';
 import 'bottom_bar.dart';
 import 'package:timkasirapp/bindings.dart';
 
@@ -33,7 +37,6 @@ void main() async {
 
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -46,7 +49,9 @@ class MyApp extends StatelessWidget {
         Get.lazyPut<HomeController>(() => HomeController());
       }),
       getPages: [
-        GetPage(name: "/bottom_bar", page: () => BottomBar(),
+        GetPage(
+          name: "/bottom_bar",
+          page: () => BottomBar(),
           binding: TambahDataBinding(),
         ),
         GetPage(name: "/halaman_intro", page: () => PageOneL()),
@@ -56,14 +61,15 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: "/halaman_reset_password", page: () => ResetPasswordPage()),
         GetPage(name: "/manage_barang", page: () => ManageBarang()),
-        GetPage(name: "/halaman_barang", page: () => PageBarang()),
-        GetPage(name: "/halaman_kategori_barang", page: () => KategoriBarang()),
-        GetPage(name: "/tambah_barang", page: () => tambahBarang()),
+        GetPage(
+          name: "/halaman_barang",
+          page: () => PageBarang(),
+          binding: TambahDataBinding(),
+        ),
         GetPage(name: "/transaksi", page: () => Transaksi()),
         GetPage(name: "/halaman_bayar", page: () => Pembayaran()),
         GetPage(name: "/halaman_laporan", page: () => Laporan()),
         GetPage(name: "/halaman_pengaturan", page: () => Pengaturan()),
-        GetPage(name: "/halaman_scan", page: () => TestingBarcode()),
         GetPage(
           name: "/tambah_data_produk",
           page: () => TambahDataPage(),
@@ -77,6 +83,40 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/infaq_page",
           page: () => InfaqScreen(),
+          binding: TambahDataBinding(),
+        ),
+        
+        GetPage(name: "/count_page", page: () => CountPage()),
+        GetPage(
+          name: "/uplaod_page",
+          page: () => UploadPage(),
+          binding: TambahDataBinding(),
+        ),
+        //Barang
+        GetPage(
+          name: "/uplaod_page_barang",
+          page: () => TambahBarangPage(),
+          binding: TambahDataBinding(),
+        ),
+        GetPage(
+          name: "/detail_page_barang",
+          page: () => DetailBarangPage(),
+          binding: TambahDataBinding(),
+        ),
+        GetPage(
+          name: "/edit_page_barang",
+          page: () => EditBarangPage(),
+          binding: TambahDataBinding(),
+        ),
+        //Kategori
+        GetPage(
+          name: "/kategori_page",
+          page: () => KategoriPage(),
+          binding: TambahDataBinding(),
+        ),
+        GetPage(
+          name: "/tambah_kategori_page",
+          page: () => TambahKategoriPage(),
           binding: TambahDataBinding(),
         ),
       ],

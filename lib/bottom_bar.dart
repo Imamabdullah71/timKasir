@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:timkasirapp/controllers/bottomBar_controller.dart';
+import 'package:timkasirapp/Controllers/bottomBar_controller.dart';
 import 'package:timkasirapp/mainHomePage.dart';
-import 'package:timkasirapp/pages/laporan.dart';
-import 'package:timkasirapp/pages/management_barang/manage_barang.dart';
-import 'package:timkasirapp/pages/profile.dart';
-import 'package:timkasirapp/pages/transaksi.dart';
+import 'package:timkasirapp/Pages/laporan.dart';
+import 'package:timkasirapp/Pages/management_barang/manage_barang.dart';
+import 'package:timkasirapp/Pages/profile.dart';
+import 'package:timkasirapp/Pages/transaksi.dart';
 import './widgets/widgetDrawer.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-import '../controllers/authController.dart';
+import '../Controllers/authController.dart';
 
 class Pengaturan extends StatelessWidget {
   const Pengaturan({super.key});
