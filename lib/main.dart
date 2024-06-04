@@ -85,16 +85,15 @@ class MyApp extends StatelessWidget {
           page: () => InfaqScreen(),
           binding: TambahDataBinding(),
         ),
-        
         GetPage(name: "/count_page", page: () => CountPage()),
         GetPage(
-          name: "/uplaod_page",
+          name: "/upload_page",
           page: () => UploadPage(),
           binding: TambahDataBinding(),
         ),
-        //Barang
+        // Barang
         GetPage(
-          name: "/uplaod_page_barang",
+          name: "/upload_page_barang",
           page: () => TambahBarangPage(),
           binding: TambahDataBinding(),
         ),
@@ -108,7 +107,7 @@ class MyApp extends StatelessWidget {
           page: () => EditBarangPage(),
           binding: TambahDataBinding(),
         ),
-        //Kategori
+        // Kategori
         GetPage(
           name: "/kategori_page",
           page: () => KategoriPage(),
@@ -141,14 +140,14 @@ class AuthHandler extends StatelessWidget {
         } else if (snapshot.hasData) {
           User? user = snapshot.data;
           if (user != null && !user.emailVerified) {
-            // Jika pengguna belum verifikasi email, arahkan ke halaman login dengan pesan
+            // If user has not verified their email, redirect to the login page with a message
             WidgetsBinding.instance.addPostFrameCallback((_) {
               Get.snackbar(
-                "Email belum diverifikasi",
-                "Silakan verifikasi email Anda terlebih dahulu.",
+                "Email not verified",
+                "Please verify your email first.",
               );
             });
-            return LoginPage(); // Halaman login atau halaman verifikasi email
+            return LoginPage(); // Login or email verification page
           } else {
             return BottomBar();
           }

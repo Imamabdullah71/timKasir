@@ -7,6 +7,7 @@ class PageBarang extends GetView<PageBarangController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Get.back(),
@@ -53,19 +54,46 @@ class PageBarang extends GetView<PageBarangController> {
                     itemBuilder: (context, index) {
                       var barang = controller.filteredBarangList[index];
                       return ListTile(
+                        leading: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: barang['foto_url'] != null &&
+                                  barang['foto_url'].isNotEmpty
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    barang['foto_url'],
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Icon(
+                                        Icons.broken_image,
+                                        color: Colors.red,
+                                      );
+                                    },
+                                  ),
+                                )
+                              : Icon(
+                                  Icons.image_not_supported,
+                                  color: Colors.grey,
+                                ),
+                        ),
                         title: Text(barang['nama_barang']),
-                        subtitle: Text('Harga: ${barang['harga_barang']}'),
+                        subtitle: Text('Harga: ${barang['harga_jual']}'),
                         onTap: () {
                           Get.toNamed("/detail_page_barang", arguments: barang);
                         },
                         trailing: IconButton(
-                            onPressed: () {
-                              controller.hapusBarang(barang['id']);
-                            },
-                            icon: Icon(
-                              BootstrapIcons.trash,
-                              color: Colors.red,
-                            )),
+                          onPressed: () {
+                            controller.hapusBarang(barang['id']);
+                          },
+                          icon: Icon(
+                            BootstrapIcons.trash,
+                            color: Colors.red,
+                          ),
+                        ),
                       );
                     },
                   );
@@ -87,7 +115,7 @@ class PageBarang extends GetView<PageBarangController> {
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             ),
             onPressed: () {
-              Get.toNamed("/uplaod_page_barang");
+              Get.toNamed("/upload_page_barang");
             },
             child: Text(
               "Tambah Barang",

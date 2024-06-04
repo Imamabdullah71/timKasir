@@ -12,6 +12,7 @@ class DetailBarangPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final barang = Get.arguments as Map<String, dynamic>;
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Get.back(),
@@ -62,6 +63,33 @@ class DetailBarangPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: barang['foto_url'] != null &&
+                          barang['foto_url'].isNotEmpty
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            barang['foto_url'],
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Icon(
+                                Icons.broken_image,
+                                color: Colors.red,
+                              );
+                            },
+                          ),
+                        )
+                      : Icon(
+                          Icons.image_not_supported,
+                          color: Colors.grey,
+                        ),
+                ),
+                SizedBox(height: 20),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -168,7 +196,7 @@ class DetailBarangPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 ),
                 onPressed: () {
-                  // Get.toNamed("/edit_page_barang", arguments: barang);
+                  pageBarangController.hapusBarang(barang['id']);
                 },
                 child: Text(
                   "Hapus",

@@ -4,6 +4,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:timkasirapp/Controllers/Barang_Controller/tambah_barang_controller.dart';
+import 'dart:io';
 
 class TambahBarangPage extends StatelessWidget {
   final TambahBarangController controller = Get.put(TambahBarangController());
@@ -12,7 +13,17 @@ class TambahBarangPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tambah Barang"),
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
+        title: Text(
+          "Tambah Barang",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
         backgroundColor: Colors.cyan,
       ),
@@ -20,6 +31,47 @@ class TambahBarangPage extends StatelessWidget {
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
+            Container(
+              height: 200,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 100,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey[300],
+                    ),
+                    child: Icon(
+                      Icons.image_not_supported,
+                      size: 60,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          // Fungsi buka kamera
+                        },
+                        icon: Icon(
+                          Icons.camera_alt_rounded,
+                          color: Colors.black,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => controller.pickImage(),
+                        icon: Icon(
+                          Icons.image,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
             TextField(
               decoration: InputDecoration(labelText: 'Nama Barang'),
               onChanged: (value) => controller.setField('nama_barang', value),
@@ -56,31 +108,9 @@ class TambahBarangPage extends StatelessWidget {
                             keyboardType: TextInputType.number,
                             onChanged: (value) =>
                                 controller.setField('stok_barang', value),
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30)),
-                                borderSide: BorderSide(
-                                  color: Colors.purple,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.shade500,
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30)),
-                              ),
-                              contentPadding: EdgeInsets.only(left: 20),
-                            ),
                           ),
                         ),
-                      ],
+                      ],  
                     ),
                   ),
                   flex: 2,
@@ -108,28 +138,6 @@ class TambahBarangPage extends StatelessWidget {
                                   controller.setField('kode_barang', value),
                               controller: TextEditingController(
                                 text: controller.barcode.value,
-                              ),
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                  borderSide: BorderSide(
-                                    color: Colors.purple,
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.grey.shade500,
-                                  ),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                ),
-                                contentPadding: EdgeInsets.only(left: 20),
                               ),
                             ),
                           ),
@@ -177,13 +185,38 @@ class TambahBarangPage extends StatelessWidget {
             }),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                controller.tambahBarang();
-              },
-              child: Text("Tambah Barang"),
+              onPressed: () => controller.pickImage(),
+              child: Text("Pilih Gambar"),
             ),
+            SizedBox(height: 20),
+            Obx(() {
+              if (controller.imageFile.value != null) {
+                return Image.file(File(controller.imageFile.value!.path));
+              } else {
+                return Text("Tidak ada gambar dipilih");
+              }
+            }),
           ],
         ),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left: 30),
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.purple,
+              minimumSize: Size(
+                double.infinity, // Lebar
+                48, // Tinggi
+              ),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            ),
+            onPressed: () {
+              controller.tambahBarang();
+            },
+            child: Text(
+              "Tambahkan Barang",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            )),
       ),
     );
   }

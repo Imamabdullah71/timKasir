@@ -13,7 +13,7 @@ class TambahBarangController extends GetxController {
     'stok_barang': ''.obs,
     'kode_barang': ''.obs,
     'kategori_id': ''.obs,
-    'foto_url': ''.obs, // Tambahkan untuk URL foto
+    'foto_url': ''.obs,  // Tambahkan untuk URL foto
   }.obs;
 
   var kategoriList = <Map<String, dynamic>>[].obs;
@@ -39,8 +39,7 @@ class TambahBarangController extends GetxController {
 
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       imageFile.value = pickedFile;
@@ -53,12 +52,20 @@ class TambahBarangController extends GetxController {
     if (imageFile.value == null) return null;
 
     try {
-      final ref = FirebaseStorage.instance
-          .ref()
-          .child('barang_images')
-          .child('$docId.jpg');
-      await ref.putFile(File(imageFile.value!.path));
-      return await ref.getDownloadURL();
+      final ref = FirebaseStorage.instance.ref().child('barang_images').child('$docId.jpg');
+      final uploadTask = ref.putFile(
+        File(imageFile.value!.path),
+        SettableMetadata(
+          contentType: 'image/jpeg', // Atur tipe konten file
+          customMetadata: {
+            'uploaded_by': 'user_id', // Contoh metadata khusus
+            'description': 'Image of a product',
+          },
+        ),
+      );
+
+      final snapshot = await uploadTask;
+      return await snapshot.ref.getDownloadURL();
     } catch (e) {
       Get.snackbar('Error', 'Gagal mengunggah gambar: $e');
       return null;

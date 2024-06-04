@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class PageBarangController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -77,10 +78,26 @@ class PageBarangController extends GetxController {
     DocumentReference docRef = firestore.collection("barang").doc(docId);
 
     try {
+      // Ambil URL foto sebelum menghapus dokumen
+      var docSnapshot = await docRef.get();
+      var data = docSnapshot.data() as Map<String, dynamic>?; // Cast data ke Map<String, dynamic>
+      String? fotoUrl = data?['foto_url'];
+
       Get.defaultDialog(
         title: "Apakah yakin ingin menghapus data?",
         middleText: "Data akan dihapus permanen!",
         onConfirm: () async {
+          // Hapus gambar dari Cloud Storage jika URL foto ada
+          if (fotoUrl != null && fotoUrl.isNotEmpty) {
+            try {
+              var storageRef = FirebaseStorage.instance.refFromURL(fotoUrl);
+              await storageRef.delete();
+            } catch (e) {
+              print("Gagal menghapus gambar: $e");
+            }
+          }
+
+          // Hapus dokumen dari Firestore
           await docRef.delete();
           Get.back();
           Get.snackbar(
