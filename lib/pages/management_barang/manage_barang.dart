@@ -83,9 +83,9 @@ class ManageBarang extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(BootstrapIcons.funnel),
-            title: Text("Filter Page"),
+            title: Text("Image Picker Testing"),
             onTap: () {
-              Get.toNamed("/filter_page");
+              Get.toNamed("/mencoba_image_picker");
             },
           ),
         ],

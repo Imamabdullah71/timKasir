@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:timkasirapp/1Testing_Image/Testing_Upload_Image.dart';
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/detail_barang.dart';
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/edit_barang.dart';
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/tambah_barang.dart';
@@ -118,6 +119,11 @@ class MyApp extends StatelessWidget {
           page: () => TambahKategoriPage(),
           binding: TambahDataBinding(),
         ),
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //Ini hanya bagaian untuk testing page, hapus jika tidak digunakan
+        GetPage(
+            name: "/mencoba_image_picker", page: () => TestingImagePicker()),
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       ],
       debugShowCheckedModeBanner: false,
       home: AuthHandler(),

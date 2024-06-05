@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:timkasirapp/Controllers/Barang_Controller/tambah_barang_controller.dart';
-import 'dart:io';
 
 class TambahBarangPage extends StatelessWidget {
   final TambahBarangController controller = Get.put(TambahBarangController());
@@ -36,24 +36,41 @@ class TambahBarangPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey[300],
-                    ),
-                    child: Icon(
-                      Icons.image_not_supported,
-                      size: 60,
-                    ),
-                  ),
+                  Obx(() {
+                    if (controller.croppedImageFile.value != null) {
+                      return Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.grey[300],
+                        ),
+                        child: Image.memory(
+                          controller.croppedImageFile.value!,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    } else {
+                      return Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.grey[300],
+                        ),
+                        child: Icon(
+                          Icons.image_not_supported,
+                          size: 60,
+                        ),
+                      );
+                    }
+                  }),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
                         onPressed: () {
-                          // Fungsi buka kamera
+                          controller.pickImage(ImageSource.camera);
                         },
                         icon: Icon(
                           Icons.camera_alt_rounded,
@@ -61,7 +78,9 @@ class TambahBarangPage extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () => controller.pickImage(),
+                        onPressed: () {
+                          controller.pickImage(ImageSource.gallery);
+                        },
                         icon: Icon(
                           Icons.image,
                           color: Colors.black,
@@ -182,19 +201,6 @@ class TambahBarangPage extends StatelessWidget {
                   showSearchBox: true,
                 ),
               );
-            }),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => controller.pickImage(),
-              child: Text("Pilih Gambar"),
-            ),
-            SizedBox(height: 20),
-            Obx(() {
-              if (controller.imageFile.value != null) {
-                return Image.file(File(controller.imageFile.value!.path));
-              } else {
-                return Text("Tidak ada gambar dipilih");
-              }
             }),
           ],
         ),

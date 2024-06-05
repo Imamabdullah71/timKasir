@@ -1,9 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:crop_your_image/crop_your_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/image_editor_page.dart';
 
 class TambahBarangController extends GetxController {
   var barangData = {
@@ -13,13 +17,16 @@ class TambahBarangController extends GetxController {
     'stok_barang': ''.obs,
     'kode_barang': ''.obs,
     'kategori_id': ''.obs,
-    'foto_url': ''.obs, // Tambahkan untuk URL foto
+    'foto_url': ''.obs,
   }.obs;
 
   var kategoriList = <Map<String, dynamic>>[].obs;
   var selectedKategori = ''.obs;
   var barcode = ''.obs;
-  var imageFile = Rx<XFile?>(null);
+  var imageFile = Rx<Uint8List?>(null);
+  var croppedImageFile = Rx<Uint8List?>(null);
+
+  final CropController cropController = CropController();
 
   @override
   void onInit() {
@@ -37,27 +44,31 @@ class TambahBarangController extends GetxController {
     }).toList();
   }
 
-  Future<void> pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery);
-
+  Future<void> pickImage(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
     if (pickedFile != null) {
-      imageFile.value = pickedFile;
+      imageFile.value = await pickedFile.readAsBytes();
+      Get.to(() => ImageEditorPage());
     } else {
       Get.snackbar('Error', 'Tidak ada gambar yang dipilih');
     }
   }
 
+  void cropImage() {
+    if (imageFile.value != null) {
+      cropController.crop();
+    }
+  }
+
   Future<String?> uploadImage(String docId) async {
-    if (imageFile.value == null) return null;
+    if (croppedImageFile.value == null) return null;
 
     try {
       final ref = FirebaseStorage.instance
           .ref()
           .child('barang_images')
           .child('$docId.jpg');
-      await ref.putFile(File(imageFile.value!.path));
+      await ref.putData(croppedImageFile.value!);
       return await ref.getDownloadURL();
     } catch (e) {
       Get.snackbar('Error', 'Gagal mengunggah gambar: $e');
@@ -96,7 +107,7 @@ class TambahBarangController extends GetxController {
       return;
     }
 
-    if (imageFile.value == null) {
+    if (croppedImageFile.value == null) {
       Get.snackbar('Error', 'Gambar belum dipilih');
       return;
     }

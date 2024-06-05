@@ -32,6 +32,7 @@ dependencies:
   bootstrap_icons: ^1.11.3
   cloud_firestore: ^4.17.4
   convex_bottom_bar: ^3.2.0
+  crop_your_image: ^1.1.0
   cupertino_icons: ^1.0.6
   dropdown_search: ^5.0.6
   faker: ^2.1.0
@@ -48,6 +49,7 @@ dependencies:
   get_storage: ^2.1.1
   google_fonts: ^6.2.1
   http: ^1.2.1
+  image_cropper: ^6.0.0
   image_picker: ^1.1.1
   intl: ^0.19.0
   introduction_screen: ^3.1.14
