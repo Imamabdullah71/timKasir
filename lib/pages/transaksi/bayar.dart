@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 
-
 class Pembayaran extends StatelessWidget {
   final RxBool bukaTutupSearch = false.obs;
 
@@ -120,20 +119,26 @@ class Pembayaran extends StatelessWidget {
                 // scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
-                    Container(
-                      height: 300,
-                      width: double.infinity,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      height: 300,
-                      width: double.infinity,
-                      color: Colors.yellow,
-                    ),
-                    Container(
-                      height: 300,
-                      width: double.infinity,
-                      color: Colors.green,
+                    ListTile(
+                      leading: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text("Foto Barang"),
+                      ),
+                      title: Text("Nama Barang"),
+                      subtitle: Text('Harga: harga_jual barang'),
+                      onTap: () {
+                        print("Jumlah barang++");
+                      },
+                      trailing: Container(
+                        child: Text(
+                          "x1",
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -141,6 +146,23 @@ class Pembayaran extends StatelessWidget {
             )
           ],
         ),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left: 30),
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.purple,
+              minimumSize: Size(
+                double.infinity, // Lebar
+                48, // Tinggi
+              ),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            ),
+            onPressed: () {},
+            child: Text(
+              "Bayar (disini isi value jumlah yang harus dibayar)",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            )),
       ),
     );
   }

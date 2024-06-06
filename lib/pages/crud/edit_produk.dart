@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timkasirapp/Controllers/produk_controller/add_product_controller.dart';
+
 import 'package:timkasirapp/Controllers/produk_controller/edit_product_controller.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 

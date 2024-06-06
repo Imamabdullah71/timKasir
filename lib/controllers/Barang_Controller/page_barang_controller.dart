@@ -1,3 +1,4 @@
+// page_barang_controller.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,11 +37,30 @@ class PageBarangController extends GetxController {
         .orderBy("nama_barang")
         .snapshots()
         .listen((snapshot) {
-      barangList.value = snapshot.docs.map((doc) {
+      List<Map<String, dynamic>> barangs = snapshot.docs.map((doc) {
         var data = doc.data();
         data['id'] = doc.id;
         return data;
       }).toList();
+
+      // Ambil harga untuk setiap barang
+      barangs.forEach((barang) async {
+        var hargaSnapshot = await FirebaseFirestore.instance
+            .collection('harga')
+            .where('barang_id', isEqualTo: barang['id'])
+            .get();
+
+        if (hargaSnapshot.docs.isNotEmpty) {
+          var hargaData = hargaSnapshot.docs.first.data();
+          barang['harga_jual'] = hargaData['harga_jual'];
+          barang['harga_beli'] = hargaData['harga_beli'];
+        } else {
+          barang['harga_jual'] = 'Tidak ada harga';
+          barang['harga_beli'] = 'Tidak ada harga';
+        }
+      });
+
+      barangList.value = barangs;
     });
   }
 

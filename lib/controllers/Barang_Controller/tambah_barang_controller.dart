@@ -1,23 +1,25 @@
+// tambah_barang_controller.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/image_editor_page.dart';
 
 class TambahBarangController extends GetxController {
   var barangData = {
     'nama_barang': ''.obs,
-    'harga_beli': ''.obs,
-    'harga_jual': ''.obs,
     'stok_barang': ''.obs,
     'kode_barang': ''.obs,
     'kategori_id': ''.obs,
     'foto_url': ''.obs,
+  }.obs;
+
+  var hargaData = {
+    'harga_beli': ''.obs,
+    'harga_jual': ''.obs,
   }.obs;
 
   var kategoriList = <Map<String, dynamic>>[].obs;
@@ -82,12 +84,12 @@ class TambahBarangController extends GetxController {
       return;
     }
 
-    if (barangData['harga_beli']?.value.isEmpty ?? true) {
+    if (hargaData['harga_beli']?.value.isEmpty ?? true) {
       Get.snackbar('Error', 'Harga beli harus diisi');
       return;
     }
 
-    if (barangData['harga_jual']?.value.isEmpty ?? true) {
+    if (hargaData['harga_jual']?.value.isEmpty ?? true) {
       Get.snackbar('Error', 'Harga jual harus diisi');
       return;
     }
@@ -116,12 +118,16 @@ class TambahBarangController extends GetxController {
 
     final docRef = await FirebaseFirestore.instance.collection('barang').add({
       'nama_barang': barangData['nama_barang']?.value,
-      'harga_beli': int.parse(barangData['harga_beli']?.value ?? '0'),
-      'harga_jual': int.parse(barangData['harga_jual']?.value ?? '0'),
       'stok_barang': int.parse(barangData['stok_barang']?.value ?? '0'),
       'kode_barang': int.parse(barangData['kode_barang']?.value ?? '0'),
       'kategori_id': barangData['kategori_id']?.value,
       "time": dateNow,
+    });
+
+    final hargaRef = await FirebaseFirestore.instance.collection('harga').add({
+      'harga_beli': int.parse(hargaData['harga_beli']?.value ?? '0'),
+      'harga_jual': int.parse(hargaData['harga_jual']?.value ?? '0'),
+      'barang_id': docRef.id,
     });
 
     String? fotoUrl = await uploadImage(docRef.id);
@@ -150,7 +156,11 @@ class TambahBarangController extends GetxController {
   }
 
   void setField(String key, String value) {
-    barangData[key]?.value = value;
+    if (key == 'harga_beli' || key == 'harga_jual') {
+      hargaData[key]?.value = value;
+    } else {
+      barangData[key]?.value = value;
+    }
   }
 
   void setKategori(String kategori, String id) {

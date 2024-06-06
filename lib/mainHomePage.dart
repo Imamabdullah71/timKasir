@@ -61,9 +61,7 @@ class MainHomePage extends StatelessWidget {
                       ),
                       child: Center(
                         child: IconButton(
-                          onPressed: () {
-                            
-                          },
+                          onPressed: () {},
                           icon: Icon(
                             BootstrapIcons.upc_scan,
                             size: 50,
@@ -144,9 +142,9 @@ class MainHomePage extends StatelessWidget {
                         "/edit_data_produk",
                         arguments: product.id,
                       ),
-                      title: Text("Nama : ${productData["name"]}" ?? "No Name"),
+                      title: Text("Nama : ${productData["name"] ?? "No Name"}"),
                       subtitle:
-                          Text("Harga : ${productData["price"]}" ?? "No Price"),
+                          Text("Harga : ${productData["price"] ?? "No Price"}"),
                       trailing: IconButton(
                         onPressed: () {
                           controller.deleteProduct(product.id);

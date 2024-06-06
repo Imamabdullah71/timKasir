@@ -85,13 +85,10 @@ class PageBarang extends GetView<PageBarangController> {
                         onTap: () {
                           Get.toNamed("/detail_page_barang", arguments: barang);
                         },
-                        trailing: IconButton(
-                          onPressed: () {
-                            controller.hapusBarang(barang['id']);
-                          },
-                          icon: Icon(
-                            BootstrapIcons.trash,
-                            color: Colors.red,
+                        trailing: Container(
+                          child: Text(
+                            "x1",
+                            style: TextStyle(fontSize: 20, color: Colors.black),
                           ),
                         ),
                       );
