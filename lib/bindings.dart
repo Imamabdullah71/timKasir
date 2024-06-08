@@ -4,7 +4,6 @@ import 'package:timkasirapp/Controllers/Barang_Controller/tambah_barang_controll
 import 'package:timkasirapp/Controllers/Barang_Controller/page_barang_controller.dart';
 import 'package:timkasirapp/Controllers/Kategori_Controller/page_kategori_controller.dart';
 import 'package:timkasirapp/Filter_Test/Query_Controller.dart';
-import 'package:timkasirapp/Controllers/infaq_controller.dart';
 import 'package:timkasirapp/Controllers/produk_controller/add_product_controller.dart';
 import 'package:timkasirapp/Controllers/home_controller.dart';
 import 'package:timkasirapp/Controllers/produk_controller/edit_product_controller.dart';
@@ -16,7 +15,6 @@ class TambahDataBinding extends Bindings {
     Get.lazyPut<AddProductController>(() => AddProductController());
     Get.lazyPut<EditProductController>(() => EditProductController());
     Get.lazyPut<HomeController>(() => HomeController());
-    Get.lazyPut<InfaqController>(() => InfaqController());
     Get.lazyPut<QueryController>(() => QueryController());
     Get.lazyPut<UploadController>(() => UploadController());
     //Barang

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:timkasirapp/1Testing_Image/Testing_Upload_Image.dart';
+import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/detail_barang.dart';
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/edit_barang.dart';
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/tambah_barang.dart';
@@ -14,7 +15,6 @@ import 'package:timkasirapp/Controllers/bottomBar_controller.dart';
 import 'package:timkasirapp/Controllers/home_controller.dart';
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Kategori/kategori.dart';
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Kategori/tambah_kategori.dart';
-import 'package:timkasirapp/infaq.dart';
 import 'package:timkasirapp/Pages/auth/daftar.dart';
 import 'package:timkasirapp/Pages/auth/login.dart';
 import 'package:timkasirapp/Pages/auth/reset_password.dart';
@@ -24,8 +24,12 @@ import 'package:timkasirapp/Pages/laporan.dart';
 import 'package:timkasirapp/Pages/leading_pages/mainLeading.dart';
 import 'package:timkasirapp/Pages/profile.dart';
 import 'package:timkasirapp/Pages/transaksi.dart';
-import 'package:timkasirapp/Pages/transaksi/bayar.dart';
+import 'package:timkasirapp/Pages/transaksi/payment_page.dart';
+import 'package:timkasirapp/Pages/transaksi/transaksi_page.dart';
 import 'package:timkasirapp/Pages/crud/tambah_product.dart';
+import 'package:timkasirapp/Pages/transaksi/success%20_transaksi_page.dart';
+import 'package:timkasirapp/Pages/transaksi/transaksi_detail_page.dart';
+import 'package:timkasirapp/mainHomePage.dart';
 import 'package:timkasirapp/upload_file/upload_page.dart';
 import 'Pages/management_barang/manage_barang.dart';
 import 'bottom_bar.dart';
@@ -48,6 +52,7 @@ class MyApp extends StatelessWidget {
         Get.lazyPut<BottomBarController>(() => BottomBarController());
         Get.lazyPut<AddProductController>(() => AddProductController());
         Get.lazyPut<HomeController>(() => HomeController());
+        Get.lazyPut<TransaksiController>(() => TransaksiController());
       }),
       getPages: [
         GetPage(
@@ -68,7 +73,6 @@ class MyApp extends StatelessWidget {
           binding: TambahDataBinding(),
         ),
         GetPage(name: "/transaksi", page: () => Transaksi()),
-        GetPage(name: "/halaman_bayar", page: () => Pembayaran()),
         GetPage(name: "/halaman_laporan", page: () => Laporan()),
         GetPage(name: "/halaman_pengaturan", page: () => Pengaturan()),
         GetPage(
@@ -79,11 +83,6 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/edit_data_produk",
           page: () => EditDataPage(),
-          binding: TambahDataBinding(),
-        ),
-        GetPage(
-          name: "/infaq_page",
-          page: () => InfaqScreen(),
           binding: TambahDataBinding(),
         ),
         GetPage(name: "/count_page", page: () => CountPage()),
@@ -119,6 +118,11 @@ class MyApp extends StatelessWidget {
           page: () => TambahKategoriPage(),
           binding: TambahDataBinding(),
         ),
+        //Pembayaran
+        GetPage(name: "/transaksi_page", page: () => TransaksiPage()),
+        GetPage(name: "/transaksi_detail", page: () => TransaksiDetailPage()),
+        GetPage(name: "/payment_page", page: () => PaymentPage()),
+        GetPage(name: "/success_transaksi_page", page: () => SuccessTransaksiPage()),
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //Ini hanya bagaian untuk testing page, hapus jika tidak digunakan
         GetPage(

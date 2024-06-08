@@ -24,11 +24,21 @@ class MainHomePage extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: Icon(BootstrapIcons.house),
-            onPressed: () {
-              Get.offAllNamed("/halaman_utama");
-            },
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.purple,
+              ),
+              child: IconButton(
+                icon: Icon(BootstrapIcons.house),
+                color: Colors.white,
+                onPressed: () {
+                  Get.offAllNamed("/halaman_utama");
+                },
+              ),
+            ),
           ),
         ],
       ),
@@ -92,7 +102,7 @@ class MainHomePage extends StatelessWidget {
                       child: Center(
                         child: IconButton(
                           onPressed: () {
-                            Get.toNamed("/halaman_bayar");
+                            Get.toNamed("/transaksi_page");
                           },
                           icon: Icon(
                             BootstrapIcons.cart3,

@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animations: ^2.0.11
   avatar_glow: ^3.0.1
   bootstrap_icons: ^1.11.3
   cloud_firestore: ^4.17.4

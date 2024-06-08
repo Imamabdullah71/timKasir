@@ -120,6 +120,7 @@ class PageBarangController extends GetxController {
           // Hapus dokumen dari Firestore
           await docRef.delete();
           Get.back();
+          Get.back();
           Get.snackbar(
             "Data berhasil dihapus",
             "",
