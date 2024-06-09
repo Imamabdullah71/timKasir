@@ -41,12 +41,13 @@ class MainHomePage extends StatelessWidget {
       ),
       drawer: const WidgetDrawer(),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: 300,
+            height: 250,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.lightBlue,
+              // color: const Color.fromARGB(255, 229, 135, 246),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: Colors.purple,
@@ -63,7 +64,7 @@ class MainHomePage extends StatelessWidget {
                       height: 100,
                       width: 100,
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: Colors.purple,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Center(
@@ -78,10 +79,10 @@ class MainHomePage extends StatelessWidget {
                       ),
                     ),
                     const Text(
-                      "Scan Test",
+                      "Scan",
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.white,
+                        color: Colors.purple,
                       ),
                     )
                   ],
@@ -93,7 +94,7 @@ class MainHomePage extends StatelessWidget {
                       height: 100,
                       width: 100,
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: Colors.purple,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Center(
@@ -113,7 +114,7 @@ class MainHomePage extends StatelessWidget {
                       "Transaksi",
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.white,
+                        color: Colors.purple,
                       ),
                     )
                   ],

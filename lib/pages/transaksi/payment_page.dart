@@ -7,7 +7,8 @@ import 'package:timkasirapp/Controllers/Transaksi/payment_controller.dart'; // I
 class PaymentPage extends StatelessWidget {
   final TransaksiController transaksiController =
       Get.find<TransaksiController>();
-  final PaymentController paymentController = Get.put(PaymentController());
+  final PaymentController paymentController =
+      Get.find<PaymentController>();
 
   @override
   Widget build(BuildContext context) {

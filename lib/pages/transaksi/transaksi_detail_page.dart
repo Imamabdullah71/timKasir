@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timkasirapp/Controllers/Transaksi/payment_controller.dart';
 import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
 
 // ignore: use_key_in_widget_constructors
 class TransaksiDetailPage extends StatelessWidget {
   final TransaksiController transaksiController =
       Get.find<TransaksiController>();
+  final PaymentController paymentController = Get.find<PaymentController>();
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +117,7 @@ class TransaksiDetailPage extends StatelessWidget {
           child: FloatingActionButton.extended(
             onPressed: () => Get.toNamed("/payment_page"),
             label: Text(
-              "Lanjut Bayar (${transaksiController.totalAmount.value})",
+              "Lanjut Bayar (${paymentController.formatNumber(transaksiController.totalAmount.value)})",
               style: const TextStyle(color: Colors.white),
             ),
             backgroundColor: Colors.purple,

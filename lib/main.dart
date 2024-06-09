@@ -103,8 +103,16 @@ class MyApp extends StatelessWidget {
           page: () => TransaksiPage(),
           binding: TambahDataBinding(),
         ),
-        GetPage(name: "/transaksi_detail", page: () => TransaksiDetailPage()),
-        GetPage(name: "/payment_page", page: () => PaymentPage()),
+        GetPage(
+          name: "/transaksi_detail",
+          page: () => TransaksiDetailPage(),
+          binding: TambahDataBinding(),
+        ),
+        GetPage(
+          name: "/payment_page",
+          page: () => PaymentPage(),
+          binding: TambahDataBinding(),
+        ),
         GetPage(
             name: "/success_transaksi_page",
             page: () => SuccessTransaksiPage()),
