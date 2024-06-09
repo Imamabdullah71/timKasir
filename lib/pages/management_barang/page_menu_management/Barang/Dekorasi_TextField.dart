@@ -10,12 +10,12 @@ class MyWidget extends StatelessWidget {
         child: TextField(
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
-            border: OutlineInputBorder(
+            border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(30),
               ),
             ),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(30)),
               borderSide: BorderSide(
                 color: Colors.purple,
@@ -25,9 +25,9 @@ class MyWidget extends StatelessWidget {
               borderSide: BorderSide(
                 color: Colors.grey.shade500,
               ),
-              borderRadius: BorderRadius.all(Radius.circular(30)),
+              borderRadius: const BorderRadius.all(Radius.circular(30)),
             ),
-            contentPadding: EdgeInsets.only(left: 20),
+            contentPadding: const EdgeInsets.only(left: 20),
           ),
         ),
       ),

@@ -1,20 +1,19 @@
-// Pages/payment_page.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
+import 'package:timkasirapp/Controllers/Transaksi/payment_controller.dart'; // Import controller baru
 
+// ignore: use_key_in_widget_constructors
 class PaymentPage extends StatelessWidget {
   final TransaksiController transaksiController =
       Get.find<TransaksiController>();
-
-  final RxInt amountGiven = 0.obs;
-  final TextEditingController amountController = TextEditingController();
+  final PaymentController paymentController = Get.put(PaymentController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pembayaran"),
+        title: const Text("Pembayaran"),
         centerTitle: true,
         backgroundColor: Colors.purple,
         actions: [
@@ -24,21 +23,18 @@ class PaymentPage extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color:
-                      amountGiven.value >= transaksiController.totalAmount.value
-                          ? Colors.green
-                          : Colors.grey,
+                  color: paymentController.amountGiven.value >=
+                          transaksiController.totalAmount.value.toInt()
+                      ? Colors.green
+                      : Colors.grey,
                 ),
                 child: IconButton(
-                  icon: Icon(Icons.check),
-                  onPressed:
-                      amountGiven.value >= transaksiController.totalAmount.value
-                          ? () {
-                              transaksiController
-                                  .finalizeTransaction(amountGiven.value);
-                              Get.toNamed("/success_transaksi_page");
-                            }
-                          : null,
+                  icon: const Icon(Icons.check),
+                  onPressed: paymentController.amountGiven.value >=
+                          transaksiController.totalAmount.value.toInt()
+                      ? () => paymentController
+                          .onConfirmTap(transaksiController.totalAmount.value)
+                      : null,
                   color: Colors.white,
                 ),
               ),
@@ -49,25 +45,125 @@ class PaymentPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: amountController,
-              decoration: InputDecoration(
-                labelText: "Jumlah Uang",
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
-              onChanged: (value) {
-                amountGiven.value = int.tryParse(value) ?? 0;
-              },
+            Obx(() => Text(
+                  "Rp ${paymentController.formatNumber(paymentController.amountGiven.value.toDouble())}",
+                  style: const TextStyle(
+                      fontSize: 40, fontWeight: FontWeight.bold),
+                )),
+            const SizedBox(height: 20),
+            NumPad(
+              onNumberTap: paymentController.onNumberTap,
+              onClearTap: paymentController.onClearTap,
+              onBackspaceTap: paymentController.onBackspaceTap,
+              buttonSize: 70, // Set ukuran tombol
+              buttonColor: Colors.blue[100]!, // Set warna latar belakang tombol
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Obx(() => Text(
-                "Total yang harus dibayar: ${transaksiController.totalAmount.value}")),
-            SizedBox(height: 20),
-            Obx(() => Text(
-                "Kembalian: ${amountGiven.value - transaksiController.totalAmount.value}")),
+                  "Total yang harus dibayar: Rp ${paymentController.formatNumber(transaksiController.totalAmount.value)}",
+                  style: const TextStyle(fontSize: 20),
+                )),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class NumPad extends StatelessWidget {
+  final Function(int) onNumberTap;
+  final Function onClearTap;
+  final Function onBackspaceTap;
+  final double buttonSize; // Tambahkan parameter ukuran tombol
+  final Color buttonColor; // Tambahkan parameter warna tombol
+
+  const NumPad({
+    super.key,
+    required this.onNumberTap,
+    required this.onClearTap,
+    required this.onBackspaceTap,
+    this.buttonSize = 60.0, // Default ukuran tombol
+    this.buttonColor =
+        const Color(0xFFE0E0E0), // Default warna latar belakang tombol
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        buildRow([7, 8, 9, -2]),
+        buildRow([4, 5, 6, -3]),
+        buildRow([1, 2, 3]),
+        buildRow([
+          -1,
+          -4,
+          0
+        ]), // -1 for '000', -2 for 'C', -3 for backspace, -4 for '00'
+      ],
+    );
+  }
+
+  Widget buildRow(List<int> numbers) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: numbers.map((number) {
+        return number == -1
+            ? buildButton("000", () => onNumberTap(number))
+            : number == -2
+                ? buildButton("C", onClearTap)
+                : number == -3
+                    ? buildButtonIcon(Icons.backspace,
+                        onBackspaceTap) // Gunakan ikon untuk backspace
+                    : number == -4
+                        ? buildButton("00", () => onNumberTap(0))
+                        : buildButton(
+                            number.toString(), () => onNumberTap(number));
+      }).toList(),
+    );
+  }
+
+  Widget buildButton(String label, Function onTap) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () => onTap(),
+        child: Container(
+          width: buttonSize, // Gunakan ukuran tombol yang ditentukan
+          height: buttonSize, // Gunakan ukuran tombol yang ditentukan
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: buttonColor, // Gunakan warna tombol yang ditentukan
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 24),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildButtonIcon(IconData icon, Function onTap) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () => onTap(),
+        child: Container(
+          width: buttonSize, // Gunakan ukuran tombol yang ditentukan
+          height: buttonSize, // Gunakan ukuran tombol yang ditentukan
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: buttonColor, // Gunakan warna tombol yang ditentukan
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(
+            icon,
+            size: 24,
+            color: Colors.black,
+          ),
         ),
       ),
     );

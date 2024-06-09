@@ -1,21 +1,23 @@
+// page_barang.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timkasirapp/Controllers/Barang_Controller/page_barang_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class PageBarang extends GetView<PageBarangController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      // backgroundColor: Colors.grey[300],
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
         ),
-        title: Text(
+        title: const Text(
           "Daftar Barang",
           style: TextStyle(color: Colors.white),
         ),
@@ -25,28 +27,77 @@ class PageBarang extends GetView<PageBarangController> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Obx(() {
-              return Wrap(
-                spacing: 8.0,
-                children: controller.kategoriList.map((kategori) {
-                  return FilterChip(
-                    label: Text(kategori['nama_kategori']),
-                    selected:
-                        controller.selectedCategories.contains(kategori['id']),
-                    onSelected: (bool selected) {
-                      controller.toggleCategorySelection(kategori['id']);
-                    },
-                  );
-                }).toList(),
-              );
-            }),
+            padding:
+                const EdgeInsets.only(left: 15, top: 15, right: 15, bottom: 10),
+            child: TextField(
+              onChanged: (value) {
+                controller.searchQuery.value = value;
+              },
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.search),
+                labelText: 'Cari Barang...',
+                filled: true,
+                fillColor: Colors.white,
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  borderSide: BorderSide(
+                    color: Colors.purple,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade500,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                ),
+                contentPadding: const EdgeInsets.only(left: 20),
+              ),
+            ),
           ),
+          Obx(() {
+            return Wrap(
+              spacing: 8.0,
+              children: controller.kategoriList.map((kategori) {
+                return FilterChip(
+                  selectedColor: Colors.purple[200],
+                  label: Text(kategori['nama_kategori']),
+                  selected:
+                      controller.selectedCategories.contains(kategori['id']),
+                  onSelected: (bool selected) {
+                    controller.toggleCategorySelection(kategori['id']);
+                  },
+                  shape: StadiumBorder(
+                    side: BorderSide(
+                      color: controller.selectedCategories
+                              .contains(kategori['id'])
+                          ? Colors
+                              .transparent // Menghilangkan border jika dipilih
+                          : Colors
+                              .purple, // Menampilkan border jika tidak dipilih
+                      width: 2.0,
+                    ),
+                  ),
+                );
+              }).toList(),
+            );
+          }),
           Expanded(
             child: Obx(
               () {
                 if (controller.filteredBarangList.isEmpty) {
-                  return Center(child: Text('Tidak ada barang.'));
+                  return const Center(
+                      child: Text(
+                    'Tidak ada barang.',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+                  ));
                 } else {
                   return ListView.builder(
                     itemCount: controller.filteredBarangList.length,
@@ -67,14 +118,14 @@ class PageBarang extends GetView<PageBarangController> {
                                     barang['foto_url'],
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, error, stackTrace) {
-                                      return Icon(
+                                      return const Icon(
                                         Icons.broken_image,
                                         color: Colors.red,
                                       );
                                     },
                                   ),
                                 )
-                              : Icon(
+                              : const Icon(
                                   Icons.image_not_supported,
                                   color: Colors.grey,
                                 ),
@@ -84,12 +135,6 @@ class PageBarang extends GetView<PageBarangController> {
                         onTap: () {
                           Get.toNamed("/detail_page_barang", arguments: barang);
                         },
-                        trailing: Container(
-                          child: Text(
-                            "x1",
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          ),
-                        ),
                       );
                     },
                   );
@@ -104,16 +149,16 @@ class PageBarang extends GetView<PageBarangController> {
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.purple,
-              minimumSize: Size(
+              minimumSize: const Size(
                 double.infinity, // Lebar
                 48, // Tinggi
               ),
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             ),
             onPressed: () {
               Get.toNamed("/upload_page_barang");
             },
-            child: Text(
+            child: const Text(
               "Tambah Barang",
               style: TextStyle(color: Colors.white, fontSize: 20),
             )),

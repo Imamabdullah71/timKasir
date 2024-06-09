@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
+// ignore: use_key_in_widget_constructors, camel_case_types
 class tambahBarang extends StatelessWidget {
   final RxBool isExpanded = false.obs;
 
@@ -12,7 +13,7 @@ class tambahBarang extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Tambah Barang".toUpperCase(),
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.purple,
             fontWeight: FontWeight.bold,
           ),
@@ -20,7 +21,7 @@ class tambahBarang extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(BootstrapIcons.house),
+            icon: const Icon(BootstrapIcons.house),
             onPressed: () {
               Get.offAllNamed("/halaman_utama");
             },
@@ -30,7 +31,7 @@ class tambahBarang extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 150,
               width: double.infinity,
               child: Column(
@@ -43,7 +44,7 @@ class tambahBarang extends StatelessWidget {
                       color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.photo_library,
                       size: 50,
                       color: Colors.grey,
@@ -54,42 +55,42 @@ class tambahBarang extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.camera_alt_outlined),
+                        icon: const Icon(Icons.camera_alt_outlined),
                       ),
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.photo_outlined),
+                        icon: const Icon(Icons.photo_outlined),
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Nama*",
                     style: TextStyle(
                       fontSize: 20,
-                      color: const Color.fromARGB(255, 8, 8, 8),
+                      color: Color.fromARGB(255, 8, 8, 8),
                     ),
                   ),
-                  SizedBox(height: 8),
-                  Container(
+                  const SizedBox(height: 8),
+                  SizedBox(
                     height: 40,
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Nama Barang',
-                        border: OutlineInputBorder(
+                        border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(30),
                           ),
                         ),
-                        focusedBorder: OutlineInputBorder(
+                        focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                           borderSide: BorderSide(
                             color: Colors.purple,
@@ -99,38 +100,39 @@ class tambahBarang extends StatelessWidget {
                           borderSide: BorderSide(
                             color: Colors.grey.shade500,
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                          borderRadius: const BorderRadius.all(Radius.circular(30)),
                         ),
-                        contentPadding: EdgeInsets.only(left: 20),
+                        contentPadding: const EdgeInsets.only(left: 20),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       Expanded(
-                        child: Container(
+                        flex: 2,
+                        child: SizedBox(
                           width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Stok",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: const Color.fromARGB(255, 8, 8, 8),
+                                  color: Color.fromARGB(255, 8, 8, 8),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 height: 40,
                                 child: TextField(
                                   decoration: InputDecoration(
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(30),
                                       ),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
+                                    focusedBorder: const OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(30)),
                                       borderSide: BorderSide(
@@ -142,41 +144,41 @@ class tambahBarang extends StatelessWidget {
                                         color: Colors.grey.shade500,
                                       ),
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
+                                          const BorderRadius.all(Radius.circular(30)),
                                     ),
-                                    contentPadding: EdgeInsets.only(left: 20),
+                                    contentPadding: const EdgeInsets.only(left: 20),
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        flex: 2,
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Expanded(
-                        child: Container(
+                        flex: 3,
+                        child: SizedBox(
                           width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Kode",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: const Color.fromARGB(255, 8, 8, 8),
+                                  color: Color.fromARGB(255, 8, 8, 8),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 height: 40,
                                 child: TextField(
                                   decoration: InputDecoration(
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(30),
                                       ),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
+                                    focusedBorder: const OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(30)),
                                       borderSide: BorderSide(
@@ -188,45 +190,45 @@ class tambahBarang extends StatelessWidget {
                                         color: Colors.grey.shade500,
                                       ),
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
+                                          const BorderRadius.all(Radius.circular(30)),
                                     ),
-                                    contentPadding: EdgeInsets.only(left: 20),
+                                    contentPadding: const EdgeInsets.only(left: 20),
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        flex: 3,
                       ),
                       Column(
                         children: [
-                          SizedBox(height: 25),
+                          const SizedBox(height: 25),
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(BootstrapIcons.upc_scan),
+                            icon: const Icon(BootstrapIcons.upc_scan),
                           ),
                         ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       Expanded(
-                        child: Container(
+                        flex: 2,
+                        child: SizedBox(
                           width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Harga dasar",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: const Color.fromARGB(255, 8, 8, 8),
+                                  color: Color.fromARGB(255, 8, 8, 8),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 height: 40,
                                 child: TextField(
                                   decoration: InputDecoration(
@@ -239,12 +241,12 @@ class tambahBarang extends StatelessWidget {
                                         color: Colors.grey.shade600,
                                       ),
                                     ),
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(30),
                                       ),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
+                                    focusedBorder: const OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(30)),
                                       borderSide: BorderSide(
@@ -256,32 +258,32 @@ class tambahBarang extends StatelessWidget {
                                         color: Colors.grey.shade500,
                                       ),
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
+                                          const BorderRadius.all(Radius.circular(30)),
                                     ),
-                                    contentPadding: EdgeInsets.only(left: 20),
+                                    contentPadding: const EdgeInsets.only(left: 20),
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        flex: 2,
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Expanded(
-                        child: Container(
+                        flex: 2,
+                        child: SizedBox(
                           width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Harga Jual",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: const Color.fromARGB(255, 8, 8, 8),
+                                  color: Color.fromARGB(255, 8, 8, 8),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 height: 40,
                                 child: TextField(
                                   decoration: InputDecoration(
@@ -294,12 +296,12 @@ class tambahBarang extends StatelessWidget {
                                         color: Colors.grey.shade600,
                                       ),
                                     ),
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(30),
                                       ),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
+                                    focusedBorder: const OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(30)),
                                       borderSide: BorderSide(
@@ -311,21 +313,20 @@ class tambahBarang extends StatelessWidget {
                                         color: Colors.grey.shade500,
                                       ),
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
+                                          const BorderRadius.all(Radius.circular(30)),
                                     ),
-                                    contentPadding: EdgeInsets.only(left: 20),
+                                    contentPadding: const EdgeInsets.only(left: 20),
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        flex: 2,
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  Container(
+                  const SizedBox(height: 20),
+                  SizedBox(
                     //Container Sengaja dibuat untuk mengatur ukuran dari DropdownSearch
                     height: 40,
                     width: double.infinity,
@@ -333,10 +334,10 @@ class tambahBarang extends StatelessWidget {
                       children: [
                         Expanded(
                           child: DropdownSearch<String>(
-                            dropdownButtonProps: DropdownButtonProps(
+                            dropdownButtonProps: const DropdownButtonProps(
                               icon: Icon(Icons.keyboard_arrow_down_outlined),
                             ),
-                            dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownDecoratorProps: const DropDownDecoratorProps(
                               dropdownSearchDecoration: InputDecoration(
                                 labelText: 'Kategori',
                                 border: OutlineInputBorder(
@@ -345,8 +346,8 @@ class tambahBarang extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            items: ["Brazil", "Italia", "Tunisia", 'Canada'],
-                            popupProps: PopupPropsMultiSelection.menu(
+                            items: const ["Brazil", "Italia", "Tunisia", 'Canada'],
+                            popupProps: const PopupPropsMultiSelection.menu(
                               showSelectedItems: true,
                               // disabledItemFn: (String s) => s.startsWith('I'),
                             ),
@@ -356,7 +357,7 @@ class tambahBarang extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(
+                          icon: const Icon(
                             BootstrapIcons.plus_lg,
                             size: 30,
                           ),
@@ -364,68 +365,66 @@ class tambahBarang extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Container(
-                    child: Obx(
-                      () => isExpanded.value
-                          ? Column(
-                              children: [
-                                TextField(
-                                  decoration: InputDecoration(
-                                    hintText: 'Nama Barang',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(30),
-                                      ),
+                  const SizedBox(height: 20),
+                  Obx(
+                    () => isExpanded.value
+                        ? Column(
+                            children: [
+                              TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Nama Barang',
+                                  border: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
-                                      borderSide: BorderSide(
-                                        color: Colors.purple,
-                                      ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.grey.shade500,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
-                                    ),
-                                    contentPadding: EdgeInsets.only(left: 20),
                                   ),
-                                ),
-                                SizedBox(height: 20),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    hintText: 'Nama Barang',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(30),
-                                      ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)),
+                                    borderSide: BorderSide(
+                                      color: Colors.purple,
                                     ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
-                                      borderSide: BorderSide(
-                                        color: Colors.purple,
-                                      ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.grey.shade500,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
-                                    ),
-                                    contentPadding: EdgeInsets.only(left: 20),
                                   ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.grey.shade500,
+                                    ),
+                                    borderRadius:
+                                        const BorderRadius.all(Radius.circular(30)),
+                                  ),
+                                  contentPadding: const EdgeInsets.only(left: 20),
                                 ),
-                                SizedBox(height: 20),
-                              ],
-                            )
-                          : SizedBox(height: 5),
-                    ),
+                              ),
+                              const SizedBox(height: 20),
+                              TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Nama Barang',
+                                  border: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)),
+                                    borderSide: BorderSide(
+                                      color: Colors.purple,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.grey.shade500,
+                                    ),
+                                    borderRadius:
+                                        const BorderRadius.all(Radius.circular(30)),
+                                  ),
+                                  contentPadding: const EdgeInsets.only(left: 20),
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                            ],
+                          )
+                        : const SizedBox(height: 5),
                   ),
                   Center(
                     child: GestureDetector(
@@ -440,7 +439,7 @@ class tambahBarang extends StatelessWidget {
                               text: isExpanded.value
                                   ? 'Tampilkan lebih sedikit'
                                   : 'Tampilkan lebih detail',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,

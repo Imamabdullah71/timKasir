@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timkasirapp/widgets/widgetDrawer.dart';
+import 'package:timkasirapp/widgets/widget_drawer.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 
 class ManageBarang extends StatelessWidget {
@@ -12,7 +12,7 @@ class ManageBarang extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Manajemen".toUpperCase(),
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.purple,
             fontWeight: FontWeight.bold,
           ),
@@ -20,70 +20,70 @@ class ManageBarang extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(BootstrapIcons.house),
+            icon: const Icon(BootstrapIcons.house),
             onPressed: () {
               Get.offAllNamed("/halaman_utama");
             },
           ),
         ],
       ),
-      drawer: WidgetDrawer(),
+      drawer: const WidgetDrawer(),
       body: ListView(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         children: [
           ListTile(
-            leading: Icon(BootstrapIcons.box_seam),
-            title: Text("Barang"),
+            leading: const Icon(BootstrapIcons.box_seam),
+            title: const Text("Barang"),
             onTap: () {
               Get.toNamed("/halaman_barang");
             },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.grid),
-            title: Text("Kategori barang"),
+            leading: const Icon(BootstrapIcons.grid),
+            title: const Text("Kategori barang"),
             onTap: () {
               Get.toNamed("/kategori_page");
             },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.boxes),
-            title: Text("Manajemen stok"),
+            leading: const Icon(BootstrapIcons.boxes),
+            title: const Text("Manajemen stok"),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.cart4),
-            title: Text("Pembelian barang"),
+            leading: const Icon(BootstrapIcons.cart4),
+            title: const Text("Pembelian barang"),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.person_vcard),
-            title: Text("Pelanggan dan Supplier"),
+            leading: const Icon(BootstrapIcons.person_vcard),
+            title: const Text("Pelanggan dan Supplier"),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.journal_text),
-            title: Text("Barang Test"),
+            leading: const Icon(BootstrapIcons.journal_text),
+            title: const Text("Barang Test"),
             onTap: () {
               Get.toNamed("/uplaod_page_barang");
             },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.folder),
-            title: Text("Folder"),
+            leading: const Icon(BootstrapIcons.folder),
+            title: const Text("Folder"),
             onTap: () {
               Get.toNamed("/uplaod_page");
             },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.pen),
-            title: Text("Count Page"),
+            leading: const Icon(BootstrapIcons.pen),
+            title: const Text("Count Page"),
             onTap: () {
               Get.toNamed("/count_page");
             },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.funnel),
-            title: Text("Image Picker Testing"),
+            leading: const Icon(BootstrapIcons.funnel),
+            title: const Text("Image Picker Testing"),
             onTap: () {
               Get.toNamed("/mencoba_image_picker");
             },
@@ -94,7 +94,7 @@ class ManageBarang extends StatelessWidget {
         onPressed: () {
           Get.toNamed("/infaq_page");
         },
-        child: Icon(BootstrapIcons.plus_lg),
+        child: const Icon(BootstrapIcons.plus_lg),
       ),
     );
   }

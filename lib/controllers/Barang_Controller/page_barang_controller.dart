@@ -10,6 +10,7 @@ class PageBarangController extends GetxController {
   var barangList = <Map<String, dynamic>>[].obs;
   var kategoriList = <Map<String, dynamic>>[].obs;
   var selectedCategories = <String>[].obs;
+  var searchQuery = ''.obs;
 
   @override
   void onInit() {
@@ -36,15 +37,14 @@ class PageBarangController extends GetxController {
         .collection('barang')
         .orderBy("nama_barang")
         .snapshots()
-        .listen((snapshot) {
+        .listen((snapshot) async {
       List<Map<String, dynamic>> barangs = snapshot.docs.map((doc) {
         var data = doc.data();
         data['id'] = doc.id;
         return data;
       }).toList();
 
-      // Ambil harga untuk setiap barang
-      barangs.forEach((barang) async {
+      for (var barang in barangs) {
         var hargaSnapshot = await FirebaseFirestore.instance
             .collection('harga')
             .where('barang_id', isEqualTo: barang['id'])
@@ -58,7 +58,7 @@ class PageBarangController extends GetxController {
           barang['harga_jual'] = 'Tidak ada harga';
           barang['harga_beli'] = 'Tidak ada harga';
         }
-      });
+      }
 
       barangList.value = barangs;
     });
@@ -77,13 +77,21 @@ class PageBarangController extends GetxController {
   }
 
   List<Map<String, dynamic>> get filteredBarangList {
-    if (selectedCategories.isEmpty) {
-      return barangList;
-    } else {
-      return barangList.where((barang) {
-        return selectedCategories.contains(barang['kategori_id']);
+    var filteredList = barangList.where((barang) {
+      return selectedCategories.isEmpty ||
+          selectedCategories.contains(barang['kategori_id']);
+    }).toList();
+
+    if (searchQuery.isNotEmpty) {
+      filteredList = filteredList.where((barang) {
+        return barang['nama_barang']
+            .toString()
+            .toLowerCase()
+            .contains(searchQuery.toLowerCase());
       }).toList();
     }
+
+    return filteredList;
   }
 
   void toggleCategorySelection(String categoryId) {
@@ -98,44 +106,55 @@ class PageBarangController extends GetxController {
     DocumentReference docRef = firestore.collection("barang").doc(docId);
 
     try {
-      // Ambil URL foto sebelum menghapus dokumen
       var docSnapshot = await docRef.get();
-      var data = docSnapshot.data() as Map<String, dynamic>?; // Cast data ke Map<String, dynamic>
+      var data = docSnapshot.data()
+          as Map<String, dynamic>?; // Cast data ke Map<String, dynamic>
       String? fotoUrl = data?['foto_url'];
 
       Get.defaultDialog(
         title: "Apakah yakin ingin menghapus data?",
         middleText: "Data akan dihapus permanen!",
         onConfirm: () async {
-          // Hapus gambar dari Cloud Storage jika URL foto ada
           if (fotoUrl != null && fotoUrl.isNotEmpty) {
             try {
               var storageRef = FirebaseStorage.instance.refFromURL(fotoUrl);
               await storageRef.delete();
             } catch (e) {
-              print("Gagal menghapus gambar: $e");
+              Get.snackbar(
+                "Data berhasil dihapus",
+                "",
+                duration: const Duration(seconds: 3),
+                backgroundColor: Colors.red,
+                colorText: Colors.white,
+                borderRadius: 10.0,
+                margin: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24.0, vertical: 12.0),
+                snackPosition: SnackPosition.TOP,
+                forwardAnimationCurve: Curves.easeOut,
+                reverseAnimationCurve: Curves.easeIn,
+                isDismissible: true,
+                showProgressIndicator: false,
+              );
             }
           }
 
-          // Hapus dokumen dari Firestore
           await docRef.delete();
           Get.back();
           Get.back();
           Get.snackbar(
             "Data berhasil dihapus",
             "",
-            duration: Duration(seconds: 3),
+            duration: const Duration(seconds: 3),
             backgroundColor: Colors.green,
             colorText: Colors.white,
             borderRadius: 10.0,
-            margin: EdgeInsets.all(16.0),
-            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            margin: const EdgeInsets.all(16.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
             snackPosition: SnackPosition.BOTTOM,
             forwardAnimationCurve: Curves.easeOut,
             reverseAnimationCurve: Curves.easeIn,
-            onTap: (snackbar) {
-              print("Snackbar tapped!");
-            },
             isDismissible: true,
             showProgressIndicator: false,
           );
@@ -145,10 +164,11 @@ class PageBarangController extends GetxController {
         onCancel: () => Get.back(),
       );
     } catch (e) {
-      print(e);
-      Get.defaultDialog(
-        title: "Terjadi Kesalahan",
-        middleText: "Gagal menghapus produk! $e",
+      Get.dialog(
+        const AlertDialog(
+          title: Center(child: Text("Ubah Jumlah Barang")),
+          content: Center(child: Text("Gagal menghapus produk!")),
+        ),
       );
     }
   }

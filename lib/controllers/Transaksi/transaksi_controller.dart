@@ -61,6 +61,11 @@ class TransaksiController extends GetxController {
     }
   }
 
+  void deleteItem(String itemId) {
+    itemCounts.remove(itemId);
+    Get.back();
+  }
+
   void updateTotal() {
     double total = 0.0;
     itemCounts.forEach((itemId, count) {

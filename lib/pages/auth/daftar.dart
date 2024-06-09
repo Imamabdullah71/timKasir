@@ -2,8 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:timkasirapp/Controllers/authController.dart';
+import 'package:timkasirapp/Controllers/auth_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class DaftarPage extends StatelessWidget {
   final AuthController authC = Get.find();
   final TextEditingController nameController = TextEditingController();
@@ -26,7 +27,7 @@ class DaftarPage extends StatelessWidget {
         backgroundColor: Colors.purple,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Column(
           children: [
             Column(
@@ -36,32 +37,32 @@ class DaftarPage extends StatelessWidget {
                   controller: nameController,
                   decoration: InputDecoration(
                     labelText: 'Nama',
-                    contentPadding: EdgeInsets.only(left: 20),
+                    contentPadding: const EdgeInsets.only(left: 20),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                   keyboardType: TextInputType.text,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextField(
                   controller: emailController,
                   decoration: InputDecoration(
                     labelText: 'Email',
-                    contentPadding: EdgeInsets.only(left: 20),
+                    contentPadding: const EdgeInsets.only(left: 20),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                   keyboardType: TextInputType.emailAddress,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Obx(
                   () => TextField(
                     controller: passwordController,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      contentPadding: EdgeInsets.only(left: 20),
+                      contentPadding: const EdgeInsets.only(left: 20),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -77,30 +78,30 @@ class DaftarPage extends StatelessWidget {
                     obscureText: !authC.isPasswordVisible.value,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextField(
                   controller: phoneController,
                   decoration: InputDecoration(
                     labelText: 'Nomor Telepon',
-                    contentPadding: EdgeInsets.only(left: 20),
+                    contentPadding: const EdgeInsets.only(left: 20),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                   keyboardType: TextInputType.phone,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text.rich(
                   TextSpan(
                     text: "Dengan mendaftar, Anda telah menyetujui \n",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 14,
                     ),
                     children: [
                       TextSpan(
                         text: "Syarat Ketentuan & Kebijakan Privasi",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.purple,
                         ),
                         recognizer: TapGestureRecognizer()
@@ -111,12 +112,12 @@ class DaftarPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purple,
-                    minimumSize: Size(double.infinity, 48),
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    minimumSize: const Size(double.infinity, 48),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   ),
                   onPressed: () async {
                     bool success = await authC.registerFC(
@@ -133,40 +134,40 @@ class DaftarPage extends StatelessWidget {
                   },
                   child: Text(
                     'Daftar'.toUpperCase(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Sudah punya akun Tim Kasir?",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple,
-                      minimumSize: Size(
+                      minimumSize: const Size(
                         70, // Lebar
                         48, // Tinggi
                       ),
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                          const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     ),
                     onPressed: () {
                       Get.toNamed('/halaman_login');
                     },
-                    child: Text(
+                    child: const Text(
                       'Masuk di sini',
                       style: TextStyle(
                         color: Colors.white,

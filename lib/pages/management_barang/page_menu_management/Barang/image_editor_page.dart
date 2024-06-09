@@ -10,10 +10,10 @@ class ImageEditorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Gambar'),
+        title: const Text('Edit Gambar'),
         actions: [
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: () {
               controller.cropImage();
               Get.back();
@@ -32,7 +32,7 @@ class ImageEditorPage extends StatelessWidget {
               },
             );
           } else {
-            return Text('Tidak ada gambar yang dipilih');
+            return const Text('Tidak ada gambar yang dipilih');
           }
         }),
       ),

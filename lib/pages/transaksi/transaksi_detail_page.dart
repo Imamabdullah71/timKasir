@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class TransaksiDetailPage extends StatelessWidget {
   final TransaksiController transaksiController =
       Get.find<TransaksiController>();
@@ -10,7 +11,7 @@ class TransaksiDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detail Transaksi"),
+        title: const Text("Detail Transaksi"),
         centerTitle: true,
         backgroundColor: Colors.purple,
       ),
@@ -18,7 +19,7 @@ class TransaksiDetailPage extends StatelessWidget {
         var selectedItems = transaksiController.itemCounts.entries.toList();
 
         if (selectedItems.isEmpty) {
-          return Center(child: Text("No items selected"));
+          return const Center(child: Text("No items selected"));
         }
 
         return ListView.builder(
@@ -41,7 +42,7 @@ class TransaksiDetailPage extends StatelessWidget {
                     height: 50,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
-                      return Icon(
+                      return const Icon(
                         Icons.broken_image,
                         color: Colors.red,
                       );
@@ -55,27 +56,47 @@ class TransaksiDetailPage extends StatelessWidget {
               onTap: () {
                 Get.dialog(
                   AlertDialog(
-                    title: Text("Ubah Jumlah"),
-                    content: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    title: const Text("Ubah Jumlah Barang"),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
-                          onPressed: () {
-                            transaksiController.removeItem(item.id);
-                          },
-                          icon: Icon(Icons.remove),
-                          color: Colors.red,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                transaksiController.removeItem(item.id);
+                              },
+                              icon: const Icon(Icons.remove),
+                              color: Colors.red,
+                            ),
+                            Obx(() {
+                              var currentQuantity =
+                                  transaksiController.itemCounts[item.id] ?? 0;
+                              return Text("$currentQuantity");
+                            }),
+                            IconButton(
+                              onPressed: () {
+                                transaksiController.addItem(item.id);
+                              },
+                              icon: const Icon(Icons.add),
+                              color: Colors.green,
+                            ),
+                          ],
                         ),
-                        Obx(() {
-                          var currentQuantity = transaksiController.itemCounts[item.id] ?? 0;
-                          return Text("$currentQuantity");
-                        }),
-                        IconButton(
-                          onPressed: () {
-                            transaksiController.addItem(item.id);
-                          },
-                          icon: Icon(Icons.add),
-                          color: Colors.green,
+                        const SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              onPressed: () =>
+                                  transaksiController.deleteItem(item.id),
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -87,13 +108,18 @@ class TransaksiDetailPage extends StatelessWidget {
         );
       }),
       floatingActionButton: Obx(() {
-        return FloatingActionButton.extended(
-          onPressed: () => Get.toNamed("/payment_page"),
-          label: Text(
-            "Lanjut Bayar (${transaksiController.totalAmount.value})",
-            style: TextStyle(color: Colors.white),
+        return Container(
+          width: double.infinity, // Mengatur lebar menjadi penuh
+          height: 55, // Mengatur tinggi sesuai keinginan
+          margin: const EdgeInsets.only(left: 35), // Margin opsional
+          child: FloatingActionButton.extended(
+            onPressed: () => Get.toNamed("/payment_page"),
+            label: Text(
+              "Lanjut Bayar (${transaksiController.totalAmount.value})",
+              style: const TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.purple,
           ),
-          backgroundColor: Colors.purple,
         );
       }),
     );

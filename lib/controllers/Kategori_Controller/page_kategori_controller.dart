@@ -28,24 +28,19 @@ class PageKategoriController extends GetxController {
       Get.snackbar(
         "Berhasil menambahkan kategori!",
         "",
-        duration: Duration(milliseconds: 1500),
+        duration: const Duration(milliseconds: 1500),
         backgroundColor: Colors.green,
         colorText: Colors.white,
         borderRadius: 10.0,
-        margin: EdgeInsets.all(16.0),
-        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        margin: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
         snackPosition: SnackPosition.BOTTOM,
         forwardAnimationCurve: Curves.easeOut,
         reverseAnimationCurve: Curves.easeIn,
-        onTap: (snackbar) {
-          print("Snackbar tapped!");
-        },
         isDismissible: true,
         showProgressIndicator: false,
       );
     } catch (e) {
-      print(e);
-
       Get.defaultDialog(
         title: "Terjadi Kesalahan",
         middleText: "Gagal menambahkan produk! $e",
@@ -79,18 +74,15 @@ class PageKategoriController extends GetxController {
           Get.snackbar(
             "Berhasil menghapus kategori!",
             "",
-            duration: Duration(milliseconds: 1500),
+            duration: const Duration(milliseconds: 1500),
             backgroundColor: Colors.green,
             colorText: Colors.white,
             borderRadius: 10.0,
-            margin: EdgeInsets.all(16.0),
-            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            margin: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
             snackPosition: SnackPosition.BOTTOM,
             forwardAnimationCurve: Curves.easeOut,
             reverseAnimationCurve: Curves.easeIn,
-            onTap: (snackbar) {
-              print("Snackbar tapped!");
-            },
             isDismissible: true,
             showProgressIndicator: false,
           );
@@ -100,7 +92,6 @@ class PageKategoriController extends GetxController {
         onCancel: () => Get.back(),
       );
     } catch (e) {
-      print(e);
       Get.defaultDialog(
         title: "Terjadi Kesalahan",
         middleText: "Gagal menghapus produk! $e",
@@ -126,24 +117,19 @@ class PageKategoriController extends GetxController {
       Get.snackbar(
             "Berhasil update!",
             "",
-            duration: Duration(milliseconds: 1500),
+            duration: const Duration(milliseconds: 1500),
             backgroundColor: Colors.green,
             colorText: Colors.white,
             borderRadius: 10.0,
-            margin: EdgeInsets.all(16.0),
-            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            margin: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
             snackPosition: SnackPosition.BOTTOM,
             forwardAnimationCurve: Curves.easeOut,
             reverseAnimationCurve: Curves.easeIn,
-            onTap: (snackbar) {
-              print("Snackbar tapped!");
-            },
             isDismissible: true,
             showProgressIndicator: false,
           );
     } catch (e) {
-      print(e);
-
       Get.defaultDialog(
         title: "Terjadi Kesalahan",
         middleText: "Gagal mengubah produk! $e",

@@ -19,8 +19,8 @@ class SuccessTransaksiPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Transaksi berhasil!"),
-            SizedBox(height: 20),
+            const Text("Transaksi berhasil!"),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Get.back();
@@ -29,7 +29,7 @@ class SuccessTransaksiPage extends StatelessWidget {
               },
               child: Text("Transaksi Kembali"),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Get.back();

@@ -24,8 +24,6 @@ class EditProductController extends GetxController {
       Get.back();
       Get.snackbar("Berhasil", "Berhasil Mengubah produk");
     } catch (e) {
-      print(e);
-
       Get.defaultDialog(
         title: "Terjadi Kesalahan",
         middleText: "Gagal mengubah produk! $e",

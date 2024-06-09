@@ -5,7 +5,7 @@ import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
 // ignore: use_key_in_widget_constructors
 class TransaksiPage extends StatelessWidget {
   final TransaksiController transaksiController =
-      Get.put(TransaksiController());
+      Get.find<TransaksiController>();
 
   @override
   Widget build(BuildContext context) {
@@ -69,17 +69,22 @@ class TransaksiPage extends StatelessWidget {
         );
       }),
       floatingActionButton: Obx(() {
-        return FloatingActionButton.extended(
-          onPressed: transaksiController.itemCounts.isNotEmpty
-              ? () => Get.toNamed("/transaksi_detail")
-              : null,
-          label: Text(
-            "Bayar (${transaksiController.totalAmount.value})",
-            style: const TextStyle(color: Colors.white),
+        return Container(
+          width: double.infinity, // Mengatur lebar menjadi penuh
+          height: 55, // Mengatur tinggi sesuai keinginan
+          margin: const EdgeInsets.only(left: 35), // Margin opsional
+          child: FloatingActionButton.extended(
+            onPressed: transaksiController.itemCounts.isNotEmpty
+                ? () => Get.toNamed("/transaksi_detail")
+                : null,
+            label: Text(
+              "Bayar (${transaksiController.totalAmount.value})",
+              style: const TextStyle(color: Colors.white),
+            ),
+            backgroundColor: transaksiController.itemCounts.isNotEmpty
+                ? Colors.purple
+                : Colors.grey,
           ),
-          backgroundColor: transaksiController.itemCounts.isNotEmpty
-              ? Colors.purple
-              : Colors.grey,
         );
       }),
     );

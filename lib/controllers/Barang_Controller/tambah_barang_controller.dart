@@ -124,12 +124,6 @@ class TambahBarangController extends GetxController {
       "time": dateNow,
     });
 
-    final hargaRef = await FirebaseFirestore.instance.collection('harga').add({
-      'harga_beli': int.parse(hargaData['harga_beli']?.value ?? '0'),
-      'harga_jual': int.parse(hargaData['harga_jual']?.value ?? '0'),
-      'barang_id': docRef.id,
-    });
-
     String? fotoUrl = await uploadImage(docRef.id);
 
     if (fotoUrl != null) {
@@ -141,12 +135,12 @@ class TambahBarangController extends GetxController {
     Get.snackbar(
       "Berhasil menambahkan barang!",
       "",
-      duration: Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 2000),
       backgroundColor: Colors.green,
       colorText: Colors.white,
       borderRadius: 10.0,
-      margin: EdgeInsets.all(16.0),
-      padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      margin: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
       snackPosition: SnackPosition.BOTTOM,
       forwardAnimationCurve: Curves.easeOut,
       reverseAnimationCurve: Curves.easeIn,

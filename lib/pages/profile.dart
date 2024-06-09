@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-import '../Controllers/authController.dart';
+import '../Controllers/auth_controller.dart';
 
 class Pengaturan extends StatelessWidget {
   const Pengaturan({super.key});
@@ -27,16 +27,16 @@ class Pengaturan extends StatelessWidget {
               // Jika ingin menggunakan warna latar belakang:
               backgroundColor: Colors.grey[300],
               // Jika ingin menggunakan ikon sebagai gambar:
-              child: Icon(Icons.person, size: 50.0),
+              child: const Icon(Icons.person, size: 50.0),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "Profil",
               style: TextStyle(
                 fontSize: 25,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
               height: 500,
               width: double.infinity,
@@ -47,30 +47,30 @@ class Pengaturan extends StatelessWidget {
                   // mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Nama"),
-                    SizedBox(height: 10),
+                    const Text("Nama"),
+                    const SizedBox(height: 10),
                     Text(user?.displayName ?? "Nama Pemilik"),
-                    SizedBox(height: 20),
-                    Text("Email"),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 20),
+                    const Text("Email"),
+                    const SizedBox(height: 10),
                     Text(user?.email ?? "email@gmail.com"),
-                    SizedBox(height: 20),
-                    Text("Telepon"),
-                    SizedBox(height: 10),
-                    Text("08731253614"),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 20),
+                    const Text("Telepon"),
+                    const SizedBox(height: 10),
+                    const Text("08731253614"),
+                    const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
                         authController.logoutFC();
                       },
-                      child: Text("Logout"),
+                      child: const Text("Logout"),
                     ),
                     ElevatedButton(
                       onPressed: () {
                         if (user != null) {
                           Get.dialog(
                             AlertDialog(
-                              title: Text("Raw User Data"),
+                              title: const Text("Raw User Data"),
                               content: SingleChildScrollView(
                                 child: Text(user.toString()),
                               ),
@@ -79,7 +79,7 @@ class Pengaturan extends StatelessWidget {
                                   onPressed: () {
                                     Get.back();
                                   },
-                                  child: Text("Close"),
+                                  child: const Text("Close"),
                                 ),
                               ],
                             ),
@@ -88,7 +88,7 @@ class Pengaturan extends StatelessWidget {
                           Get.snackbar("Error", "User not logged in");
                         }
                       },
-                      child: Text("Lihat Raw data"),
+                      child: const Text("Lihat Raw data"),
                     ),
                   ],
                 ),

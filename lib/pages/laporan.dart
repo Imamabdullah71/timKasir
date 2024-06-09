@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timkasirapp/widgets/widgetDrawer.dart';
+import 'package:timkasirapp/widgets/widget_drawer.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 
 class Laporan extends StatelessWidget {
@@ -12,7 +12,7 @@ class Laporan extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Laporan".toUpperCase(),
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.purple,
             fontWeight: FontWeight.bold,
           ),
@@ -20,35 +20,35 @@ class Laporan extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(BootstrapIcons.house),
+            icon: const Icon(BootstrapIcons.house),
             onPressed: () {
               Get.offAllNamed("/halaman_utama");
             },
           ),
         ],
       ),
-      drawer: WidgetDrawer(),
+      drawer: const WidgetDrawer(),
       body: ListView(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         children: [
           ListTile(
-            leading: Icon(BootstrapIcons.archive),
-            title: Text("Laporan Infaq"),
+            leading: const Icon(BootstrapIcons.archive),
+            title: const Text("Laporan Infaq"),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.graph_up),
-            title: Text("Laporan Laba Rugi"),
+            leading: const Icon(BootstrapIcons.graph_up),
+            title: const Text("Laporan Laba Rugi"),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.file_earmark_bar_graph),
-            title: Text("Laporan Penjualan"),
+            leading: const Icon(BootstrapIcons.file_earmark_bar_graph),
+            title: const Text("Laporan Penjualan"),
             onTap: () {},
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.boxes),
-            title: Text("Laporan Persediaan"),
+            leading: const Icon(BootstrapIcons.boxes),
+            title: const Text("Laporan Persediaan"),
             onTap: () {},
           ),
         ],

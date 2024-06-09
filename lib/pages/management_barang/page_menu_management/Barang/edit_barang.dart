@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:timkasirapp/Controllers/Barang_Controller/edit_barang_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class EditBarangPage extends StatelessWidget {
   final EditBarangController controller = Get.put(EditBarangController());
 
@@ -15,12 +16,12 @@ class EditBarangPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
         ),
-        title: Text(
+        title: const Text(
           "Edit Barang",
           style: TextStyle(
             color: Colors.white,
@@ -34,11 +35,11 @@ class EditBarangPage extends StatelessWidget {
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(labelText: 'Nama Barang'),
+              decoration: const InputDecoration(labelText: 'Nama Barang'),
               controller: controller.namaBarangController,
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Harga Barang'),
+              decoration: const InputDecoration(labelText: 'Harga Barang'),
               keyboardType: TextInputType.number,
               controller: controller.hargaBarangController,
             ),
@@ -48,7 +49,7 @@ class EditBarangPage extends StatelessWidget {
                     .map((kategori) => kategori['nama_kategori'] as String)
                     .toList(),
                 selectedItem: controller.selectedKategori.value,
-                dropdownDecoratorProps: DropDownDecoratorProps(
+                dropdownDecoratorProps: const DropDownDecoratorProps(
                   dropdownSearchDecoration: InputDecoration(
                     labelText: "Pilih Kategori",
                   ),
@@ -59,12 +60,12 @@ class EditBarangPage extends StatelessWidget {
                   controller.setKategori(selectedKategori['nama_kategori'],
                       selectedKategori['id']);
                 },
-                popupProps: PopupProps.menu(
+                popupProps: const PopupProps.menu(
                   showSearchBox: true,
                 ),
               );
             }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -73,16 +74,16 @@ class EditBarangPage extends StatelessWidget {
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.purple,
-              minimumSize: Size(
+              minimumSize: const Size(
                 double.infinity, // Lebar
                 48, // Tinggi
               ),
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             ),
             onPressed: () {
               controller.editBarang(barang['id']);
             },
-            child: Text(
+            child: const Text(
               "Simpan Perubahan",
               style: TextStyle(color: Colors.white, fontSize: 20),
             )),

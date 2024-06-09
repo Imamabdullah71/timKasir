@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timkasirapp/Controllers/Kategori_Controller/page_kategori_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class KategoriPage extends GetView<PageKategoriController> {
   final PageKategoriController kategoriController =
       Get.find<PageKategoriController>();
@@ -12,7 +13,7 @@ class KategoriPage extends GetView<PageKategoriController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Daftar Kategori",
           style: TextStyle(color: Colors.white),
         ),
@@ -23,7 +24,7 @@ class KategoriPage extends GetView<PageKategoriController> {
         stream: kategoriController.kategoriCollection,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -31,7 +32,7 @@ class KategoriPage extends GetView<PageKategoriController> {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(child: Text("Tidak ada kategori"));
+            return const Center(child: Text("Tidak ada kategori"));
           }
 
           var kategoriDoc = snapshot.data!.docs;
@@ -47,7 +48,7 @@ class KategoriPage extends GetView<PageKategoriController> {
                       kategoriData["nama_kategori"] ?? "";
                   Get.dialog(
                     AlertDialog(
-                      title: Center(child: Text('Edit Kategori')),
+                      title: const Center(child: Text('Edit Kategori')),
                       content: FutureBuilder<DocumentSnapshot<Object?>>(
                         future: controller.getKategoriData(kategoriIndex.id),
                         builder: (context, snapshot) {
@@ -57,7 +58,7 @@ class KategoriPage extends GetView<PageKategoriController> {
                               return Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   TextField(
                                     controller: controller.namaKategoriC,
                                     autocorrect: false,
@@ -68,12 +69,12 @@ class KategoriPage extends GetView<PageKategoriController> {
                                         BootstrapIcons.box_seam,
                                         color: Colors.grey.shade600,
                                       ),
-                                      border: OutlineInputBorder(
+                                      border: const OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(30),
                                         ),
                                       ),
-                                      focusedBorder: OutlineInputBorder(
+                                      focusedBorder: const OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(30)),
                                         borderSide: BorderSide(
@@ -84,10 +85,10 @@ class KategoriPage extends GetView<PageKategoriController> {
                                         borderSide: BorderSide(
                                           color: Colors.grey.shade500,
                                         ), // Change border color here
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(30)),
                                       ),
-                                      contentPadding: EdgeInsets.symmetric(
+                                      contentPadding: const EdgeInsets.symmetric(
                                         vertical: 5,
                                       ),
                                     ),
@@ -95,15 +96,15 @@ class KategoriPage extends GetView<PageKategoriController> {
                                 ],
                               );
                             } else {
-                              return Center(
+                              return const Center(
                                 child: Text("Data kategori tidak ditemukan."),
                               );
                             }
                           } else if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(child: CircularProgressIndicator());
                           } else {
-                            return Center(
+                            return const Center(
                               child:
                                   Text("Terjadi kesalahan saat memuat data."),
                             );
@@ -115,11 +116,11 @@ class KategoriPage extends GetView<PageKategoriController> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.purple,
-                              minimumSize: Size(
+                              minimumSize: const Size(
                                 70, // Lebar
                                 48, // Tinggi
                               ),
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 20),
                             ),
                             onPressed: () {
@@ -128,7 +129,7 @@ class KategoriPage extends GetView<PageKategoriController> {
                                 kategoriIndex.id,
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               "Ubah",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 18),
@@ -139,13 +140,12 @@ class KategoriPage extends GetView<PageKategoriController> {
                     ),
                   );
                 },
-                title: Text(
-                    "${kategoriData["nama_kategori"]}" ?? "Kategori kosong"),
+                title: Text(kategoriData["nama_kategori"]),
                 trailing: IconButton(
                   onPressed: () {
                     controller.hapusKategori(kategoriIndex.id);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     BootstrapIcons.trash,
                     color: Colors.red,
                   ),
@@ -160,16 +160,16 @@ class KategoriPage extends GetView<PageKategoriController> {
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.purple,
-              minimumSize: Size(
+              minimumSize: const Size(
                 double.infinity, // Lebar
                 48, // Tinggi
               ),
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             ),
             onPressed: () {
               Get.toNamed("/tambah_kategori_page");
             },
-            child: Text(
+            child: const Text(
               "Tambah Kategori",
               style: TextStyle(
                 color: Colors.white,

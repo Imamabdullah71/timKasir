@@ -1,10 +1,9 @@
 // detail_barang.dart
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:timkasirapp/Controllers/Barang_Controller/page_barang_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class DetailBarangPage extends StatelessWidget {
   final PageBarangController pageBarangController =
       Get.find<PageBarangController>();
@@ -17,12 +16,12 @@ class DetailBarangPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
         ),
-        title: Text(
+        title: const Text(
           "Detail Barang",
           style: TextStyle(
             color: Colors.white,
@@ -38,7 +37,7 @@ class DetailBarangPage extends StatelessWidget {
                 backgroundColor: Colors.green,
               ),
               onPressed: () {},
-              child: Text(
+              child: const Text(
                 "Stok",
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
@@ -50,11 +49,11 @@ class DetailBarangPage extends StatelessWidget {
         future: pageBarangController.getKategoriNama(barang['kategori_id']),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (!snapshot.hasData) {
-            return Center(child: Text("Kategori tidak ditemukan"));
+            return const Center(child: Text("Kategori tidak ditemukan"));
           }
 
           final namaKategori = snapshot.data ?? 'Tidak diketahui';
@@ -78,105 +77,105 @@ class DetailBarangPage extends StatelessWidget {
                             barang['foto_url'],
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
-                              return Icon(
+                              return const Icon(
                                 Icons.broken_image,
                                 color: Colors.red,
                               );
                             },
                           ),
                         )
-                      : Icon(
+                      : const Icon(
                           Icons.image_not_supported,
                           color: Colors.grey,
                         ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child:
                           Text("Nama Barang", style: TextStyle(fontSize: 18)),
                     ),
-                    Text(": ", style: TextStyle(fontSize: 18)),
+                    const Text(": ", style: TextStyle(fontSize: 18)),
                     Expanded(
                       child: Text("${barang['nama_barang']}",
-                          style: TextStyle(fontSize: 18)),
+                          style: const TextStyle(fontSize: 18)),
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child:
                           Text("Kode Barang", style: TextStyle(fontSize: 18)),
                     ),
-                    Text(": ", style: TextStyle(fontSize: 18)),
+                    const Text(": ", style: TextStyle(fontSize: 18)),
                     Expanded(
                       child: Text("${barang['kode_barang']}",
-                          style: TextStyle(fontSize: 18)),
+                          style: const TextStyle(fontSize: 18)),
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Text("Harga Beli", style: TextStyle(fontSize: 18)),
                     ),
-                    Text(": ", style: TextStyle(fontSize: 18)),
+                    const Text(": ", style: TextStyle(fontSize: 18)),
                     Expanded(
                       child: Text("${barang['harga_beli']}",
-                          style: TextStyle(fontSize: 18)),
+                          style: const TextStyle(fontSize: 18)),
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Text("Harga Jual", style: TextStyle(fontSize: 18)),
                     ),
-                    Text(": ", style: TextStyle(fontSize: 18)),
+                    const Text(": ", style: TextStyle(fontSize: 18)),
                     Expanded(
                       child: Text("${barang['harga_jual']}",
-                          style: TextStyle(fontSize: 18)),
+                          style: const TextStyle(fontSize: 18)),
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Text("Stok", style: TextStyle(fontSize: 18)),
                     ),
-                    Text(": ", style: TextStyle(fontSize: 18)),
+                    const Text(": ", style: TextStyle(fontSize: 18)),
                     Expanded(
                       child: Text("${barang['stok_barang']} item",
-                          style: TextStyle(fontSize: 18)),
+                          style: const TextStyle(fontSize: 18)),
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Text("Kategori", style: TextStyle(fontSize: 18)),
                     ),
-                    Text(": ", style: TextStyle(fontSize: 18)),
+                    const Text(": ", style: TextStyle(fontSize: 18)),
                     Expanded(
                       child:
-                          Text("$namaKategori", style: TextStyle(fontSize: 18)),
+                          Text(namaKategori, style: const TextStyle(fontSize: 18)),
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           );
@@ -190,36 +189,36 @@ class DetailBarangPage extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
-                  minimumSize: Size(
+                  minimumSize: const Size(
                     double.infinity, // Lebar
                     48, // Tinggi
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 ),
                 onPressed: () {
                   pageBarangController.hapusBarang(barang['id']);
                 },
-                child: Text(
+                child: const Text(
                   "Hapus",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  minimumSize: Size(
+                  minimumSize: const Size(
                     double.infinity, // Lebar
                     48, // Tinggi
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 ),
                 onPressed: () {
                   Get.toNamed("/edit_page_barang", arguments: barang);
                 },
-                child: Text(
+                child: const Text(
                   "Edit Barang",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),

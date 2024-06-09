@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:timkasirapp/Controllers/authController.dart';
+import 'package:timkasirapp/Controllers/auth_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class ResetPasswordPage extends StatelessWidget {
   final AuthController authC = Get.find();
   final TextEditingController emailController = TextEditingController();
@@ -22,33 +23,33 @@ class ResetPasswordPage extends StatelessWidget {
         backgroundColor: Colors.purple,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Column(
           children: [
             TextField(
               controller: emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
-                contentPadding: EdgeInsets.only(left: 20),
+                contentPadding: const EdgeInsets.only(left: 20),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.purple,
-                minimumSize: Size(double.infinity, 48),
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                minimumSize: const Size(double.infinity, 48),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               ),
               onPressed: () async {
                 await authC.resetPassword(emailController.text.trim());
               },
               child: Text(
                 'Reset'.toUpperCase(),
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),

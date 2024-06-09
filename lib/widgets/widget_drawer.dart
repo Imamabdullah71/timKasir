@@ -15,7 +15,7 @@ class WidgetDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           Container(
-            padding: EdgeInsets.only(left: 10, top: 30),
+            padding: const EdgeInsets.only(left: 10, top: 30),
             alignment: Alignment.center,
             height: 120,
             width: double.infinity,
@@ -23,17 +23,17 @@ class WidgetDrawer extends StatelessWidget {
             child: ListTile(
               leading: CircleAvatar(
                 backgroundColor: Colors.grey[300],
-                child: Icon(Icons.person),
+                child: const Icon(Icons.person),
               ),
-              title: Text('Profile'),
+              title: const Text('Profile'),
             ),
           ),
-          Divider(
+          const Divider(
             thickness: 3,
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.database),
-            title: Text('Manajemen'),
+            leading: const Icon(BootstrapIcons.database),
+            title: const Text('Manajemen'),
             onTap: () {
               // Fungsi saat ditekan
               // Misalnya, navigasi ke halaman Home
@@ -41,8 +41,8 @@ class WidgetDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.cart3),
-            title: Text('Transaksi Penjualan'),
+            leading: const Icon(BootstrapIcons.cart3),
+            title: const Text('Transaksi Penjualan'),
             onTap: () {
               // Fungsi saat ditekan
               // Misalnya, navigasi ke halaman Profile
@@ -50,8 +50,8 @@ class WidgetDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.cash_stack),
-            title: Text('Keuangan'),
+            leading: const Icon(BootstrapIcons.cash_stack),
+            title: const Text('Keuangan'),
             onTap: () {
               // Fungsi saat ditekan
               // Misalnya, navigasi ke halaman Settings
@@ -59,8 +59,8 @@ class WidgetDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.file_earmark),
-            title: Text('Laporan'),
+            leading: const Icon(BootstrapIcons.file_earmark),
+            title: const Text('Laporan'),
             onTap: () {
               // Fungsi saat ditekan
               // Misalnya, navigasi ke halaman Settings
@@ -68,8 +68,8 @@ class WidgetDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(BootstrapIcons.gear),
-            title: Text('Pengaturan'),
+            leading: const Icon(BootstrapIcons.gear),
+            title: const Text('Pengaturan'),
             onTap: () {
               // Fungsi saat ditekan
               // Misalnya, navigasi ke halaman Settings
@@ -77,8 +77,8 @@ class WidgetDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.logout),
-            title: Text('Logout'),
+            leading: const Icon(Icons.logout),
+            title: const Text('Logout'),
             onTap: () {
               Get.offAllNamed("/halaman_intro");
             },

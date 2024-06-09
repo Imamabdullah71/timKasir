@@ -6,7 +6,7 @@ PageViewModel viewThree() {
   return PageViewModel(
           // titleWidget: Text("title widget"),
           useScrollView: true,
-          decoration: PageDecoration(
+          decoration: const PageDecoration(
             footerFit: FlexFit.tight,
             fullScreen: true,
             // pageColor: Colors.red,
@@ -28,7 +28,7 @@ PageViewModel viewThree() {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
+                      SizedBox(
                         // color: Colors.amber,
                         height: 25,
                         width: 25,
@@ -37,7 +37,7 @@ PageViewModel viewThree() {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       Text(
                         "Tim Kasir",
                         style: GoogleFonts.lato(
@@ -49,8 +49,8 @@ PageViewModel viewThree() {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Container(
+                  const SizedBox(height: 10),
+                  SizedBox(
                     height: 450,
                     width: double.infinity,
                     child: Image.asset(

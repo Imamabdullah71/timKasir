@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-PageViewModel viewOne() {
+PageViewModel viewTwo() {
   return PageViewModel(
     // titleWidget: Text("title widget"),
     useScrollView: true,
-    decoration: PageDecoration(
+    decoration: const PageDecoration(
       footerFit: FlexFit.tight,
       fullScreen: true,
       // pageColor: Colors.red,
@@ -28,7 +28,7 @@ PageViewModel viewOne() {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   // color: Colors.amber,
                   height: 25,
                   width: 25,
@@ -37,7 +37,7 @@ PageViewModel viewOne() {
                     fit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 Text(
                   "Tim Kasir",
                   style: GoogleFonts.lato(
@@ -49,13 +49,12 @@ PageViewModel viewOne() {
                 ),
               ],
             ),
-            SizedBox(height: 10),
-            Container(
+            const SizedBox(height: 10),
+            SizedBox(
               height: 450,
               width: double.infinity,
-              // color: Colors.amber,
               child: Image.asset(
-                'assets/images/kasir2.png',
+                'assets/images/kasir3.png',
                 fit: BoxFit.cover,
               ),
             ),

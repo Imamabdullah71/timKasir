@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timkasirapp/widgets/widgetDrawer.dart';
+import 'package:timkasirapp/widgets/widget_drawer.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 
 class Transaksi extends StatelessWidget {
@@ -10,7 +10,7 @@ class Transaksi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Transaksi",
           style: TextStyle(
             color: Colors.purple,
@@ -21,7 +21,7 @@ class Transaksi extends StatelessWidget {
         actions: [
           CircleAvatar(
             backgroundColor: Colors.grey[300],
-            child: Icon(
+            child: const Icon(
               BootstrapIcons
                   .star, // Ikon yang ingin ditampilkan di dalam CircleAvatar
               color: Colors.black, // Warna ikon
@@ -29,17 +29,17 @@ class Transaksi extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(BootstrapIcons.three_dots_vertical),
+            icon: const Icon(BootstrapIcons.three_dots_vertical),
             onPressed: () {
               Get.offAllNamed("/halaman_utama");
             },
           ),
         ],
       ),
-      drawer: WidgetDrawer(),
+      drawer: const WidgetDrawer(),
       body: Column(
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Icon(
@@ -87,7 +87,7 @@ class Transaksi extends StatelessWidget {
                       width: 2.0, // Ketebalan border
                     ),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       "Kategori 1",
                       style: TextStyle(
@@ -97,7 +97,7 @@ class Transaksi extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Container(
                   height: 40,
                   width: 70,
@@ -109,7 +109,7 @@ class Transaksi extends StatelessWidget {
                       width: 2.0, // Ketebalan border
                     ),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       "Kategori 2",
                       style: TextStyle(
@@ -119,7 +119,7 @@ class Transaksi extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Container(
                   height: 40,
                   width: 70,
@@ -131,7 +131,7 @@ class Transaksi extends StatelessWidget {
                       width: 2.0, // Ketebalan border
                     ),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       "Kategori 3",
                       style: TextStyle(
@@ -141,7 +141,7 @@ class Transaksi extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Container(
                   height: 40,
                   width: 70,
@@ -153,7 +153,7 @@ class Transaksi extends StatelessWidget {
                       width: 2.0, // Ketebalan border
                     ),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       "Kategori 4",
                       style: TextStyle(
@@ -163,7 +163,7 @@ class Transaksi extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
               ],
             ),
           ),
@@ -175,17 +175,17 @@ class Transaksi extends StatelessWidget {
                     width: 50,
                     height: 50,
                     clipBehavior: Clip.antiAlias,
-                    child: Image.asset(
-                      'assets/images/barang/coklat.jpg',
-                      fit: BoxFit.cover,
-                    ),
                     decoration: BoxDecoration(
                       color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(10),
                     ),
+                    child: Image.asset(
+                      'assets/images/barang/coklat.jpg',
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  title: Text("Coklat"),
-                  subtitle: Text("Jumlah barang : 52"),
+                  title: const Text("Coklat"),
+                  subtitle: const Text("Jumlah barang : 52"),
                 ),
                 ListTile(
                   leading: Container(
@@ -195,12 +195,12 @@ class Transaksi extends StatelessWidget {
                     ),
                     width: 50,
                     height: 50,
-                    child: Icon(
+                    child: const Icon(
                       BootstrapIcons.plus_lg,
                       size: 40,
                     ),
                   ),
-                  title: Text("Tambah Barang"),
+                  title: const Text("Tambah Barang"),
                 ),
               ],
             ),

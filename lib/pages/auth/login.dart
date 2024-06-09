@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:timkasirapp/Controllers/authController.dart';
+import 'package:timkasirapp/Controllers/auth_controller.dart';
 import 'package:timkasirapp/Controllers/bottomBar_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class LoginPage extends StatelessWidget {
   final AuthController authC = Get.find();
   final TextEditingController emailController = TextEditingController();
@@ -30,7 +31,7 @@ class LoginPage extends StatelessWidget {
         backgroundColor: Colors.purple,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Column(
           children: [
             Column(
@@ -40,20 +41,20 @@ class LoginPage extends StatelessWidget {
                   controller: emailController,
                   decoration: InputDecoration(
                     labelText: 'Email',
-                    contentPadding: EdgeInsets.only(left: 20),
+                    contentPadding: const EdgeInsets.only(left: 20),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                   keyboardType: TextInputType.emailAddress,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Obx(
                   () => TextField(
                     controller: passwordController,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      contentPadding: EdgeInsets.only(left: 20),
+                      contentPadding: const EdgeInsets.only(left: 20),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -69,14 +70,14 @@ class LoginPage extends StatelessWidget {
                     obscureText: !authC.isPasswordVisible.value,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
                       Get.toNamed('/halaman_reset_password');
                     },
-                    child: Text(
+                    child: const Text(
                       "Reset Password",
                       style: TextStyle(
                         color: Colors.purple,
@@ -85,12 +86,12 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purple,
-                    minimumSize: Size(double.infinity, 48),
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    minimumSize: const Size(double.infinity, 48),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   ),
                   onPressed: () async {
                     bool success = await authC.loginFC(
@@ -116,18 +117,18 @@ class LoginPage extends StatelessWidget {
                   },
                   child: Text(
                     'Masuk'.toUpperCase(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 if (emailFromRegister != null) Obx(
                   () => ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: authC.isResendButtonEnabled.value ? Colors.purple : Colors.grey,
-                      minimumSize: Size(double.infinity, 48),
-                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      minimumSize: const Size(double.infinity, 48),
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     ),
                     onPressed: authC.isResendButtonEnabled.value
                         ? () {
@@ -139,7 +140,7 @@ class LoginPage extends StatelessWidget {
                                     onPressed: () {
                                       Get.back();
                                     },
-                                    child: Text("Kembali"),
+                                    child: const Text("Kembali"),
                                   ),
                                   TextButton(
                                     onPressed: () async {
@@ -147,7 +148,7 @@ class LoginPage extends StatelessWidget {
                                       authC.startResendEmailTimer();
                                       Get.back();
                                     },
-                                    child: Text("Ya, kirim ulang"),
+                                    child: const Text("Ya, kirim ulang"),
                                   ),
                                 ],
                               ),
@@ -158,7 +159,7 @@ class LoginPage extends StatelessWidget {
                       authC.isResendButtonEnabled.value
                           ? 'Kirim Ulang'
                           : 'Kirim Ulang (${authC.resendButtonCountdown.value})',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
@@ -166,33 +167,33 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Belum punya akun Tim Kasir?",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple,
-                      minimumSize: Size(
+                      minimumSize: const Size(
                         70, // Lebar
                         48, // Tinggi
                       ),
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                          const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     ),
                     onPressed: () {
                       Get.toNamed('/halaman_daftar');
                     },
-                    child: Text(
+                    child: const Text(
                       'Daftar di sini',
                       style: TextStyle(
                         color: Colors.white,

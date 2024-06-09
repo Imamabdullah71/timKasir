@@ -7,6 +7,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timkasirapp/Controllers/Barang_Controller/tambah_barang_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class TambahBarangPage extends StatelessWidget {
   final TambahBarangController controller = Get.put(TambahBarangController());
 
@@ -16,23 +17,23 @@ class TambahBarangPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
         ),
-        title: Text(
+        title: const Text(
           "Tambah Barang",
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.purple,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 200,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +60,7 @@ class TambahBarangPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           color: Colors.grey[300],
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.image_not_supported,
                           size: 60,
                         ),
@@ -73,7 +74,7 @@ class TambahBarangPage extends StatelessWidget {
                         onPressed: () {
                           controller.pickImage(ImageSource.camera);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.camera_alt_rounded,
                           color: Colors.black,
                         ),
@@ -82,7 +83,7 @@ class TambahBarangPage extends StatelessWidget {
                         onPressed: () {
                           controller.pickImage(ImageSource.gallery);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.image,
                           color: Colors.black,
                         ),
@@ -93,63 +94,156 @@ class TambahBarangPage extends StatelessWidget {
               ),
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Nama Barang'),
               onChanged: (value) => controller.setField('nama_barang', value),
+              decoration: InputDecoration(
+                labelText: 'Nama Barang',
+                filled: true,
+                fillColor: Colors.white,
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  borderSide: BorderSide(
+                    color: Colors.purple,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade500,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                ),
+                contentPadding: const EdgeInsets.only(left: 20),
+              ),
             ),
+            const SizedBox(height: 20),
             TextField(
-              decoration: InputDecoration(labelText: 'Harga Beli'),
               keyboardType: TextInputType.number,
               onChanged: (value) => controller.setField('harga_beli', value),
+              decoration: InputDecoration(
+                labelText: 'Harga Beli',
+                filled: true,
+                fillColor: Colors.white,
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  borderSide: BorderSide(
+                    color: Colors.purple,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade500,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                ),
+                contentPadding: const EdgeInsets.only(left: 20),
+              ),
             ),
+            const SizedBox(height: 20),
             TextField(
-              decoration: InputDecoration(labelText: 'Harga Jual'),
               keyboardType: TextInputType.number,
               onChanged: (value) => controller.setField('harga_jual', value),
+              decoration: InputDecoration(
+                labelText: 'Harga Jual',
+                filled: true,
+                fillColor: Colors.white,
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  borderSide: BorderSide(
+                    color: Colors.purple,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade500,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                ),
+                contentPadding: const EdgeInsets.only(left: 20),
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
-                  child: Container(
+                  flex: 2,
+                  child: SizedBox(
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Stok",
                           style: TextStyle(
                             fontSize: 20,
                             color: Color.fromARGB(255, 8, 8, 8),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           height: 40,
                           child: TextField(
                             keyboardType: TextInputType.number,
                             onChanged: (value) =>
                                 controller.setField('stok_barang', value),
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: const OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30),
+                                ),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                                borderSide: BorderSide(
+                                  color: Colors.purple,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.grey.shade500,
+                                ),
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(30)),
+                              ),
+                              contentPadding: const EdgeInsets.only(left: 20),
+                            ),
                           ),
                         ),
-                      ],  
+                      ],
                     ),
                   ),
-                  flex: 2,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Expanded(
-                  child: Container(
+                  flex: 3,
+                  child: SizedBox(
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Kode Barang",
                           style: TextStyle(
                             fontSize: 20,
                             color: Color.fromARGB(255, 8, 8, 8),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           height: 40,
                           child: Obx(
                             () => TextField(
@@ -159,35 +253,58 @@ class TambahBarangPage extends StatelessWidget {
                               controller: TextEditingController(
                                 text: controller.barcode.value,
                               ),
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(30),
+                                  ),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30)),
+                                  borderSide: BorderSide(
+                                    color: Colors.purple,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.grey.shade500,
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(30)),
+                                ),
+                                contentPadding: const EdgeInsets.only(left: 20),
+                              ),
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  flex: 3,
                 ),
                 Column(
                   children: [
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     IconButton(
                       onPressed: () async {
                         await scanBarcode();
                       },
-                      icon: Icon(BootstrapIcons.upc_scan),
+                      icon: const Icon(BootstrapIcons.upc_scan),
                     ),
                   ],
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Obx(() {
               return DropdownSearch<String>(
                 items: controller.kategoriList
                     .map((kategori) => kategori['nama_kategori'] as String)
                     .toList(),
                 selectedItem: controller.selectedKategori.value,
-                dropdownDecoratorProps: DropDownDecoratorProps(
+                dropdownDecoratorProps: const DropDownDecoratorProps(
                   dropdownSearchDecoration: InputDecoration(
                     labelText: "Pilih Kategori",
                   ),
@@ -198,7 +315,7 @@ class TambahBarangPage extends StatelessWidget {
                   controller.setKategori(selectedKategori['nama_kategori'],
                       selectedKategori['id']);
                 },
-                popupProps: PopupProps.menu(
+                popupProps: const PopupProps.menu(
                   showSearchBox: true,
                 ),
               );
@@ -211,16 +328,16 @@ class TambahBarangPage extends StatelessWidget {
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.purple,
-              minimumSize: Size(
+              minimumSize: const Size(
                 double.infinity, // Lebar
                 48, // Tinggi
               ),
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             ),
             onPressed: () {
               controller.tambahBarang();
             },
-            child: Text(
+            child: const Text(
               "Tambahkan Barang",
               style: TextStyle(color: Colors.white, fontSize: 20),
             )),

@@ -3,19 +3,20 @@ import 'package:get/get.dart';
 import 'package:timkasirapp/Controllers/Kategori_Controller/page_kategori_controller.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 
+// ignore: use_key_in_widget_constructors
 class TambahKategoriPage extends GetView<PageKategoriController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Tambah Kategori",
           style: TextStyle(
             color: Colors.white,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 237, 42, 255),
+        backgroundColor: const Color.fromARGB(255, 237, 42, 255),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -31,12 +32,12 @@ class TambahKategoriPage extends GetView<PageKategoriController> {
                   BootstrapIcons.box_seam,
                   color: Colors.grey.shade600,
                 ),
-                border: OutlineInputBorder(
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(30),
                   ),
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   borderSide: BorderSide(
                     color: Colors.purple,
@@ -46,27 +47,27 @@ class TambahKategoriPage extends GetView<PageKategoriController> {
                   borderSide: BorderSide(
                     color: Colors.grey.shade500,
                   ), // Change border color here
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
                 ),
-                contentPadding: EdgeInsets.symmetric(
+                contentPadding: const EdgeInsets.symmetric(
                   vertical: 5,
                 ),
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 237, 42, 255),
-                minimumSize: Size(
+                backgroundColor: const Color.fromARGB(255, 237, 42, 255),
+                minimumSize: const Size(
                   70, // Lebar
                   48, // Tinggi
                 ),
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               ),
               onPressed: () {
                 controller.tambahKategori(controller.namaKategoriC.text);
               },
-              child: Text(
+              child: const Text(
                 'Tambahkan',
                 style: TextStyle(
                   color: Colors.white,
