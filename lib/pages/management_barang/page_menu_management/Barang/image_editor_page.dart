@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:timkasirapp/Controllers/Barang_Controller/tambah_barang_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class ImageEditorPage extends StatelessWidget {
   final TambahBarangController controller = Get.find();
 
