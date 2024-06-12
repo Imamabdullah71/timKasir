@@ -14,12 +14,8 @@ class EditBarangPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Mengatur warna ikon back
         ),
         title: const Text(
           "Edit Barang",

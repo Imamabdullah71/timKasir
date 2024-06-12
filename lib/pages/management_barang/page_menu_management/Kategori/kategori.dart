@@ -13,6 +13,9 @@ class KategoriPage extends GetView<PageKategoriController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Mengatur warna ikon back
+        ),
         title: const Text(
           "Daftar Kategori",
           style: TextStyle(color: Colors.white),
@@ -88,7 +91,8 @@ class KategoriPage extends GetView<PageKategoriController> {
                                         borderRadius: const BorderRadius.all(
                                             Radius.circular(30)),
                                       ),
-                                      contentPadding: const EdgeInsets.symmetric(
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
                                         vertical: 5,
                                       ),
                                     ),
@@ -102,7 +106,8 @@ class KategoriPage extends GetView<PageKategoriController> {
                             }
                           } else if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return const Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           } else {
                             return const Center(
                               child:

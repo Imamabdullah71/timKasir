@@ -15,12 +15,8 @@ class TambahBarangPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Mengatur warna ikon back
         ),
         title: const Text(
           "Tambah Barang",
@@ -304,9 +300,30 @@ class TambahBarangPage extends StatelessWidget {
                     .map((kategori) => kategori['nama_kategori'] as String)
                     .toList(),
                 selectedItem: controller.selectedKategori.value,
-                dropdownDecoratorProps: const DropDownDecoratorProps(
+                dropdownDecoratorProps: DropDownDecoratorProps(
                   dropdownSearchDecoration: InputDecoration(
                     labelText: "Pilih Kategori",
+                    filled: true,
+                    fillColor: Colors.white, // Warna background
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          8.0), // Radius border untuk sudut yang lebih lembut
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: const BorderSide(
+                        color: Colors.purple, // Warna border saat fokus
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Colors
+                            .grey.shade500, // Warna border saat tidak fokus
+                      ),
+                    ),
                   ),
                 ),
                 onChanged: (value) {
@@ -315,8 +332,22 @@ class TambahBarangPage extends StatelessWidget {
                   controller.setKategori(selectedKategori['nama_kategori'],
                       selectedKategori['id']);
                 },
-                popupProps: const PopupProps.menu(
+                popupProps: PopupProps.menu(
                   showSearchBox: true,
+                  searchFieldProps: TextFieldProps(
+                    decoration: InputDecoration(
+                      labelText: "Cari Kategori",
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
+                  fit: FlexFit.loose,
+                  constraints: BoxConstraints.tightFor(
+                      width: MediaQuery.of(context).size.width *
+                          0.8), // Mengatur ukuran popup dropdown
                 ),
               );
             }),

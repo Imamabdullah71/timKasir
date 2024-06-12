@@ -13,7 +13,15 @@ class TransaksiPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Transaksi"),
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Mengatur warna ikon back
+        ),
+        title: const Text(
+          "Transaksi",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.purple,
       ),

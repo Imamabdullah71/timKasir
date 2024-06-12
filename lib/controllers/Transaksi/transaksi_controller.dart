@@ -1,4 +1,3 @@
-// Controllers/transaksi_controller.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:timkasirapp/Models/barang_model.dart';
@@ -15,13 +14,11 @@ class TransaksiController extends GetxController {
   }
 
   void fetchItems() async {
-    final barangSnapshot =
-        await FirebaseFirestore.instance.collection('barang').get();
+    final barangSnapshot = await FirebaseFirestore.instance.collection('barang').get();
 
     for (var doc in barangSnapshot.docs) {
       var barang = BarangModel.fromFirestore(doc);
 
-      // Fetch harga for this barang
       var hargaSnapshot = await FirebaseFirestore.instance
           .collection('harga')
           .where('barang_id', isEqualTo: barang.id)
@@ -30,16 +27,15 @@ class TransaksiController extends GetxController {
       if (hargaSnapshot.docs.isNotEmpty) {
         var hargaData = hargaSnapshot.docs.first.data() as Map<String, dynamic>;
 
-        // Konversi harga_jual ke double
         if (hargaData['harga_jual'] is int) {
           barang.hargaJual = (hargaData['harga_jual'] as int).toDouble();
         } else if (hargaData['harga_jual'] is double) {
           barang.hargaJual = hargaData['harga_jual'];
         } else {
-          barang.hargaJual = 0.0; // Nilai default jika tipe tidak terduga
+          barang.hargaJual = 0.0;
         }
       } else {
-        barang.hargaJual = 0.0; // Nilai default jika tidak ada harga ditemukan
+        barang.hargaJual = 0.0;
       }
 
       items.add(barang);
@@ -77,9 +73,10 @@ class TransaksiController extends GetxController {
   }
 
   void finalizeTransaction(int amountGiven) {
+    print("finalizeTransaction called with amountGiven: $amountGiven");
     List<String> detailBarang = itemCounts.entries.map((entry) {
       var item = items.firstWhere((item) => item.id == entry.key);
-      return "${item.namaBarang} × ${entry.value}";
+      return "${item.namaBarang} ×${entry.value}";
     }).toList();
 
     FirebaseFirestore.instance.collection('transaksi').add({

@@ -7,14 +7,21 @@ import 'package:timkasirapp/Controllers/Transaksi/payment_controller.dart'; // I
 class PaymentPage extends StatelessWidget {
   final TransaksiController transaksiController =
       Get.find<TransaksiController>();
-  final PaymentController paymentController =
-      Get.find<PaymentController>();
+  final PaymentController paymentController = Get.find<PaymentController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pembayaran"),
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Mengatur warna ikon back
+        ),
+        title: const Text(
+          "Pembayaran",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.purple,
         actions: [
@@ -94,8 +101,9 @@ class NumPad extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        buildRow([7, 8, 9, -2]),
-        buildRow([4, 5, 6, -3]),
+        buildRow([-2, -3]),
+        buildRow([7, 8, 9]),
+        buildRow([4, 5, 6]),
         buildRow([1, 2, 3]),
         buildRow([
           -1,
@@ -118,7 +126,7 @@ class NumPad extends StatelessWidget {
                     ? buildButtonIcon(Icons.backspace,
                         onBackspaceTap) // Gunakan ikon untuk backspace
                     : number == -4
-                        ? buildButton("00", () => onNumberTap(0))
+                        ? buildButton("00", () => onNumberTap(00))
                         : buildButton(
                             number.toString(), () => onNumberTap(number));
       }).toList(),

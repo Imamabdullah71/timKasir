@@ -9,6 +9,9 @@ class TambahKategoriPage extends GetView<PageKategoriController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Mengatur warna ikon back
+        ),
         title: const Text(
           "Tambah Kategori",
           style: TextStyle(
@@ -16,7 +19,7 @@ class TambahKategoriPage extends GetView<PageKategoriController> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 237, 42, 255),
+        backgroundColor: Colors.purple,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -57,12 +60,13 @@ class TambahKategoriPage extends GetView<PageKategoriController> {
             const SizedBox(height: 40),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 237, 42, 255),
+                backgroundColor: Colors.purple,
                 minimumSize: const Size(
                   70, // Lebar
                   48, // Tinggi
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               ),
               onPressed: () {
                 controller.tambahKategori(controller.namaKategoriC.text);

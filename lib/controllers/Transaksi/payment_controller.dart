@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
 
 class PaymentController extends GetxController {
   final RxInt amountGiven = 0.obs;
   final TextEditingController amountController = TextEditingController();
+  final TransaksiController transaksiController = Get.find<TransaksiController>();
 
   void onNumberTap(int number) {
     if (number == -1) {
@@ -22,16 +24,18 @@ class PaymentController extends GetxController {
 
   void onBackspaceTap() {
     if (amountController.text.isNotEmpty) {
-      amountController.text =
-          amountController.text.substring(0, amountController.text.length - 1);
+      amountController.text = amountController.text.substring(0, amountController.text.length - 1);
       amountGiven.value = int.tryParse(amountController.text) ?? 0;
     }
   }
 
   void onConfirmTap(double totalAmount) {
     if (amountGiven.value >= totalAmount.toInt()) {
-      // Add your transaction finalizing logic here
+      print("onConfirmTap called with amountGiven: ${amountGiven.value}, totalAmount: $totalAmount");
+      transaksiController.finalizeTransaction(amountGiven.value);
       Get.toNamed("/success_transaksi_page");
+    } else {
+      print("onConfirmTap: amountGiven is less than totalAmount");
     }
   }
 

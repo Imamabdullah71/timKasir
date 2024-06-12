@@ -1,10 +1,10 @@
-// tambah_barang_controller.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'dart:typed_data';
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/image_editor_page.dart';
 
@@ -79,6 +79,7 @@ class TambahBarangController extends GetxController {
   }
 
   void tambahBarang() async {
+    // Validasi input sebelum menambahkan barang
     if (barangData['nama_barang']?.value.isEmpty ?? true) {
       Get.snackbar('Error', 'Nama barang harus diisi');
       return;
@@ -114,39 +115,52 @@ class TambahBarangController extends GetxController {
       return;
     }
 
-    String dateNow = DateTime.now().toIso8601String();
+    try {
+      // Menambahkan barang ke Firestore
+      String dateNow = DateTime.now().toIso8601String();
+      final docRef = await FirebaseFirestore.instance.collection('barang').add({
+        'nama_barang': barangData['nama_barang']?.value,
+        'stok_barang': int.parse(barangData['stok_barang']?.value ?? '0'),
+        'kode_barang': int.parse(barangData['kode_barang']?.value ?? '0'),
+        'kategori_id': barangData['kategori_id']?.value,
+        'foto_url': '',  // akan di-update nanti
+        'time': dateNow,
+      });
 
-    final docRef = await FirebaseFirestore.instance.collection('barang').add({
-      'nama_barang': barangData['nama_barang']?.value,
-      'stok_barang': int.parse(barangData['stok_barang']?.value ?? '0'),
-      'kode_barang': int.parse(barangData['kode_barang']?.value ?? '0'),
-      'kategori_id': barangData['kategori_id']?.value,
-      "time": dateNow,
-    });
+      // Mengunggah gambar dan memperbarui URL gambar
+      String? fotoUrl = await uploadImage(docRef.id);
+      if (fotoUrl != null) {
+        await docRef.update({'foto_url': fotoUrl});
+        barangData['foto_url']?.value = fotoUrl;
+      }
 
-    String? fotoUrl = await uploadImage(docRef.id);
+      // Menambahkan data harga ke koleksi 'harga'
+      await FirebaseFirestore.instance.collection('harga').add({
+        'barang_id': docRef.id,
+        'harga_beli': double.parse(hargaData['harga_beli']?.value ?? '0'),
+        'harga_jual': double.parse(hargaData['harga_jual']?.value ?? '0'),
+      });
 
-    if (fotoUrl != null) {
-      await docRef.update({'foto_url': fotoUrl});
-      barangData['foto_url']?.value = fotoUrl;
+      // Kembali ke halaman sebelumnya dan tampilkan notifikasi sukses
+      Get.back();
+      Get.snackbar(
+        "Berhasil menambahkan barang!",
+        "",
+        duration: const Duration(milliseconds: 2000),
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        borderRadius: 10.0,
+        margin: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        snackPosition: SnackPosition.BOTTOM,
+        forwardAnimationCurve: Curves.easeOut,
+        reverseAnimationCurve: Curves.easeIn,
+        isDismissible: true,
+        showProgressIndicator: false,
+      );
+    } catch (e) {
+      Get.snackbar('Error', 'Gagal menambahkan barang: $e');
     }
-
-    Get.back();
-    Get.snackbar(
-      "Berhasil menambahkan barang!",
-      "",
-      duration: const Duration(milliseconds: 2000),
-      backgroundColor: Colors.green,
-      colorText: Colors.white,
-      borderRadius: 10.0,
-      margin: const EdgeInsets.all(16.0),
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-      snackPosition: SnackPosition.BOTTOM,
-      forwardAnimationCurve: Curves.easeOut,
-      reverseAnimationCurve: Curves.easeIn,
-      isDismissible: true,
-      showProgressIndicator: false,
-    );
   }
 
   void setField(String key, String value) {
@@ -166,4 +180,6 @@ class TambahBarangController extends GetxController {
     barcode.value = code;
     setField('kode_barang', code);
   }
+
+  
 }

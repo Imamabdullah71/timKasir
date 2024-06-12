@@ -14,12 +14,8 @@ class DetailBarangPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Mengatur warna ikon back
         ),
         title: const Text(
           "Detail Barang",
@@ -170,8 +166,8 @@ class DetailBarangPage extends StatelessWidget {
                     ),
                     const Text(": ", style: TextStyle(fontSize: 18)),
                     Expanded(
-                      child:
-                          Text(namaKategori, style: const TextStyle(fontSize: 18)),
+                      child: Text(namaKategori,
+                          style: const TextStyle(fontSize: 18)),
                     ),
                   ],
                 ),
@@ -193,7 +189,8 @@ class DetailBarangPage extends StatelessWidget {
                     double.infinity, // Lebar
                     48, // Tinggi
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 ),
                 onPressed: () {
                   pageBarangController.hapusBarang(barang['id']);
@@ -213,7 +210,8 @@ class DetailBarangPage extends StatelessWidget {
                     double.infinity, // Lebar
                     48, // Tinggi
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 ),
                 onPressed: () {
                   Get.toNamed("/edit_page_barang", arguments: barang);

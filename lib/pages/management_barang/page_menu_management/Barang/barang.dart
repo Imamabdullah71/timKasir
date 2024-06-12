@@ -2,20 +2,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timkasirapp/Controllers/Barang_Controller/page_barang_controller.dart';
+import 'package:timkasirapp/Controllers/Transaksi/payment_controller.dart';
 
 // ignore: use_key_in_widget_constructors
 class PageBarang extends GetView<PageBarangController> {
+  final PaymentController paymentController = Get.find<PaymentController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Mengatur warna ikon back
         ),
         title: const Text(
           "Daftar Barang",
@@ -60,30 +58,36 @@ class PageBarang extends GetView<PageBarangController> {
             ),
           ),
           Obx(() {
-            return Wrap(
-              spacing: 8.0,
-              children: controller.kategoriList.map((kategori) {
-                return FilterChip(
-                  selectedColor: Colors.purple[200],
-                  label: Text(kategori['nama_kategori']),
-                  selected:
-                      controller.selectedCategories.contains(kategori['id']),
-                  onSelected: (bool selected) {
-                    controller.toggleCategorySelection(kategori['id']);
-                  },
-                  shape: StadiumBorder(
-                    side: BorderSide(
-                      color: controller.selectedCategories
-                              .contains(kategori['id'])
-                          ? Colors
-                              .transparent // Menghilangkan border jika dipilih
-                          : Colors
-                              .purple, // Menampilkan border jika tidak dipilih
-                      width: 2.0,
+            return SingleChildScrollView(
+              scrollDirection:
+                  Axis.horizontal, // Mengatur scroll secara horizontal
+              child: Row(
+                children: controller.kategoriList.map((kategori) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: FilterChip(
+                      selectedColor: Colors.purple[200],
+                      label: Text(kategori['nama_kategori']),
+                      selected: controller.selectedCategories
+                          .contains(kategori['id']),
+                      onSelected: (bool selected) {
+                        controller.toggleCategorySelection(kategori['id']);
+                      },
+                      shape: StadiumBorder(
+                        side: BorderSide(
+                          color: controller.selectedCategories
+                                  .contains(kategori['id'])
+                              ? Colors
+                                  .transparent // Menghilangkan border jika dipilih
+                              : Colors
+                                  .purple, // Menampilkan border jika tidak dipilih
+                          width: 2.0,
+                        ),
+                      ),
                     ),
-                  ),
-                );
-              }).toList(),
+                  );
+                }).toList(),
+              ),
             );
           }),
           Expanded(
@@ -131,7 +135,8 @@ class PageBarang extends GetView<PageBarangController> {
                                 ),
                         ),
                         title: Text(barang['nama_barang']),
-                        subtitle: Text('Harga: ${barang['harga_jual']}'),
+                        subtitle: Text(
+                            'Harga: Rp ${paymentController.formatNumber(barang['harga_jual'])}'),
                         onTap: () {
                           Get.toNamed("/detail_page_barang", arguments: barang);
                         },

@@ -60,34 +60,34 @@ class ManageBarang extends StatelessWidget {
             title: const Text("Pelanggan dan Supplier"),
             onTap: () {},
           ),
-          ListTile(
-            leading: const Icon(BootstrapIcons.journal_text),
-            title: const Text("Barang Test"),
-            onTap: () {
-              Get.toNamed("/uplaod_page_barang");
-            },
-          ),
-          ListTile(
-            leading: const Icon(BootstrapIcons.folder),
-            title: const Text("Folder"),
-            onTap: () {
-              Get.toNamed("/uplaod_page");
-            },
-          ),
-          ListTile(
-            leading: const Icon(BootstrapIcons.pen),
-            title: const Text("Count Page"),
-            onTap: () {
-              Get.toNamed("/count_page");
-            },
-          ),
-          ListTile(
-            leading: const Icon(BootstrapIcons.funnel),
-            title: const Text("Image Picker Testing"),
-            onTap: () {
-              Get.toNamed("/mencoba_image_picker");
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(BootstrapIcons.journal_text),
+          //   title: const Text("Barang Test"),
+          //   onTap: () {
+          //     Get.toNamed("/uplaod_page_barang");
+          //   },
+          // ),
+          // ListTile(
+          //   leading: const Icon(BootstrapIcons.folder),
+          //   title: const Text("Folder"),
+          //   onTap: () {
+          //     Get.toNamed("/uplaod_page");
+          //   },
+          // ),
+          // ListTile(
+          //   leading: const Icon(BootstrapIcons.pen),
+          //   title: const Text("Count Page"),
+          //   onTap: () {
+          //     Get.toNamed("/count_page");
+          //   },
+          // ),
+          // ListTile(
+          //   leading: const Icon(BootstrapIcons.funnel),
+          //   title: const Text("Image Picker Testing"),
+          //   onTap: () {
+          //     Get.toNamed("/mencoba_image_picker");
+          //   },
+          // ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -99,11 +99,3 @@ class ManageBarang extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
