@@ -3,6 +3,7 @@ import 'package:timkasirapp/Controllers/Barang_Controller/edit_barang_controller
 import 'package:timkasirapp/Controllers/Barang_Controller/tambah_barang_controller.dart';
 import 'package:timkasirapp/Controllers/Barang_Controller/page_barang_controller.dart';
 import 'package:timkasirapp/Controllers/Kategori_Controller/page_kategori_controller.dart';
+import 'package:timkasirapp/Controllers/Stok_Controller/page_stok_controller.dart';
 import 'package:timkasirapp/Controllers/Transaksi/payment_controller.dart';
 import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
 import 'package:timkasirapp/Controllers/home_controller.dart';
@@ -20,5 +21,7 @@ class TambahDataBinding extends Bindings {
     // Transaksi
     Get.lazyPut<TransaksiController>(() => TransaksiController());
     Get.lazyPut<PaymentController>(() => PaymentController());
+    // Stok Barang
+    Get.lazyPut<PageStokController>(() => PageStokController());
   }
 }

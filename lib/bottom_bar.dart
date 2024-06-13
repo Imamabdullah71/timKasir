@@ -10,7 +10,6 @@ import 'package:timkasirapp/Pages/transaksi.dart';
 import 'widgets/widget_drawer.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 
-
 // ignore: use_key_in_widget_constructors
 class BottomBar extends StatelessWidget {
   final BottomBarController controller = Get.put(BottomBarController());
@@ -30,37 +29,40 @@ class BottomBar extends StatelessWidget {
           const Pengaturan(),
         ],
       ),
-      bottomNavigationBar: Obx(() => SalomonBottomBar(
-        currentIndex: controller.selectedIndex.value,
-        onTap: controller.onTabTapped,
-        items: [
-          SalomonBottomBarItem(
-            icon: const Icon(BootstrapIcons.cart2),
-            title: const Text("Transaksi"),
-            selectedColor: Colors.purple,
-          ),
-          SalomonBottomBarItem(
-            icon: const Icon(BootstrapIcons.database),
-            title: const Text("Barang"),
-            selectedColor: Colors.purple,
-          ),
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.home),
-            title: const Text("Home"),
-            selectedColor: Colors.purple,
-          ),
-          SalomonBottomBarItem(
-            icon: const Icon(BootstrapIcons.file_earmark),
-            title: const Text("Laporan"),
-            selectedColor: Colors.purple,
-          ),
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.people),
-            title: const Text("Profile"),
-            selectedColor: Colors.purple,
-          ),
-        ],
-      )),
+      bottomNavigationBar: Obx(() => SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SalomonBottomBar(
+              currentIndex: controller.selectedIndex.value,
+              onTap: controller.onTabTapped,
+              items: [
+                SalomonBottomBarItem(
+                  icon: const Icon(BootstrapIcons.cart2),
+                  title: const Text("Transaksi"),
+                  selectedColor: Colors.purple,
+                ),
+                SalomonBottomBarItem(
+                  icon: const Icon(BootstrapIcons.database),
+                  title: const Text("Barang"),
+                  selectedColor: Colors.purple,
+                ),
+                SalomonBottomBarItem(
+                  icon: const Icon(Icons.home),
+                  title: const Text("Home"),
+                  selectedColor: Colors.purple,
+                ),
+                SalomonBottomBarItem(
+                  icon: const Icon(BootstrapIcons.file_earmark),
+                  title: const Text("Laporan"),
+                  selectedColor: Colors.purple,
+                ),
+                SalomonBottomBarItem(
+                  icon: const Icon(Icons.people),
+                  title: const Text("Profile"),
+                  selectedColor: Colors.purple,
+                ),
+              ],
+            ),
+          )),
     );
   }
 }

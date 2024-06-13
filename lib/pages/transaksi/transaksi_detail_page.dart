@@ -62,7 +62,8 @@ class TransaksiDetailPage extends StatelessWidget {
               ),
               title: Text(item.namaBarang),
               subtitle: Text("×$quantity"),
-              trailing: Text("Total: ${(item.hargaJual ?? 0.0) * quantity}"),
+              trailing: Text(
+                  "Total: ${paymentController.formatNumber((item.hargaJual ?? 0.0) * quantity)}"),
               onTap: () {
                 Get.dialog(
                   AlertDialog(

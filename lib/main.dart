@@ -19,6 +19,7 @@ import 'package:timkasirapp/Pages/auth/reset_password.dart';
 import 'package:timkasirapp/Pages/management_barang/page_menu_management/Barang/barang.dart';
 import 'package:timkasirapp/Pages/laporan.dart';
 import 'package:timkasirapp/Pages/landing_pages/main_landing.dart';
+import 'package:timkasirapp/Pages/management_barang/page_menu_management/Stok_Barang/stok_barang.dart';
 import 'package:timkasirapp/Pages/profile.dart';
 import 'package:timkasirapp/Pages/transaksi.dart';
 import 'package:timkasirapp/Pages/transaksi/payment_page.dart';
@@ -86,6 +87,7 @@ class MyApp extends StatelessWidget {
           page: () => EditBarangPage(),
           binding: TambahDataBinding(),
         ),
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Kategori
         GetPage(
           name: "/kategori_page",
@@ -97,6 +99,7 @@ class MyApp extends StatelessWidget {
           page: () => TambahKategoriPage(),
           binding: TambahDataBinding(),
         ),
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Transaksi
         GetPage(
           name: "/transaksi_page",
@@ -116,9 +119,15 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: "/success_transaksi_page",
             page: () => SuccessTransaksiPage()),
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Stok Barang
+        GetPage(
+          name: "/stok_barang_page",
+          page: () => StokBarangPage(),
+          binding: TambahDataBinding(),
+        ),
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //Ini hanya bagaian untuk testing page, hapus jika tidak digunakan
-
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       ],
       debugShowCheckedModeBanner: false,
