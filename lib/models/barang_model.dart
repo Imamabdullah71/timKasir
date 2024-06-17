@@ -1,4 +1,3 @@
-// models/barang_model.dart:
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BarangModel {
@@ -9,7 +8,7 @@ class BarangModel {
   final String kategoriId;
   final String fotoUrl;
   final Timestamp time;
-  double? hargaJual; // Jadikan hargaJual dapat diubah
+  double? hargaJual;
 
   BarangModel({
     required this.id,
@@ -25,37 +24,17 @@ class BarangModel {
   factory BarangModel.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
 
-    String kodeBarangString;
-    if (data['kode_barang'] is int) {
-      kodeBarangString = data['kode_barang'].toString();
-    } else if (data['kode_barang'] is String) {
-      kodeBarangString = data['kode_barang'];
-    } else {
-      kodeBarangString = '';
-    }
-
-    Timestamp timestamp;
-    if (data['time'] is String) {
-      try {
-        timestamp = Timestamp.fromDate(DateTime.parse(data['time']));
-      } catch (e) {
-        timestamp = Timestamp.now();
-      }
-    } else if (data['time'] is Timestamp) {
-      timestamp = data['time'];
-    } else {
-      timestamp = Timestamp.now();
-    }
-
     return BarangModel(
       id: doc.id,
       namaBarang: data['nama_barang'] ?? '',
-      kodeBarang: kodeBarangString,
+      kodeBarang: data['kode_barang'].toString(),
       stokBarang: data['stok_barang'] ?? 0,
       kategoriId: data['kategori_id'] ?? '',
       fotoUrl: data['foto_url'] ?? '',
-      time: timestamp,
-      hargaJual: (data['harga_jual'] as double?) ?? 0.0, // Nilai default
+      time: data['time'] is Timestamp
+          ? data['time']
+          : Timestamp.fromDate(DateTime.parse(data['time'] ?? DateTime.now().toString())),
+      hargaJual: (data['harga_jual'] as num?)?.toDouble() ?? 0.0,
     );
   }
 

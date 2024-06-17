@@ -31,11 +31,16 @@ class PaymentController extends GetxController {
 
   void onConfirmTap(double totalAmount) {
     if (amountGiven.value >= totalAmount.toInt()) {
-      print("onConfirmTap called with amountGiven: ${amountGiven.value}, totalAmount: $totalAmount");
       transaksiController.finalizeTransaction(amountGiven.value);
       Get.toNamed("/success_transaksi_page");
     } else {
-      print("onConfirmTap: amountGiven is less than totalAmount");
+      Get.snackbar(
+        "Pembayaran Gagal",
+        "Jumlah yang diberikan kurang dari total yang harus dibayar.",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     }
   }
 

@@ -3,10 +3,8 @@ import 'package:get/get.dart';
 import 'package:timkasirapp/Controllers/Transaksi/payment_controller.dart';
 import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
 
-// ignore: use_key_in_widget_constructors
 class TransaksiDetailPage extends StatelessWidget {
-  final TransaksiController transaksiController =
-      Get.find<TransaksiController>();
+  final TransaksiController transaksiController = Get.find<TransaksiController>();
   final PaymentController paymentController = Get.find<PaymentController>();
 
   @override
@@ -14,7 +12,7 @@ class TransaksiDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.white, // Mengatur warna ikon back
+          color: Colors.white,
         ),
         title: const Text(
           "Detail Transaksi",
@@ -37,11 +35,10 @@ class TransaksiDetailPage extends StatelessWidget {
           itemBuilder: (context, index) {
             var itemId = selectedItems[index].key;
             var quantity = selectedItems[index].value;
-            var item = transaksiController.items
-                .firstWhere((item) => item.id == itemId);
+            var item = transaksiController.items.firstWhere((item) => item.id == itemId);
 
             return ListTile(
-              leading: Container(
+              leading: SizedBox(
                 height: 50,
                 width: 50,
                 child: ClipRRect(
@@ -63,7 +60,8 @@ class TransaksiDetailPage extends StatelessWidget {
               title: Text(item.namaBarang),
               subtitle: Text("×$quantity"),
               trailing: Text(
-                  "Total: ${paymentController.formatNumber((item.hargaJual ?? 0.0) * quantity)}"),
+                "Total: ${paymentController.formatNumber((item.hargaJual ?? 0.0) * quantity)}"
+              ),
               onTap: () {
                 Get.dialog(
                   AlertDialog(
@@ -82,8 +80,7 @@ class TransaksiDetailPage extends StatelessWidget {
                               color: Colors.red,
                             ),
                             Obx(() {
-                              var currentQuantity =
-                                  transaksiController.itemCounts[item.id] ?? 0;
+                              var currentQuantity = transaksiController.itemCounts[item.id] ?? 0;
                               return Text("$currentQuantity");
                             }),
                             IconButton(
@@ -100,8 +97,7 @@ class TransaksiDetailPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             IconButton(
-                              onPressed: () =>
-                                  transaksiController.deleteItem(item.id),
+                              onPressed: () => transaksiController.deleteItem(item.id),
                               icon: const Icon(
                                 Icons.delete,
                                 color: Colors.red,
@@ -120,9 +116,9 @@ class TransaksiDetailPage extends StatelessWidget {
       }),
       floatingActionButton: Obx(() {
         return Container(
-          width: double.infinity, // Mengatur lebar menjadi penuh
-          height: 55, // Mengatur tinggi sesuai keinginan
-          margin: const EdgeInsets.only(left: 35), // Margin opsional
+          width: double.infinity,
+          height: 55,
+          margin: const EdgeInsets.only(left: 35),
           child: FloatingActionButton.extended(
             onPressed: () => Get.toNamed("/payment_page"),
             label: Text(

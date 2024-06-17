@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
-import 'package:timkasirapp/Controllers/Transaksi/payment_controller.dart'; // Import controller baru
+import 'package:timkasirapp/Controllers/Transaksi/payment_controller.dart';
 
 // ignore: use_key_in_widget_constructors
 class PaymentPage extends StatelessWidget {
-  final TransaksiController transaksiController =
-      Get.find<TransaksiController>();
+  final TransaksiController transaksiController = Get.find<TransaksiController>();
   final PaymentController paymentController = Get.find<PaymentController>();
 
   @override
@@ -14,7 +13,7 @@ class PaymentPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.white, // Mengatur warna ikon back
+          color: Colors.white,
         ),
         title: const Text(
           "Pembayaran",
@@ -31,17 +30,14 @@ class PaymentPage extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: paymentController.amountGiven.value >=
-                          transaksiController.totalAmount.value.toInt()
+                  color: paymentController.amountGiven.value >= transaksiController.totalAmount.value.toInt()
                       ? Colors.green
                       : Colors.grey,
                 ),
                 child: IconButton(
                   icon: const Icon(Icons.check),
-                  onPressed: paymentController.amountGiven.value >=
-                          transaksiController.totalAmount.value.toInt()
-                      ? () => paymentController
-                          .onConfirmTap(transaksiController.totalAmount.value)
+                  onPressed: paymentController.amountGiven.value >= transaksiController.totalAmount.value.toInt()
+                      ? () => paymentController.onConfirmTap(transaksiController.totalAmount.value)
                       : null,
                   color: Colors.white,
                 ),
@@ -65,8 +61,8 @@ class PaymentPage extends StatelessWidget {
               onNumberTap: paymentController.onNumberTap,
               onClearTap: paymentController.onClearTap,
               onBackspaceTap: paymentController.onBackspaceTap,
-              buttonSize: 70, // Set ukuran tombol
-              buttonColor: Colors.blue[100]!, // Set warna latar belakang tombol
+              buttonSize: 70,
+              buttonColor: Colors.blue[100]!,
             ),
             const SizedBox(height: 20),
             Obx(() => Text(
@@ -84,17 +80,16 @@ class NumPad extends StatelessWidget {
   final Function(int) onNumberTap;
   final Function onClearTap;
   final Function onBackspaceTap;
-  final double buttonSize; // Tambahkan parameter ukuran tombol
-  final Color buttonColor; // Tambahkan parameter warna tombol
+  final double buttonSize;
+  final Color buttonColor;
 
   const NumPad({
     super.key,
     required this.onNumberTap,
     required this.onClearTap,
     required this.onBackspaceTap,
-    this.buttonSize = 60.0, // Default ukuran tombol
-    this.buttonColor =
-        const Color(0xFFE0E0E0), // Default warna latar belakang tombol
+    this.buttonSize = 60.0,
+    this.buttonColor = const Color(0xFFE0E0E0),
   });
 
   @override
@@ -105,11 +100,7 @@ class NumPad extends StatelessWidget {
         buildRow([7, 8, 9]),
         buildRow([4, 5, 6]),
         buildRow([1, 2, 3]),
-        buildRow([
-          -1,
-          -4,
-          0
-        ]), // -1 for '000', -2 for 'C', -3 for backspace, -4 for '00'
+        buildRow([-1, -4, 0]),
       ],
     );
   }
@@ -123,13 +114,11 @@ class NumPad extends StatelessWidget {
             : number == -2
                 ? buildButton("C", onClearTap)
                 : number == -3
-                    ? buildButtonIcon(Icons.backspace,
-                        onBackspaceTap) // Gunakan ikon untuk backspace
+                    ? buildButtonIcon(Icons.backspace, onBackspaceTap)
                     : number == -4
                         ? buildButton("00", () => onNumberTap(00))
-                        : buildButton(
-                            number.toString(), () => onNumberTap(number));
-      }).toList(),
+                        : buildButton(number.toString(), () => onNumberTap(number));
+      }).toList()
     );
   }
 
@@ -139,11 +128,11 @@ class NumPad extends StatelessWidget {
       child: GestureDetector(
         onTap: () => onTap(),
         child: Container(
-          width: buttonSize, // Gunakan ukuran tombol yang ditentukan
-          height: buttonSize, // Gunakan ukuran tombol yang ditentukan
+          width: buttonSize,
+          height: buttonSize,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: buttonColor, // Gunakan warna tombol yang ditentukan
+            color: buttonColor,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
@@ -161,11 +150,11 @@ class NumPad extends StatelessWidget {
       child: GestureDetector(
         onTap: () => onTap(),
         child: Container(
-          width: buttonSize, // Gunakan ukuran tombol yang ditentukan
-          height: buttonSize, // Gunakan ukuran tombol yang ditentukan
+          width: buttonSize,
+          height: buttonSize,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: buttonColor, // Gunakan warna tombol yang ditentukan
+            color: buttonColor,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(

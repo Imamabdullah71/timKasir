@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
 
+// ignore: use_key_in_widget_constructors
 class SuccessTransaksiPage extends StatelessWidget {
   final TransaksiController transaksiController =
       Get.find<TransaksiController>();
@@ -14,7 +15,7 @@ class SuccessTransaksiPage extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Colors.white, // Mengatur warna ikon back
         ),
-        title: Text(
+        title: const Text(
           "Transaksi Sukses",
           style: TextStyle(
             color: Colors.white,
@@ -35,7 +36,7 @@ class SuccessTransaksiPage extends StatelessWidget {
                 Get.back();
                 Get.back();
               },
-              child: Text("Transaksi Kembali"),
+              child: const Text("Transaksi Kembali"),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -45,7 +46,7 @@ class SuccessTransaksiPage extends StatelessWidget {
                 Get.back();
                 Get.back();
               },
-              child: Text("Halaman Utama"),
+              child: const Text("Halaman Utama"),
             ),
           ],
         ),
