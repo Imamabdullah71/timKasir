@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timkasirapp/Count_Down_Test/countdown_controller.dart';
+import 'package:tim_kasir/Count_Down_Test/countdown_controller.dart';
 
 class CountPage extends StatelessWidget {
   final CountdownController countdownController =

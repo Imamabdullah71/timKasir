@@ -1,6 +1,6 @@
 {
-    "name": "timkasirapp",
-    "short_name": "timkasirapp",
+    "name": "tim_kasir",
+    "short_name": "tim_kasir",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

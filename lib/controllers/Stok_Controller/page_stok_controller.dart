@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:timkasirapp/models/barang_model.dart';
+import 'package:tim_kasir/models/barang_model.dart';
 
 class PageStokController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

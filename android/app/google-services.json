@@ -1,10 +1,30 @@
 {
   "project_info": {
     "project_number": "355847532999",
+    "firebase_url": "https://timkasir-firebase-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "timkasir-firebase",
     "storage_bucket": "timkasir-firebase.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355847532999:android:f009bc5f484cf4d4da29e2",
+        "android_client_info": {
+          "package_name": "com.example.tim_kasir"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMbI6enXTVC0MELAcivJeqplfgIAwwnbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:355847532999:android:61c8f436468c95feda29e2",

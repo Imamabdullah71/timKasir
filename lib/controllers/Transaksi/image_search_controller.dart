@@ -1,16 +1,20 @@
-// image_search_controller.dart
+// lib/Controllers/Transaksi/image_search_controller.dart
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:timkasirapp/Models/barang_model.dart';
-import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:tim_kasir/Controllers/Transaksi/vision_service.dart';
+import 'package:tim_kasir/Models/barang_model.dart';
+import 'package:tim_kasir/Controllers/Transaksi/transaksi_controller.dart';
 
 class ImageSearchController extends GetxController {
   final ImagePicker _picker = ImagePicker();
   final TransaksiController transaksiController = Get.find<TransaksiController>();
+  final VisionService visionService = VisionService();
 
-  // Fungsi untuk mengambil gambar menggunakan kamera
-  Future<void> searchByImage(BuildContext context) async {
+  // Fungsi untuk mengambil gambar menggunakan kamera dan mengunggahnya ke Firebase Storage
+  Future<String?> uploadImageAndGetUrl() async {
     final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
 
     if (photo == null) {
@@ -21,33 +25,68 @@ class ImageSearchController extends GetxController {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-      return;
+      return null;
     }
 
-    // Disini seharusnya ada logika untuk mengirim gambar ke server atau menggunakan model lokal untuk mendapatkan barang yang serupa.
-    // Simulasikan hasil pencarian gambar dengan mencari barang dengan nama yang cocok.
-    // Ini bisa digantikan dengan logika sebenarnya berdasarkan layanan eksternal atau model ML.
+    // Mengunggah gambar ke Firebase Cloud Storage
+    final fileName = photo.name;
+    final storageRef = FirebaseStorage.instance.ref().child('images/$fileName');
+    await storageRef.putFile(File(photo.path));
 
-    String simulatedQuery = 'barang'; // Ubah ini menjadi hasil dari model pencarian gambar.
-    
-    // Filter barang berdasarkan hasil pencarian
-    var matchedItems = transaksiController.items.where((item) {
-      return item.namaBarang.toLowerCase().contains(simulatedQuery.toLowerCase());
-    }).toList();
+    // Mendapatkan URL gambar yang diunggah
+    final String downloadUrl = await storageRef.getDownloadURL();
+    return downloadUrl;
+  }
 
-    if (matchedItems.isEmpty) {
+  // Fungsi utama untuk mengambil gambar dan mencari gambar serupa
+  Future<void> searchByImage(BuildContext context) async {
+    try {
+      // Ambil gambar dan unggah ke Firebase Storage, dapatkan URL-nya
+      final imageUrl = await uploadImageAndGetUrl();
+      if (imageUrl == null) return;
+
+      // Panggil fungsi untuk menganalisis gambar dan mendapatkan label fitur
+      final labels = await visionService.analyzeImage(imageUrl);
+
+      if (labels.isEmpty) {
+        Get.snackbar(
+          'Tidak Ditemukan',
+          'Tidak ada barang yang sesuai dengan gambar',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+        );
+        return;
+      }
+
+      // Filter barang berdasarkan hasil label dari analisis gambar
+      var matchedItems = transaksiController.items.where((item) {
+        return labels.any((label) => item.namaBarang.toLowerCase().contains(label.toLowerCase()));
+      }).toList();
+
+      if (matchedItems.isEmpty) {
+        Get.snackbar(
+          'Tidak Ditemukan',
+          'Tidak ada barang yang sesuai dengan gambar',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+        );
+        return;
+      }
+
+      // Tampilkan barang yang ditemukan ke pengguna
+      showSearchResults(context, matchedItems);
+
+    } catch (e) {
       Get.snackbar(
-        'Tidak Ditemukan',
-        'Tidak ada barang yang sesuai dengan gambar',
+        'Error',
+        e.toString(),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-      return;
     }
-
-    // Tampilkan barang yang ditemukan ke pengguna
-    showSearchResults(context, matchedItems);
   }
 
   // Menampilkan hasil pencarian ke pengguna

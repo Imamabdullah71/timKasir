@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:timkasirapp/Models/barang_model.dart';
+import 'package:tim_kasir/Models/barang_model.dart';
 
 class TransaksiController extends GetxController {
   final RxList<BarangModel> items = <BarangModel>[].obs;

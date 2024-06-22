@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
+import 'package:tim_kasir/Controllers/Transaksi/transaksi_controller.dart';
 
 class PaymentController extends GetxController {
   final RxInt amountGiven = 0.obs;

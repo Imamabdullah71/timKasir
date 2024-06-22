@@ -1,18 +1,22 @@
 import 'package:get/get.dart';
-import 'package:timkasirapp/Controllers/Barang_Controller/edit_barang_controller.dart';
-import 'package:timkasirapp/Controllers/Barang_Controller/tambah_barang_controller.dart';
-import 'package:timkasirapp/Controllers/Barang_Controller/page_barang_controller.dart';
-import 'package:timkasirapp/Controllers/Kategori_Controller/page_kategori_controller.dart';
-import 'package:timkasirapp/Controllers/Stok_Controller/page_stok_controller.dart';
-import 'package:timkasirapp/Controllers/Transaksi/image_search_controller.dart';
-import 'package:timkasirapp/Controllers/Transaksi/payment_controller.dart';
-import 'package:timkasirapp/Controllers/Transaksi/transaksi_controller.dart';
-import 'package:timkasirapp/Controllers/home_controller.dart';
+import 'package:tim_kasir/Controllers/Barang_Controller/edit_barang_controller.dart';
+import 'package:tim_kasir/Controllers/Barang_Controller/tambah_barang_controller.dart';
+import 'package:tim_kasir/Controllers/Barang_Controller/page_barang_controller.dart';
+import 'package:tim_kasir/Controllers/Kategori_Controller/page_kategori_controller.dart';
+import 'package:tim_kasir/Controllers/Stok_Controller/page_stok_controller.dart';
+import 'package:tim_kasir/Controllers/Transaksi/image_search_controller.dart';
+import 'package:tim_kasir/Controllers/Transaksi/payment_controller.dart';
+import 'package:tim_kasir/Controllers/Transaksi/transaksi_controller.dart';
+import 'package:tim_kasir/Controllers/bottom_bar_controller.dart';
+import 'package:tim_kasir/Controllers/history_transaction_controller/history_controller.dart';
+import 'package:tim_kasir/Controllers/home_controller.dart';
 
 class TambahDataBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<HomeController>(() => HomeController());
+    Get.lazyPut<BottomBarController>(() => BottomBarController());
+
     // Barang
     Get.lazyPut<TambahBarangController>(() => TambahBarangController());
     Get.lazyPut<PageBarangController>(() => PageBarangController());
@@ -22,7 +26,9 @@ class TambahDataBinding extends Bindings {
     // Transaksi
     Get.lazyPut<TransaksiController>(() => TransaksiController());
     Get.lazyPut<PaymentController>(() => PaymentController());
-    Get.lazyPut<ImageSearchController >(() => ImageSearchController ());
+    Get.lazyPut<ImageSearchController>(() => ImageSearchController());
+    // Histori Transaksi
+    Get.lazyPut<HistoryController>(() => HistoryController());
     // Stok Barang
     Get.lazyPut<PageStokController>(() => PageStokController());
   }

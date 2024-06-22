@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timkasirapp/Controllers/home_controller.dart';
-import 'package:timkasirapp/widgets/widget_drawer.dart';
+import 'package:tim_kasir/Controllers/home_controller.dart';
+import 'package:tim_kasir/widgets/widget_drawer.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -15,7 +15,7 @@ class MainHomePage extends StatelessWidget {
         title: Text(
           "Halaman Utama".toUpperCase(),
           style: const TextStyle(
-            color: Colors.purple,
+            color: Color.fromARGB(255, 114, 94, 225),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -26,7 +26,7 @@ class MainHomePage extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.purple,
+                color: const Color.fromARGB(255, 114, 94, 225),
               ),
               child: IconButton(
                 icon: const Icon(BootstrapIcons.house),
@@ -50,7 +50,7 @@ class MainHomePage extends StatelessWidget {
               // color: const Color.fromARGB(255, 229, 135, 246),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: Colors.purple,
+                color: const Color.fromARGB(255, 114, 94, 225),
                 width: 2.0,
               ),
             ),
@@ -64,7 +64,7 @@ class MainHomePage extends StatelessWidget {
                       height: 100,
                       width: 100,
                       decoration: BoxDecoration(
-                        color: Colors.purple,
+                        color: const Color.fromARGB(255, 114, 94, 225),
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Center(
@@ -82,7 +82,7 @@ class MainHomePage extends StatelessWidget {
                       "Scan",
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.purple,
+                        color: Color.fromARGB(255, 114, 94, 225),
                       ),
                     )
                   ],
@@ -94,7 +94,7 @@ class MainHomePage extends StatelessWidget {
                       height: 100,
                       width: 100,
                       decoration: BoxDecoration(
-                        color: Colors.purple,
+                        color: const Color.fromARGB(255, 114, 94, 225),
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Center(
@@ -114,7 +114,7 @@ class MainHomePage extends StatelessWidget {
                       "Transaksi",
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.purple,
+                        color: Color.fromARGB(255, 114, 94, 225),
                       ),
                     )
                   ],
