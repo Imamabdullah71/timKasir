@@ -3,6 +3,7 @@ import 'package:tim_kasir/Controllers/Barang_Controller/edit_barang_controller.d
 import 'package:tim_kasir/Controllers/Barang_Controller/tambah_barang_controller.dart';
 import 'package:tim_kasir/Controllers/Barang_Controller/page_barang_controller.dart';
 import 'package:tim_kasir/Controllers/Kategori_Controller/page_kategori_controller.dart';
+import 'package:tim_kasir/Controllers/Laporan_Controller/laporan_controller.dart';
 import 'package:tim_kasir/Controllers/Stok_Controller/page_stok_controller.dart';
 import 'package:tim_kasir/Controllers/Transaksi/image_search_controller.dart';
 import 'package:tim_kasir/Controllers/Transaksi/payment_controller.dart';
@@ -31,5 +32,7 @@ class TambahDataBinding extends Bindings {
     Get.lazyPut<HistoryController>(() => HistoryController());
     // Stok Barang
     Get.lazyPut<PageStokController>(() => PageStokController());
+    // Laporan
+    Get.lazyPut<LaporanController>(() => LaporanController());
   }
 }

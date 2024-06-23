@@ -24,7 +24,7 @@ class EditBarangPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.purple,
+        backgroundColor: const Color.fromARGB(255, 114, 94, 225),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -69,7 +69,7 @@ class EditBarangPage extends StatelessWidget {
         padding: const EdgeInsets.only(left: 30),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.purple,
+              backgroundColor: const Color.fromARGB(255, 114, 94, 225),
               minimumSize: const Size(
                 double.infinity, // Lebar
                 48, // Tinggi

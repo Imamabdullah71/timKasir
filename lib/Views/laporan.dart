@@ -39,7 +39,7 @@ class Laporan extends StatelessWidget {
           ListTile(
             leading: const Icon(BootstrapIcons.graph_up),
             title: const Text("Laporan Laba Rugi"),
-            onTap: () {},
+            onTap: () => Get.toNamed("/laporan_laba_rugi_page"),
           ),
           ListTile(
             leading: const Icon(BootstrapIcons.file_earmark_bar_graph),

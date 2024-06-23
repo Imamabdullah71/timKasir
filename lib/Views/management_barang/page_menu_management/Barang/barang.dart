@@ -20,7 +20,7 @@ class PageBarang extends GetView<PageBarangController> {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: Colors.purple,
+        backgroundColor: const Color.fromARGB(255, 114, 94, 225),
       ),
       body: Column(
         children: [
@@ -44,7 +44,7 @@ class PageBarang extends GetView<PageBarangController> {
                 focusedBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   borderSide: BorderSide(
-                    color: Colors.purple,
+                    color: Color.fromARGB(255, 114, 94, 225),
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -79,8 +79,7 @@ class PageBarang extends GetView<PageBarangController> {
                                   .contains(kategori['id'])
                               ? Colors
                                   .transparent // Menghilangkan border jika dipilih
-                              : Colors
-                                  .purple, // Menampilkan border jika tidak dipilih
+                              : const Color.fromARGB(255, 114, 94, 225), // Menampilkan border jika tidak dipilih
                           width: 2.0,
                         ),
                       ),
@@ -168,7 +167,7 @@ class PageBarang extends GetView<PageBarangController> {
         padding: const EdgeInsets.only(left: 30),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.purple,
+              backgroundColor: const Color.fromARGB(255, 114, 94, 225),
               minimumSize: const Size(
                 double.infinity, // Lebar
                 48, // Tinggi

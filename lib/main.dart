@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tim_kasir/Controllers/Transaksi/transaksi_controller.dart';
+import 'package:tim_kasir/Views/Laporan/laporan_page.dart';
 import 'package:tim_kasir/Views/management_barang/page_menu_management/Barang/detail_barang.dart';
 import 'package:tim_kasir/Views/management_barang/page_menu_management/Barang/edit_barang.dart';
 import 'package:tim_kasir/Views/management_barang/page_menu_management/Barang/tambah_barang.dart';
@@ -132,6 +133,13 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/stok_barang_page",
           page: () => StokBarangPage(),
+          binding: TambahDataBinding(),
+        ),
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Laporan
+        GetPage(
+          name: "/laporan_laba_rugi_page",
+          page: () => LaporanPage(),
           binding: TambahDataBinding(),
         ),
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

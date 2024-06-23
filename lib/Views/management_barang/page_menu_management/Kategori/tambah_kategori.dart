@@ -19,7 +19,7 @@ class TambahKategoriPage extends GetView<PageKategoriController> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.purple,
+        backgroundColor: const Color.fromARGB(255, 114, 94, 225),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -43,7 +43,7 @@ class TambahKategoriPage extends GetView<PageKategoriController> {
                 focusedBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   borderSide: BorderSide(
-                    color: Colors.purple,
+                    color: Color.fromARGB(255, 114, 94, 225),
                   ), // Warna border saat fokus
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -60,7 +60,7 @@ class TambahKategoriPage extends GetView<PageKategoriController> {
             const SizedBox(height: 40),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.purple,
+                backgroundColor: const Color.fromARGB(255, 114, 94, 225),
                 minimumSize: const Size(
                   70, // Lebar
                   48, // Tinggi

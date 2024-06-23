@@ -24,7 +24,7 @@ class DaftarPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.purple,
+        backgroundColor: const Color.fromARGB(255, 114, 94, 225),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(15),
@@ -102,7 +102,7 @@ class DaftarPage extends StatelessWidget {
                       TextSpan(
                         text: "Syarat Ketentuan & Kebijakan Privasi",
                         style: const TextStyle(
-                          color: Colors.purple,
+                          color: const Color.fromARGB(255, 114, 94, 225),
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
@@ -115,7 +115,7 @@ class DaftarPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
+                    backgroundColor: const Color.fromARGB(255, 114, 94, 225),
                     minimumSize: const Size(double.infinity, 48),
                     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   ),
@@ -156,7 +156,7 @@ class DaftarPage extends StatelessWidget {
                   const SizedBox(height: 5),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple,
+                      backgroundColor: const Color.fromARGB(255, 114, 94, 225),
                       minimumSize: const Size(
                         70, // Lebar
                         48, // Tinggi

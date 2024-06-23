@@ -24,7 +24,7 @@ class DetailBarangPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.purple,
+        backgroundColor: const Color.fromARGB(255, 114, 94, 225),
         actions: [
           Padding(
             padding: const EdgeInsets.only(left: 20),

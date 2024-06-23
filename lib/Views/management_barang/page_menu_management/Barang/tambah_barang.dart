@@ -23,7 +23,7 @@ class TambahBarangPage extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: Colors.purple,
+        backgroundColor: const Color.fromARGB(255, 114, 94, 225),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -103,7 +103,7 @@ class TambahBarangPage extends StatelessWidget {
                 focusedBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   borderSide: BorderSide(
-                    color: Colors.purple,
+                    color: Color.fromARGB(255, 114, 94, 225),
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -131,7 +131,7 @@ class TambahBarangPage extends StatelessWidget {
                 focusedBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   borderSide: BorderSide(
-                    color: Colors.purple,
+                    color: Color.fromARGB(255, 114, 94, 225),
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -206,7 +206,7 @@ class TambahBarangPage extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30)),
                                 borderSide: BorderSide(
-                                  color: Colors.purple,
+                                  color:  Color.fromARGB(255, 114, 94, 225),
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
@@ -261,7 +261,7 @@ class TambahBarangPage extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(30)),
                                   borderSide: BorderSide(
-                                    color: Colors.purple,
+                                    color:  Color.fromARGB(255, 114, 94, 225),
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
@@ -314,7 +314,7 @@ class TambahBarangPage extends StatelessWidget {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: const BorderSide(
-                        color: Colors.purple, // Warna border saat fokus
+                        color:  Color.fromARGB(255, 114, 94, 225), // Warna border saat fokus
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -358,7 +358,7 @@ class TambahBarangPage extends StatelessWidget {
         padding: const EdgeInsets.only(left: 30),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.purple,
+              backgroundColor: const Color.fromARGB(255, 114, 94, 225),
               minimumSize: const Size(
                 double.infinity, // Lebar
                 48, // Tinggi

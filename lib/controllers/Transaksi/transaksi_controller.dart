@@ -6,8 +6,8 @@ class TransaksiController extends GetxController {
   final RxList<BarangModel> items = <BarangModel>[].obs;
   final RxMap<String, int> itemCounts = <String, int>{}.obs;
   final RxDouble totalAmount = 0.0.obs;
+  final RxDouble totalHargaBeli = 0.0.obs; // Field untuk total harga beli
 
-  // Rx untuk query pencarian
   final RxString searchQuery = ''.obs;
 
   @override
@@ -16,7 +16,6 @@ class TransaksiController extends GetxController {
     fetchItems();
   }
 
-  // Metode untuk mendapatkan daftar barang dari Firestore
   void fetchItems() async {
     final barangSnapshot =
         await FirebaseFirestore.instance.collection('barang').get();
@@ -47,13 +46,11 @@ class TransaksiController extends GetxController {
     }
   }
 
-  // Metode untuk menambahkan barang ke keranjang
   void addItem(String itemId) {
     itemCounts[itemId] = (itemCounts[itemId] ?? 0) + 1;
     updateTotal();
   }
 
-  // Metode untuk mengurangi jumlah barang dari keranjang
   void removeItem(String itemId) {
     if (itemCounts[itemId] != null && itemCounts[itemId]! > 0) {
       itemCounts[itemId] = itemCounts[itemId]! - 1;
@@ -64,33 +61,45 @@ class TransaksiController extends GetxController {
     }
   }
 
-  // Metode untuk menghapus barang dari keranjang
   void deleteItem(String itemId) {
     itemCounts.remove(itemId);
     Get.back();
   }
 
-  // Metode untuk memperbarui total harga transaksi
   void updateTotal() {
     double total = 0.0;
+    double totalBeli = 0.0;
+
     itemCounts.forEach((itemId, hitung) {
       var item = items.firstWhere((item) => item.id == itemId);
-      var harga = item.hargaJual ?? 0.0;
-      total += harga * hitung;
+      var hargaJual = item.hargaJual ?? 0.0;
+      total += hargaJual * hitung;
+
+      var hargaBeli = _getHargaBeli(item.id); // Dapatkan harga beli
+      totalBeli += hargaBeli * hitung;
     });
+
     totalAmount.value = total;
+    totalHargaBeli.value = totalBeli; // Perbarui total harga beli
   }
 
-  // Metode untuk menyelesaikan transaksi
-  void finalizeTransaction(int amountGiven) {
+  double _getHargaBeli(String barangId) {
+    // Ambil harga beli dari Firestore atau cache
+    // Misalnya, kita asumsikan harga beli dari barang sama dengan harga jual untuk contoh ini
+    return items.firstWhere((item) => item.id == barangId).hargaJual ?? 0.0;
+  }
+
+  void finalizeTransaction(int amountGiven) async {
     List<String> detailBarang = itemCounts.entries.map((entry) {
       var item = items.firstWhere((item) => item.id == entry.key);
       return "${item.namaBarang} ×${entry.value}";
     }).toList();
 
-    FirebaseFirestore.instance.collection('transaksi').add({
+    var transaksiRef = FirebaseFirestore.instance.collection('transaksi').doc();
+    await transaksiRef.set({
       'total_barang': itemCounts.values.reduce((a, b) => a + b),
       'total_harga': totalAmount.value,
+      'total_harga_beli': totalHargaBeli.value, // Tambahkan total harga beli
       'bayar': amountGiven,
       'kembali': amountGiven - totalAmount.value,
       'detail_barang': detailBarang,
@@ -99,9 +108,9 @@ class TransaksiController extends GetxController {
 
     itemCounts.clear();
     totalAmount.value = 0.0;
+    totalHargaBeli.value = 0.0; // Reset total harga beli setelah transaksi
   }
 
-  // Getter untuk mendapatkan daftar barang yang difilter
   List<BarangModel> get filteredItems {
     if (searchQuery.isEmpty) {
       return items;

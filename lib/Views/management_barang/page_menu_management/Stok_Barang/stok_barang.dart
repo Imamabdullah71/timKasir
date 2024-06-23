@@ -20,7 +20,7 @@ class StokBarangPage extends StatelessWidget {
           'Stok Barang',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.purple,
+        backgroundColor: const Color.fromARGB(255, 114, 94, 225),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('barang').snapshots(),
