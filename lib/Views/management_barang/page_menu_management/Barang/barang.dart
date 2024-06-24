@@ -10,7 +10,6 @@ class PageBarang extends GetView<PageBarangController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.grey[300],
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.white, // Mengatur warna ikon back
@@ -79,7 +78,8 @@ class PageBarang extends GetView<PageBarangController> {
                                   .contains(kategori['id'])
                               ? Colors
                                   .transparent // Menghilangkan border jika dipilih
-                              : const Color.fromARGB(255, 114, 94, 225), // Menampilkan border jika tidak dipilih
+                              : const Color.fromARGB(255, 114, 94,
+                                  225), // Menampilkan border jika tidak dipilih
                           width: 2.0,
                         ),
                       ),
@@ -106,20 +106,6 @@ class PageBarang extends GetView<PageBarangController> {
                     itemCount: controller.filteredBarangList.length,
                     itemBuilder: (context, index) {
                       var barang = controller.filteredBarangList[index];
-
-                      // Konversi 'harga_jual' dari String ke double jika perlu
-                      double hargaJual =
-                          0.0; // Nilai default jika konversi gagal atau tidak ada
-                      if (barang['harga_jual'] != null) {
-                        if (barang['harga_jual'] is String) {
-                          hargaJual =
-                              double.tryParse(barang['harga_jual']) ?? 0.0;
-                        } else if (barang['harga_jual'] is double) {
-                          hargaJual = barang['harga_jual'];
-                        } else if (barang['harga_jual'] is int) {
-                          hargaJual = (barang['harga_jual'] as int).toDouble();
-                        }
-                      }
 
                       return ListTile(
                         leading: Container(
@@ -149,8 +135,7 @@ class PageBarang extends GetView<PageBarangController> {
                                 ),
                         ),
                         title: Text(barang['nama_barang']),
-                        subtitle: Text(
-                            'Harga: Rp ${paymentController.formatNumber(hargaJual)}'),
+                        subtitle: const Text('kodebarang'),
                         onTap: () {
                           Get.toNamed("/detail_page_barang", arguments: barang);
                         },

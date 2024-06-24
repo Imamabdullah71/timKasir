@@ -31,11 +31,11 @@ class Laporan extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
-          ListTile(
-            leading: const Icon(BootstrapIcons.archive),
-            title: const Text("Laporan Infaq"),
-            onTap: () {},
-          ),
+          // ListTile(
+          //   leading: const Icon(BootstrapIcons.archive),
+          //   title: const Text("Laporan Infaq"),
+          //   onTap: () {},
+          // ),
           ListTile(
             leading: const Icon(BootstrapIcons.graph_up),
             title: const Text("Laporan Laba Rugi"),

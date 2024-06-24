@@ -116,14 +116,13 @@ class TambahBarangController extends GetxController {
 
     try {
       // Menambahkan barang ke Firestore
-      String dateNow = DateTime.now().toIso8601String();
       final docRef = await FirebaseFirestore.instance.collection('barang').add({
         'nama_barang': barangData['nama_barang']?.value,
         'stok_barang': int.parse(barangData['stok_barang']?.value ?? '0'),
         'kode_barang': int.parse(barangData['kode_barang']?.value ?? '0'),
         'kategori_id': barangData['kategori_id']?.value,
         'foto_url': '',  // akan di-update nanti
-        'time': dateNow,
+        'timestamp': Timestamp.now(),
       });
 
       // Mengunggah gambar dan memperbarui URL gambar

@@ -206,7 +206,7 @@ class TambahBarangPage extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30)),
                                 borderSide: BorderSide(
-                                  color:  Color.fromARGB(255, 114, 94, 225),
+                                  color: Color.fromARGB(255, 114, 94, 225),
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
@@ -261,7 +261,7 @@ class TambahBarangPage extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(30)),
                                   borderSide: BorderSide(
-                                    color:  Color.fromARGB(255, 114, 94, 225),
+                                    color: Color.fromARGB(255, 114, 94, 225),
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
@@ -309,16 +309,17 @@ class TambahBarangPage extends StatelessWidget {
                         horizontal: 20, vertical: 12),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(
-                          8.0), // Radius border untuk sudut yang lebih lembut
+                          8), // Radius border untuk sudut yang lebih lembut
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       borderSide: const BorderSide(
-                        color:  Color.fromARGB(255, 114, 94, 225), // Warna border saat fokus
+                        color: Color.fromARGB(
+                            255, 114, 94, 225), // Warna border saat fokus
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                      borderRadius: BorderRadius.circular(25),
                       borderSide: BorderSide(
                         color: Colors
                             .grey.shade500, // Warna border saat tidak fokus
