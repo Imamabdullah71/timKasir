@@ -32,7 +32,7 @@ class DetailBarangPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
               ),
-              onPressed: () {},
+              onPressed: () => Get.toNamed("/stok_barang_page"),
               child: const Text(
                 "Stok",
                 style: TextStyle(color: Colors.white, fontSize: 20),
@@ -124,7 +124,9 @@ class DetailBarangPage extends StatelessWidget {
                     ),
                     const Text(": ", style: TextStyle(fontSize: 18)),
                     Expanded(
-                      child: Text("${barang['harga_beli']}",
+                      child: Text(
+                          pageBarangController
+                              .formatNumber(barang['harga_beli']),
                           style: const TextStyle(fontSize: 18)),
                     ),
                   ],
@@ -138,7 +140,9 @@ class DetailBarangPage extends StatelessWidget {
                     ),
                     const Text(": ", style: TextStyle(fontSize: 18)),
                     Expanded(
-                      child: Text("${barang['harga_jual']}",
+                      child: Text(
+                          pageBarangController
+                              .formatNumber(barang['harga_jual']),
                           style: const TextStyle(fontSize: 18)),
                     ),
                   ],

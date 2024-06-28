@@ -1,7 +1,7 @@
-// page_barang_controller.dart
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class PageBarangController extends GetxController {
@@ -11,6 +11,7 @@ class PageBarangController extends GetxController {
   var kategoriList = <Map<String, dynamic>>[].obs;
   var selectedCategories = <String>[].obs;
   var searchQuery = ''.obs;
+  var sortOrder = 'A-Z'.obs; // Variabel untuk menyimpan urutan penyortiran
 
   @override
   void onInit() {
@@ -91,6 +92,15 @@ class PageBarangController extends GetxController {
       }).toList();
     }
 
+    // Penyortiran berdasarkan urutan yang dipilih
+    if (sortOrder.value == 'A-Z') {
+      filteredList.sort((a, b) =>
+          a['nama_barang'].toString().compareTo(b['nama_barang'].toString()));
+    } else if (sortOrder.value == 'Z-A') {
+      filteredList.sort((a, b) =>
+          b['nama_barang'].toString().compareTo(a['nama_barang'].toString()));
+    }
+
     return filteredList;
   }
 
@@ -143,7 +153,7 @@ class PageBarangController extends GetxController {
           Get.back();
           Get.back();
           Get.snackbar(
-            "Data berhasil dihapus",
+            "Barang berhasil dihapus",
             "",
             duration: const Duration(seconds: 3),
             backgroundColor: Colors.green,
@@ -152,7 +162,7 @@ class PageBarangController extends GetxController {
             margin: const EdgeInsets.all(16.0),
             padding:
                 const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-            snackPosition: SnackPosition.BOTTOM,
+            snackPosition: SnackPosition.TOP,
             forwardAnimationCurve: Curves.easeOut,
             reverseAnimationCurve: Curves.easeIn,
             isDismissible: true,
@@ -171,5 +181,15 @@ class PageBarangController extends GetxController {
         ),
       );
     }
+  }
+
+  void setSortOrder(String order) {
+    sortOrder.value = order;
+  }
+
+  // Menambahkan metode formatNumber dalam PageBarangController
+  String formatNumber(double number) {
+    final formatter = NumberFormat("#,###");
+    return formatter.format(number.toInt()).replaceAll(',', '.');
   }
 }

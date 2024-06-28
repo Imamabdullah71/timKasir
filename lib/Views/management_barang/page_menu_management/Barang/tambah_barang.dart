@@ -26,7 +26,7 @@ class TambahBarangPage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 114, 94, 225),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             SizedBox(
@@ -116,242 +116,237 @@ class TambahBarangPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            TextField(
-              keyboardType: TextInputType.number,
-              onChanged: (value) => controller.setField('harga_beli', value),
-              decoration: InputDecoration(
-                labelText: 'Harga Beli',
-                filled: true,
-                fillColor: Colors.white,
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                ),
-                focusedBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 114, 94, 225),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade500,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
-                ),
-                contentPadding: const EdgeInsets.only(left: 20),
-              ),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              keyboardType: TextInputType.number,
-              onChanged: (value) => controller.setField('harga_jual', value),
-              decoration: InputDecoration(
-                labelText: 'Harga Jual',
-                filled: true,
-                fillColor: Colors.white,
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
-                ),
-                focusedBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  borderSide: BorderSide(
-                    color: Colors.purple,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade500,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
-                ),
-                contentPadding: const EdgeInsets.only(left: 20),
-              ),
-            ),
-            const SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
                   flex: 2,
                   child: SizedBox(
                     width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Stok",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Color.fromARGB(255, 8, 8, 8),
+                    child: TextField(
+                      onChanged: (value) =>
+                          controller.setField('harga_beli', value),
+                          // ${paymentController.formatNumber(transaksiController.totalAmount.value)
+                      decoration: InputDecoration(
+                        labelText: 'Harga Beli',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
                           ),
                         ),
-                        SizedBox(
-                          height: 40,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) =>
-                                controller.setField('stok_barang', value),
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                              ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30)),
-                                borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 114, 94, 225),
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.grey.shade500,
-                                ),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(30)),
-                              ),
-                              contentPadding: const EdgeInsets.only(left: 20),
-                            ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 114, 94, 225),
                           ),
                         ),
-                      ],
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade500,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                        ),
+                        contentPadding: const EdgeInsets.only(left: 20),
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  flex: 3,
+                  flex: 2,
                   child: SizedBox(
                     width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Kode Barang",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Color.fromARGB(255, 8, 8, 8),
+                    child: TextField(
+                      onChanged: (value) =>
+                          controller.setField('harga_jual', value),
+                      decoration: InputDecoration(
+                        labelText: 'Harga Jual',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
                           ),
                         ),
-                        SizedBox(
-                          height: 40,
-                          child: Obx(
-                            () => TextField(
-                              keyboardType: TextInputType.number,
-                              onChanged: (value) =>
-                                  controller.setField('kode_barang', value),
-                              controller: TextEditingController(
-                                text: controller.barcode.value,
-                              ),
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30)),
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 114, 94, 225),
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.grey.shade500,
-                                  ),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(30)),
-                                ),
-                                contentPadding: const EdgeInsets.only(left: 20),
-                              ),
-                            ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 114, 94, 225),
                           ),
                         ),
-                      ],
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade500,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                        ),
+                        contentPadding: const EdgeInsets.only(left: 20),
+                      ),
                     ),
                   ),
-                ),
-                Column(
-                  children: [
-                    const SizedBox(height: 25),
-                    IconButton(
-                      onPressed: () async {
-                        await scanBarcode();
-                      },
-                      icon: const Icon(BootstrapIcons.upc_scan),
-                    ),
-                  ],
                 ),
               ],
             ),
             const SizedBox(height: 20),
-            Obx(() {
-              return DropdownSearch<String>(
-                items: controller.kategoriList
-                    .map((kategori) => kategori['nama_kategori'] as String)
-                    .toList(),
-                selectedItem: controller.selectedKategori.value,
-                dropdownDecoratorProps: DropDownDecoratorProps(
-                  dropdownSearchDecoration: InputDecoration(
-                    labelText: "Pilih Kategori",
-                    filled: true,
-                    fillColor: Colors.white, // Warna background
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          8), // Radius border untuk sudut yang lebih lembut
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(
-                        color: Color.fromARGB(
-                            255, 114, 94, 225), // Warna border saat fokus
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: BorderSide(
-                        color: Colors
-                            .grey.shade500, // Warna border saat tidak fokus
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: TextField(
+                      onChanged: (value) =>
+                          controller.setField('stok_barang', value),
+                      decoration: InputDecoration(
+                        labelText: 'Stok',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 114, 94, 225),
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade500,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                        ),
+                        contentPadding: const EdgeInsets.only(left: 20),
                       ),
                     ),
                   ),
                 ),
-                onChanged: (value) {
-                  var selectedKategori = controller.kategoriList.firstWhere(
-                      (kategori) => kategori['nama_kategori'] == value);
-                  controller.setKategori(selectedKategori['nama_kategori'],
-                      selectedKategori['id']);
-                },
-                popupProps: PopupProps.menu(
-                  showSearchBox: true,
-                  searchFieldProps: TextFieldProps(
-                    decoration: InputDecoration(
-                      labelText: "Cari Kategori",
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 12),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                const SizedBox(width: 8),
+                Expanded(
+                  flex: 2,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Obx(
+                      () => TextField(
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) =>
+                            controller.setField('kode_barang', value),
+                        controller: TextEditingController(
+                          text: controller.barcode.value,
+                        ),
+                        decoration: InputDecoration(
+                          labelText: 'Kode Barang',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(30),
+                            ),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 114, 94, 225),
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey.shade500,
+                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30)),
+                          ),
+                          contentPadding: const EdgeInsets.only(left: 20),
+                        ),
                       ),
                     ),
                   ),
-                  fit: FlexFit.loose,
-                  constraints: BoxConstraints.tightFor(
-                      width: MediaQuery.of(context).size.width *
-                          0.8), // Mengatur ukuran popup dropdown
                 ),
-              );
-            }),
+                IconButton(
+                  onPressed: () async {
+                    await scanBarcode();
+                  },
+                  icon: const Icon(BootstrapIcons.upc_scan),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: Obx(() {
+                    return DropdownSearch<String>(
+                      items: controller.kategoriList
+                          .map(
+                              (kategori) => kategori['nama_kategori'] as String)
+                          .toList(),
+                      selectedItem: controller.selectedKategori.value,
+                      dropdownDecoratorProps: DropDownDecoratorProps(
+                        dropdownSearchDecoration: InputDecoration(
+                          labelText: "Pilih Kategori",
+                          filled: true,
+                          fillColor: Colors.white, // Warna background
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 12),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(
+                                8), // Radius border untuk sudut yang lebih lembut
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: const BorderSide(
+                              color: Color.fromARGB(
+                                  255, 114, 94, 225), // Warna border saat fokus
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide(
+                              color: Colors.grey
+                                  .shade500, // Warna border saat tidak fokus
+                            ),
+                          ),
+                        ),
+                      ),
+                      onChanged: (value) {
+                        var selectedKategori = controller.kategoriList
+                            .firstWhere((kategori) =>
+                                kategori['nama_kategori'] == value);
+                        controller.setKategori(
+                            selectedKategori['nama_kategori'],
+                            selectedKategori['id']);
+                      },
+                      popupProps: PopupProps.menu(
+                        showSearchBox: true,
+                        searchFieldProps: TextFieldProps(
+                          decoration: InputDecoration(
+                            labelText: "Cari Kategori",
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                        ),
+                        fit: FlexFit.loose,
+                        constraints: BoxConstraints.tightFor(
+                            width: MediaQuery.of(context).size.width *
+                                0.8), // Mengatur ukuran popup dropdown
+                      ),
+                    );
+                  }),
+                ),
+                IconButton(
+                    onPressed: () => Get.toNamed("/kategori_page"),
+                    icon: const Icon(BootstrapIcons.plus_lg))
+              ],
+            ),
           ],
         ),
       ),
@@ -372,7 +367,7 @@ class TambahBarangPage extends StatelessWidget {
             child: const Text(
               "Tambahkan Barang",
               style: TextStyle(color: Colors.white, fontSize: 20),
-            )),
+            ),),
       ),
     );
   }

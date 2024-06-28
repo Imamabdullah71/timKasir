@@ -1,18 +1,16 @@
-// page_barang.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:tim_kasir/Controllers/Barang_Controller/page_barang_controller.dart';
-import 'package:tim_kasir/Controllers/Transaksi/payment_controller.dart';
 
-// ignore: use_key_in_widget_constructors
 class PageBarang extends GetView<PageBarangController> {
-  final PaymentController paymentController = Get.find<PaymentController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.white, // Mengatur warna ikon back
+          color: Colors.white,
         ),
         title: const Text(
           "Daftar Barang",
@@ -24,42 +22,232 @@ class PageBarang extends GetView<PageBarangController> {
       body: Column(
         children: [
           Padding(
-            padding:
-                const EdgeInsets.only(left: 15, top: 15, right: 15, bottom: 10),
-            child: TextField(
-              onChanged: (value) {
-                controller.searchQuery.value = value;
-              },
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.search),
-                labelText: 'Cari Barang...',
-                filled: true,
-                fillColor: Colors.white,
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text('Pilih Urutan'),
+                          content: DropdownSearch<String>(
+                            items: const [
+                              'Nama A - Z',
+                              'Nama Z - A',
+                              'Baru ditambahkan',
+                              'Terlama ditambahkan'
+                            ],
+                            selectedItem: controller.sortOrder.value == 'A-Z'
+                                ? 'Nama A - Z'
+                                : 'Nama Z - A',
+                            onChanged: (value) {
+                              if (value == 'Nama A - Z') {
+                                controller.setSortOrder('A-Z');
+                              } else if (value == 'Nama Z - A') {
+                                controller.setSortOrder('Z-A');
+                              }
+                              Get.back();
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  icon: const Icon(Icons.filter_list),
+                ),
+                Expanded(
+                  child: TextField(
+                    onChanged: (value) {
+                      controller.searchQuery.value = value;
+                    },
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      labelText: 'Cari Barang...',
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(255, 114, 94, 225),
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.grey.shade500,
+                        ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30)),
+                      ),
+                      contentPadding: const EdgeInsets.only(left: 20),
+                    ),
                   ),
                 ),
-                focusedBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(255, 114, 94, 225),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text('Pilih Kategori'),
+                          content: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Obx(
+                                  () {
+                                    return GridView.builder(
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10,
+                                        childAspectRatio: 1,
+                                      ),
+                                      itemCount: controller.kategoriList.length,
+                                      itemBuilder: (context, index) {
+                                        var kategori =
+                                            controller.kategoriList[index];
+                                        var isSelected = controller
+                                            .selectedCategories
+                                            .contains(kategori['id']);
+                                        return GestureDetector(
+                                          onTap: () {
+                                            controller.toggleCategorySelection(
+                                                kategori['id']);
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                color: isSelected
+                                                    ? Colors.purple
+                                                    : Colors.transparent,
+                                                width: 2,
+                                              ),
+                                            ),
+                                            child: Stack(
+                                              children: [
+                                                // Image as background
+                                                Positioned.fill(
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                    child: kategori['foto_url'] !=
+                                                                null &&
+                                                            kategori['foto_url']
+                                                                .isNotEmpty
+                                                        ? Image.network(
+                                                            kategori[
+                                                                'foto_url'],
+                                                            fit: BoxFit.cover,
+                                                          )
+                                                        : Container(
+                                                            color: Colors
+                                                                .grey[300],
+                                                            child: const Icon(
+                                                              Icons
+                                                                  .image_not_supported,
+                                                              size: 50,
+                                                              color:
+                                                                  Colors.grey,
+                                                            ),
+                                                          ),
+                                                  ),
+                                                ),
+                                                // Overlay for selection
+                                                Positioned.fill(
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      color: isSelected
+                                                          ? Colors.purple
+                                                              .withOpacity(0.3)
+                                                          : Colors.transparent,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                  ),
+                                                ),
+                                                // Centered Text
+                                                Positioned(
+                                                  bottom: 0,
+                                                  left: 0,
+                                                  right: 0,
+                                                  child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      color: isSelected
+                                                          ? Colors.purple
+                                                              .withOpacity(0.7)
+                                                          : Colors.black
+                                                              .withOpacity(0.5),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .only(
+                                                        bottomLeft:
+                                                            Radius.circular(10),
+                                                        bottomRight:
+                                                            Radius.circular(10),
+                                                      ),
+                                                    ),
+                                                    child: Text(
+                                                      kategori['nama_kategori'],
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    child: const Text("Selesai"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  icon: const Icon(
+                    BootstrapIcons.ui_checks_grid,
                   ),
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade500,
-                  ),
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
-                ),
-                contentPadding: const EdgeInsets.only(left: 20),
-              ),
+              ],
             ),
           ),
           Obx(() {
             return SingleChildScrollView(
-              scrollDirection:
-                  Axis.horizontal, // Mengatur scroll secara horizontal
+              scrollDirection: Axis.horizontal,
               child: Row(
                 children: controller.kategoriList.map((kategori) {
                   return Padding(
@@ -76,10 +264,8 @@ class PageBarang extends GetView<PageBarangController> {
                         side: BorderSide(
                           color: controller.selectedCategories
                                   .contains(kategori['id'])
-                              ? Colors
-                                  .transparent // Menghilangkan border jika dipilih
-                              : const Color.fromARGB(255, 114, 94,
-                                  225), // Menampilkan border jika tidak dipilih
+                              ? Colors.transparent
+                              : const Color.fromARGB(255, 114, 94, 225),
                           width: 2.0,
                         ),
                       ),
@@ -106,6 +292,20 @@ class PageBarang extends GetView<PageBarangController> {
                     itemCount: controller.filteredBarangList.length,
                     itemBuilder: (context, index) {
                       var barang = controller.filteredBarangList[index];
+
+                      // Ambil dan format harga
+                      // Di dalam ListTile, gunakan metode formatNumber dari controller
+                      var hargaBeli = barang['harga_beli'] != null
+                          ? controller
+                              .formatNumber(barang['harga_beli'].toDouble())
+                          : 'Harga beli tidak tersedia';
+                      var hargaJual = barang['harga_jual'] != null
+                          ? controller
+                              .formatNumber(barang['harga_jual'].toDouble())
+                          : 'Harga jual tidak tersedia';
+
+                      var kodeBarang =
+                          barang['kode_barang'] ?? 'Kode barang tidak tersedia';
 
                       return ListTile(
                         leading: Container(
@@ -135,7 +335,25 @@ class PageBarang extends GetView<PageBarangController> {
                                 ),
                         ),
                         title: Text(barang['nama_barang']),
-                        subtitle: const Text('kodebarang'),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('$kodeBarang'),
+                            Text('  Harga Beli: Rp $hargaBeli'),
+                          ],
+                        ),
+                        trailing: Column(
+                          children: [
+                            Text(
+                              "Stok: ${barang['stok_barang']}",
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                            Text(
+                              "Rp $hargaJual",
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                          ],
+                        ),
                         onTap: () {
                           Get.toNamed("/detail_page_barang", arguments: barang);
                         },
@@ -165,7 +383,7 @@ class PageBarang extends GetView<PageBarangController> {
             child: const Text(
               "Tambah Barang",
               style: TextStyle(color: Colors.white, fontSize: 20),
-            )),
+            ),),
       ),
     );
   }

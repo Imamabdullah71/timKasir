@@ -33,7 +33,8 @@ class BarangModel {
       fotoUrl: data['foto_url'] ?? '',
       time: data['time'] is Timestamp
           ? data['time']
-          : Timestamp.fromDate(DateTime.parse(data['time'] ?? DateTime.now().toString())),
+          : Timestamp.fromDate(
+              DateTime.parse(data['time'] ?? DateTime.now().toString())),
       hargaJual: (data['harga_jual'] as num?)?.toDouble() ?? 0.0,
     );
   }

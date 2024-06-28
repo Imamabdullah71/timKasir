@@ -1,29 +1,79 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:typed_data';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class PageKategoriController extends GetxController {
   late TextEditingController namaKategoriC;
-
-  // Inisialisai Firebase Firestore ke Variabel "firestore"
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  var imageFile = Rx<Uint8List?>(null);
 
-  // Fungsi Realtime get data Collection "kategori"
-  Stream<QuerySnapshot> get kategoriCollection =>
-      firestore.collection("kategori").snapshots();
+  Stream<QuerySnapshot> get kategoriCollection => firestore.collection("kategori").snapshots();
 
-  // Fungsi tambah(Create) Kategori
+  @override
+  void onInit() {
+    namaKategoriC = TextEditingController();
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    namaKategoriC.dispose();
+    super.onClose();
+  }
+
+  Future<void> pickImage(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
+    if (pickedFile != null) {
+      // Compress the image
+      Uint8List? compressedImage = await FlutterImageCompress.compressWithFile(
+        pickedFile.path,
+        minWidth: 800,
+        minHeight: 800,
+        quality: 80,
+      );
+      imageFile.value = compressedImage;
+    } else {
+      Get.snackbar('Error', 'Tidak ada gambar yang dipilih');
+    }
+  }
+
+  Future<String?> uploadImage(String docId) async {
+    if (imageFile.value == null) return null;
+
+    try {
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('kategori_images')
+          .child('$docId.jpg');
+      await ref.putData(imageFile.value!);
+      return await ref.getDownloadURL();
+    } catch (e) {
+      Get.snackbar('Error', 'Gagal mengunggah gambar: $e');
+      return null;
+    }
+  }
+
   void tambahKategori(String namaKategori) async {
     CollectionReference colKategori = firestore.collection("kategori");
 
     try {
-      String dateNow = DateTime.now().toIso8601String();
-      await colKategori.add({
+      final docRef = await colKategori.add({
         "nama_kategori": namaKategori,
-        "time": dateNow,
+        "timestamp": Timestamp.now(),
+        "foto_url": "",
       });
 
+      String? fotoUrl = await uploadImage(docRef.id);
+      if (fotoUrl != null) {
+        await docRef.update({'foto_url': fotoUrl});
+      }
+
       namaKategoriC.clear();
+      imageFile.value = null;
       Get.back();
       Get.snackbar(
         "Berhasil menambahkan kategori!",
@@ -43,24 +93,11 @@ class PageKategoriController extends GetxController {
     } catch (e) {
       Get.defaultDialog(
         title: "Terjadi Kesalahan",
-        middleText: "Gagal menambahkan produk! $e",
+        middleText: "Gagal menambahkan kategori! $e",
       );
     }
   }
 
-  @override
-  void onInit() {
-    namaKategoriC = TextEditingController();
-    super.onInit();
-  }
-
-  @override
-  void onClose() {
-    namaKategoriC.dispose();
-    super.onClose();
-  }
-
-  // Fungsi Hapus Kategori
   void hapusKategori(String docId) async {
     DocumentReference docRef = firestore.collection("kategori").doc(docId);
 
@@ -94,7 +131,7 @@ class PageKategoriController extends GetxController {
     } catch (e) {
       Get.defaultDialog(
         title: "Terjadi Kesalahan",
-        middleText: "Gagal menghapus produk! $e",
+        middleText: "Gagal menghapus kategori! $e",
       );
     }
   }
@@ -115,24 +152,59 @@ class PageKategoriController extends GetxController {
       namaKategoriC.clear();
       Get.back();
       Get.snackbar(
-            "Berhasil update!",
-            "",
-            duration: const Duration(milliseconds: 1500),
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-            borderRadius: 10.0,
-            margin: const EdgeInsets.all(16.0),
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-            snackPosition: SnackPosition.BOTTOM,
-            forwardAnimationCurve: Curves.easeOut,
-            reverseAnimationCurve: Curves.easeIn,
-            isDismissible: true,
-            showProgressIndicator: false,
-          );
+        "Berhasil update!",
+        "",
+        duration: const Duration(milliseconds: 1500),
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        borderRadius: 10.0,
+        margin: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        snackPosition: SnackPosition.BOTTOM,
+        forwardAnimationCurve: Curves.easeOut,
+        reverseAnimationCurve: Curves.easeIn,
+        isDismissible: true,
+        showProgressIndicator: false,
+      );
     } catch (e) {
       Get.defaultDialog(
         title: "Terjadi Kesalahan",
-        middleText: "Gagal mengubah produk! $e",
+        middleText: "Gagal mengubah kategori! $e",
+      );
+    }
+  }
+
+  void updateKategoriWithImage(String namaKategori, String docID, String newImageUrl) async {
+    DocumentReference docData = firestore.collection("kategori").doc(docID);
+
+    try {
+      await docData.update({
+        "nama_kategori": namaKategori,
+        "foto_url": newImageUrl,
+      });
+
+      namaKategoriC.clear();
+      imageFile.value = null;
+      Get.back();
+      Get.snackbar(
+        "Berhasil update!",
+        "",
+        duration: const Duration(milliseconds: 1500),
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        borderRadius: 10.0,
+        margin: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        snackPosition: SnackPosition.BOTTOM,
+        forwardAnimationCurve: Curves.easeOut,
+        reverseAnimationCurve: Curves.easeIn,
+        isDismissible: true,
+        showProgressIndicator: false,
+      );
+    } catch (e) {
+      Get.defaultDialog(
+        title: "Terjadi Kesalahan",
+        middleText: "Gagal mengubah kategori! $e",
       );
     }
   }

@@ -4,8 +4,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'dart:typed_data';
 import 'package:tim_kasir/Views/management_barang/page_menu_management/Barang/image_editor_page.dart';
+import 'package:image/image.dart' as img;
 
 class TambahBarangController extends GetxController {
   var barangData = {
@@ -65,11 +67,32 @@ class TambahBarangController extends GetxController {
     if (croppedImageFile.value == null) return null;
 
     try {
+      // Decode the image to compress it
+      img.Image? originalImage = img.decodeImage(croppedImageFile.value!);
+      if (originalImage == null) {
+        throw Exception("Gagal memuat gambar untuk kompresi");
+      }
+
+      // Kompresi gambar
+      img.Image compressedImage = img.copyResize(
+        originalImage,
+        width: 800, // Ubah ukuran sesuai kebutuhan
+      );
+
+      // Encode kembali ke format JPEG dengan kompresi
+      Uint8List compressedImageBytes = Uint8List.fromList(
+        img.encodeJpg(compressedImage,
+            quality: 85), // Kompresi dengan kualitas 85%
+      );
+
+      // Mengunggah gambar yang telah dikompresi ke Firebase Storage
       final ref = FirebaseStorage.instance
           .ref()
           .child('barang_images')
           .child('$docId.jpg');
-      await ref.putData(croppedImageFile.value!);
+      await ref.putData(compressedImageBytes);
+
+      // Mengembalikan URL gambar yang telah diunggah
       return await ref.getDownloadURL();
     } catch (e) {
       Get.snackbar('Error', 'Gagal mengunggah gambar: $e');
@@ -79,40 +102,40 @@ class TambahBarangController extends GetxController {
 
   void tambahBarang() async {
     // Validasi input sebelum menambahkan barang
-    if (barangData['nama_barang']?.value.isEmpty ?? true) {
-      Get.snackbar('Error', 'Nama barang harus diisi');
-      return;
-    }
+    // if (barangData['nama_barang']?.value.isEmpty ?? true) {
+    //   Get.snackbar('Error', 'Nama barang harus diisi');
+    //   return;
+    // }
 
-    if (hargaData['harga_beli']?.value.isEmpty ?? true) {
-      Get.snackbar('Error', 'Harga beli harus diisi');
-      return;
-    }
+    // if (hargaData['harga_beli']?.value.isEmpty ?? true) {
+    //   Get.snackbar('Error', 'Harga beli harus diisi');
+    //   return;
+    // }
 
-    if (hargaData['harga_jual']?.value.isEmpty ?? true) {
-      Get.snackbar('Error', 'Harga jual harus diisi');
-      return;
-    }
+    // if (hargaData['harga_jual']?.value.isEmpty ?? true) {
+    //   Get.snackbar('Error', 'Harga jual harus diisi');
+    //   return;
+    // }
 
-    if (barangData['stok_barang']?.value.isEmpty ?? true) {
-      Get.snackbar('Error', 'Stok barang harus diisi');
-      return;
-    }
+    // if (barangData['stok_barang']?.value.isEmpty ?? true) {
+    //   Get.snackbar('Error', 'Stok barang harus diisi');
+    //   return;
+    // }
 
-    if (barangData['kode_barang']?.value.isEmpty ?? true) {
-      Get.snackbar('Error', 'Kode barang harus diisi');
-      return;
-    }
+    // if (barangData['kode_barang']?.value.isEmpty ?? true) {
+    //   Get.snackbar('Error', 'Kode barang harus diisi');
+    //   return;
+    // }
 
-    if (barangData['kategori_id']?.value.isEmpty ?? true) {
-      Get.snackbar('Error', 'Kategori harus dipilih');
-      return;
-    }
+    // if (barangData['kategori_id']?.value.isEmpty ?? true) {
+    //   Get.snackbar('Error', 'Kategori harus dipilih');
+    //   return;
+    // }
 
-    if (croppedImageFile.value == null) {
-      Get.snackbar('Error', 'Gambar belum dipilih');
-      return;
-    }
+    // if (croppedImageFile.value == null) {
+    //   Get.snackbar('Error', 'Gambar belum dipilih');
+    //   return;
+    // }
 
     try {
       // Menambahkan barang ke Firestore
@@ -121,23 +144,27 @@ class TambahBarangController extends GetxController {
         'stok_barang': int.parse(barangData['stok_barang']?.value ?? '0'),
         'kode_barang': int.parse(barangData['kode_barang']?.value ?? '0'),
         'kategori_id': barangData['kategori_id']?.value,
-        'foto_url': '',  // akan di-update nanti
+        'foto_url': '', // akan di-update nanti
         'timestamp': Timestamp.now(),
       });
 
-      // Mengunggah gambar dan memperbarui URL gambar
-      String? fotoUrl = await uploadImage(docRef.id);
-      if (fotoUrl != null) {
-        await docRef.update({'foto_url': fotoUrl});
-        barangData['foto_url']?.value = fotoUrl;
-      }
-
-      // Menambahkan data harga ke koleksi 'harga'
-      await FirebaseFirestore.instance.collection('harga').add({
+      // Unggah gambar dan perbarui URL gambar dalam koleksi barang dan harga secara paralel
+      var uploadImageTask = uploadImage(docRef.id);
+      var addHargaTask = FirebaseFirestore.instance.collection('harga').add({
         'barang_id': docRef.id,
         'harga_beli': double.parse(hargaData['harga_beli']?.value ?? '0'),
         'harga_jual': double.parse(hargaData['harga_jual']?.value ?? '0'),
       });
+
+      // Tunggu kedua operasi selesai
+      String? fotoUrl = await uploadImageTask;
+      await addHargaTask;
+
+      // Perbarui URL gambar setelah mengunggah
+      if (fotoUrl != null) {
+        await docRef.update({'foto_url': fotoUrl});
+        barangData['foto_url']?.value = fotoUrl;
+      }
 
       // Kembali ke halaman sebelumnya dan tampilkan notifikasi sukses
       Get.back();
@@ -178,6 +205,8 @@ class TambahBarangController extends GetxController {
     barcode.value = code;
     setField('kode_barang', code);
   }
-
-  
+  String formatNumber(double number) {
+    final formatter = NumberFormat("#,###");
+    return formatter.format(number.toInt()).replaceAll(',', '.');
+  }
 }
