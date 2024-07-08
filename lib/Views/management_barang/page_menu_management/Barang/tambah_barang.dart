@@ -30,7 +30,7 @@ class TambahBarangPage extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 200,
+              height: 200, 
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

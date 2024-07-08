@@ -22,6 +22,7 @@ import 'package:tim_kasir/Views/management_barang/page_menu_management/Barang/ba
 import 'package:tim_kasir/Views/laporan.dart';
 import 'package:tim_kasir/Views/landing_pages/main_landing.dart';
 import 'package:tim_kasir/Views/management_barang/page_menu_management/Stok_Barang/stok_barang.dart';
+import 'package:tim_kasir/Views/management_barang/page_menu_management/Supplier/supplier_page.dart';
 import 'package:tim_kasir/Views/profile.dart';
 import 'package:tim_kasir/Views/transaksi.dart';
 import 'package:tim_kasir/Views/transaksi/history_transaction/page_history.dart';
@@ -141,6 +142,13 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/stok_barang_page",
           page: () => StokBarangPage(),
+          binding: TambahDataBinding(),
+        ),
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Supplier
+        GetPage(
+          name: "/supplier_page",
+          page: () => SupplierPage(),
           binding: TambahDataBinding(),
         ),
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
