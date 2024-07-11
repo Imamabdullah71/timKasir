@@ -3,9 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
 import 'package:tim_kasir/Controllers/Kategori_Controller/page_kategori_controller.dart';
-// import 'dart:typed_data';
 
 class KategoriPage extends GetView<PageKategoriController> {
   KategoriPage({super.key});
