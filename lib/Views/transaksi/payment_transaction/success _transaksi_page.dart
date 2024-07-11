@@ -1,4 +1,4 @@
-// Pages/success_transaksi_page.dart
+// Views\transaksi\payment_transaction\success _transaksi_page.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tim_kasir/Controllers/Transaksi/transaksi_controller.dart';

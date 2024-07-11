@@ -30,7 +30,7 @@ class TambahBarangPage extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 200, 
+              height: 200,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -125,7 +125,7 @@ class TambahBarangPage extends StatelessWidget {
                     child: TextField(
                       onChanged: (value) =>
                           controller.setField('harga_beli', value),
-                          // ${paymentController.formatNumber(transaksiController.totalAmount.value)
+                      // ${paymentController.formatNumber(transaksiController.totalAmount.value)
                       decoration: InputDecoration(
                         labelText: 'Harga Beli',
                         filled: true,
@@ -353,21 +353,22 @@ class TambahBarangPage extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(left: 30),
         child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 114, 94, 225),
-              minimumSize: const Size(
-                double.infinity, // Lebar
-                48, // Tinggi
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 114, 94, 225),
+            minimumSize: const Size(
+              double.infinity, // Lebar
+              48, // Tinggi
             ),
-            onPressed: () {
-              controller.tambahBarang();
-            },
-            child: const Text(
-              "Tambahkan Barang",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          ),
+          onPressed: () {
+            controller.tambahBarang();
+          },
+          child: const Text(
+            "Tambahkan Barang",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ),
       ),
     );
   }

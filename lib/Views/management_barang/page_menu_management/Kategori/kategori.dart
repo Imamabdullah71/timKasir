@@ -7,8 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tim_kasir/Controllers/Kategori_Controller/page_kategori_controller.dart';
 // import 'dart:typed_data';
 
-// ignore: use_key_in_widget_constructors
 class KategoriPage extends GetView<PageKategoriController> {
+  KategoriPage({super.key});
   final PageKategoriController kategoriController =
       Get.find<PageKategoriController>();
 

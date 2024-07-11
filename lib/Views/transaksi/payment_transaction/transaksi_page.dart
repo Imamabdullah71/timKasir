@@ -1,4 +1,4 @@
-// transaksi_page.dart
+// Views\transaksi\payment_transaction\transaksi_page.dart
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +7,7 @@ import 'package:tim_kasir/Controllers/Transaksi/payment_controller.dart';
 import 'package:tim_kasir/Controllers/Transaksi/transaksi_controller.dart';
 
 class TransaksiPage extends StatelessWidget {
+  TransaksiPage({super.key});
   final TransaksiController transaksiController =
       Get.find<TransaksiController>();
   final PaymentController paymentController = Get.find<PaymentController>();
@@ -15,6 +16,7 @@ class TransaksiPage extends StatelessWidget {
 
   // TextEditingController untuk menangani teks di Search Bar
   final TextEditingController searchController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
