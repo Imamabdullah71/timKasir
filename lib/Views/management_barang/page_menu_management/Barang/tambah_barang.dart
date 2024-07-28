@@ -125,7 +125,6 @@ class TambahBarangPage extends StatelessWidget {
                     child: TextField(
                       onChanged: (value) =>
                           controller.setField('harga_beli', value),
-                      // ${paymentController.formatNumber(transaksiController.totalAmount.value)
                       decoration: InputDecoration(
                         labelText: 'Harga Beli',
                         filled: true,

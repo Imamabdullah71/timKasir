@@ -60,7 +60,7 @@ class LaporanController extends GetxController {
     double pemasukan = 0.0;
     double pengeluaran = 0.0;
 
-    // print('Calculating totals for ${transactions.length} transactions'); // Debugging log
+    // print('Calculating totals for ${transactions.length} transactionx`s'); // Debugging log
 
     for (var doc in transactions) {
       var data = doc.data() as Map<String, dynamic>;
